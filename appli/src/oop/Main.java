@@ -10,7 +10,10 @@ public class Main {
 		while(run) {
 			System.out.println("Welcome To AAAAAAA??");
 			System.out.print("Login: ");
-			String login = 
+			String login = "asd"; 
+					
+		
+			System.out.println("Welcome To 123");
 		}
 	}
 
