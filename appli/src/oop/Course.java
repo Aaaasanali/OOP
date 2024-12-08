@@ -14,7 +14,7 @@ public class Course {
     /**
     * @generated
     */
-    private Course prereq;
+    private Course prereq123123123123123;
     
     /**
     * @generated
