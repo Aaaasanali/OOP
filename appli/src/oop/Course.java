@@ -9,7 +9,7 @@ public class Course {
     /**
     * @generated
     */
-    private String nameASDHSLKDJsBASN;
+    private String name;
     
     /**
     * @generated
