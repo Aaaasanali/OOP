@@ -10,7 +10,7 @@ public class User {
     private int id;
     private String name;
     private String surname;
-    private String email;
+    private String emaila;
     private String password;
     private Language language;
     private Date birthdate1234wijrgbpowejrtbqibhwoeutbqerwt;
