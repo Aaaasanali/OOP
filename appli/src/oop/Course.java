@@ -19,7 +19,7 @@ public class Course {
     /**
     * @generated
     */
-    private int ects;
+    private int ectsshdfviwqegr14323;
     
     
     
