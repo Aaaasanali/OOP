@@ -10,10 +10,10 @@ public class User {
     private int id;
     private String name;
     private String surname;
-    private String email;
+    private String email1234wijrgbpowejrtbqibhwoeutbqerwt;
     private String password;
     private Language language;
-    private Date birthdate1234wijrgbpowejrtbqibhwoeutbqerwt;
+    private Date birthdate;
     private Sex sex;
     private String phone;
     
