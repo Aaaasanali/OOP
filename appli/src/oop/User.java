@@ -1,4 +1,4 @@
-package oop;
+	package oop;
 
 import Consts.*;
 import java.util.Date;
@@ -7,21 +7,37 @@ import java.util.Random;
 public class User {
 	
 	private String login;
-	private String password;
-	
+	private String password;	
     private String id;
     private String name;
     private String surname;
-<<<<<<< HEAD
+
     private String email;
-=======
-    private String email1234wijrgbpowejrthwoeutbqerwwertbqibhwoeutbqerwwerthwoeutbqerwwerthwoeutbqerwwert;
-    private String password;
->>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP/
+
+
     private Language language;
     private Date birthdate;
     private Sex sex;
     private String phone;
+    public void setName(String name) {
+    	this.name = name;
+    }
+    public String getName() {
+    	return name;
+    }
+    
+    public void setSurname(String surname) {
+    	this.surname = surname;
+    }
+    public String getSurname() {
+    	return surname;
+    }
+    public User(String login, String password, String name, String surname) {
+        this.login = login;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+    }
     
     
     public User(String login, String password) {

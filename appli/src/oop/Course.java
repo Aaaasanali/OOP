@@ -5,35 +5,12 @@ package oop;
 * @generated
 */
 public class Course {
-    
-    /**
-    * @generated
-    */
     private String name;
-    
-    /**
-    * @generated
-    */
-    private Course prereq123123123123123;
-    
-    /**
-    * @generated
-    */
-    private int ectsshdfviwqegr14323;
-    
-    
-    
-
-    /**
-    * @generated
-    */
+    private Course prereq;
+    private int ects;
     public String getName() {
         return this.name;
     }
-    
-    /**
-    * @generated
-    */
     public String setName(String name) {
         this.name = name;
     }
