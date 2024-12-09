@@ -2,17 +2,21 @@ package oop.Employees;
 
 import oop.Data;
 import oop.User;
-
-/**
-* @generated
-*/
+import java.util.*
+;
 public class Admin extends User {
 	
+	private static Vector<String> unis = new Vector<>(); 
 	private Data data;
 	
     public Admin(String login, String password, String uniName) {
 		super(login, password, "001");
-		this.data = new Data(uniName, this);
+		if(!unis.contains(uniName)) {
+			System.out.println("University " + uniName + " server has been created.");
+			this.data = new Data(uniName, this);
+			unis.add(uniName);
+		}
+		else System.out.println(uniName + " already exists.");
 	}
     
     public void createStudent() {
