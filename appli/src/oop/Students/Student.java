@@ -2,7 +2,7 @@ package oop.Students;
 
 import oop.User;
 
- class Student extends User implements Researcher {
+ class Student extends User{
     private int course;
     private int ects;
     private String id;
