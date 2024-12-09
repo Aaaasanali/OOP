@@ -3,6 +3,8 @@ package oop;
 import java.util.Scanner;
 
 import employees.Admin;
+import employees.Employee;
+import employees.Manager;
 
 public class Main {
 
@@ -36,11 +38,13 @@ public class Main {
 		
 		User admin = new Admin("popa1", "popapassword");
 		User admin2 = new Admin("popa3", "popapassword2	");
-		
+		User emp = new Manager("PPA", "lola");
 		System.out.println(admin.getId());
 		User current = login();
 		if(current==null) System.exit(0);
-		System.out.println(current.getClass().getSimpleName());	
+		if(current instanceof Manager) current = (Manager)current;
+		System.out.println();
+		System.out.println(current.getFunc());
 	}
 
 }

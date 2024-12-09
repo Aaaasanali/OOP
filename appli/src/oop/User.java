@@ -6,26 +6,13 @@ import java.util.*;
 public abstract class User {
 	
 	private String login;
-<<<<<<< HEAD
 	private String password;
 	private int hashPassword;
 	
-=======
-	private String password;	
->>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP/
     private String id;
     private String name;
     private String surname;
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP/
     private String email;
-<<<<<<< HEAD
-=======
-
-
->>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP/
     private Language language;
     private Date birthdate;
     private Sex sex;
@@ -57,6 +44,7 @@ public abstract class User {
     	this.password = password;
     	this.hashPassword = password.hashCode();
     	this.id = generateId();
+    	Data.addUser(this);
     }
     
     private String generateId() {
@@ -89,4 +77,12 @@ public abstract class User {
     	return this.id;
     }
     
+	public String getFunc() {
+    	String res = "";
+    	for(String i : functions) {
+    		res += i + "\n";
+    	}
+    	return res;
+    }
+	
 }

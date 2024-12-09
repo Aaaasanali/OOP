@@ -2,56 +2,49 @@ package employees;
 
 import oop.User;
 
-/**
-* @generated
-*/
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Vector;
+
 public class Employee extends User {
     
-    private Employee() {};
-    private String position;
-    
-    /**
-    * @generated
-    */
-    private String department;
-    
-    
-    
-
-    /**
-    * @generated
-    */
-    protected String getPosition() {
-        return this.position;
+	public String department;
+	private List<String> messageInbox;
+	
+	{
+		messageInbox = new ArrayList<String>();
+	}
+	
+	private final Vector<String> functions = new Vector<>(Arrays.asList("Check Salary", "Check Inbox"));
+	
+    public Employee(String login, String password) {
+    	super(login, password);
     }
     
-    /**
-    * @generated
-    */
-    protected String setPosition(String position) {
-        this.position = position;
-    }
-    
-    
-    /**
-    * @generated
-    */
     protected String getDepartment() {
-        return this.department;
+    	return department;
     }
     
-    /**
-    * @generated
-    */
-    protected String setDepartment(String department) {
-        this.department = department;
+    protected void setDepartment(String department) {
+    	this.department = department;
     }
     
+    private void sendMessage(User other, String message) {
+    	
+    }
     
+    public String getFunc() {
+    	String res = "";
+    	for(String i : functions) {
+    		res += i + "\n";
+    	}
+    	res += super.getFunc();
+    	return res;
+    }
     
-    
-
-    //                          Operations                                  
-    
+    public String toString() {
+    	return "Employee is placed in " + department + " department";
+    }
     
 }

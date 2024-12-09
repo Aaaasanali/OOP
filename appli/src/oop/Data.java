@@ -17,6 +17,10 @@ public final class Data {
 		users.put(a.getLogin(), a);
 	}
 	
+	public static void addUser(User a) {
+		users.put(a.getLogin(), a);
+	}
+	
 	public static void setUniName(String n) {
 		UniversityName = n;
 	}
