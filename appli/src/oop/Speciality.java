@@ -29,7 +29,7 @@ public class Speciality {
     /**
     * @generated
     */
-    private  attribute;
+    private int attribute;
     
     
     

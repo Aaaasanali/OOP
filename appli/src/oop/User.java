@@ -12,7 +12,12 @@ public class User {
     private String id;
     private String name;
     private String surname;
+<<<<<<< HEAD
     private String email;
+=======
+    private String email1234wijrgbpowejrthwoeutbqerwwertbqibhwoeutbqerwwerthwoeutbqerwwerthwoeutbqerwwert;
+    private String password;
+>>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP/
     private Language language;
     private Date birthdate;
     private Sex sex;
