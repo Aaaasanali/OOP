@@ -2,8 +2,8 @@ package oop.Employees;
 
 import oop.Data;
 import oop.User;
-import java.util.*
-;
+import java.util.*;
+
 public class Admin extends User {
 	
 	private static Vector<String> unis = new Vector<>(); 
