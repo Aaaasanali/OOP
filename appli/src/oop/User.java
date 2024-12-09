@@ -1,4 +1,4 @@
-package oop;
+	package oop;
 
 import Consts.*;
 import java.util.*;
@@ -6,17 +6,49 @@ import java.util.*;
 public abstract class User {
 	
 	private String login;
+<<<<<<< HEAD
 	private String password;
 	private int hashPassword;
 	
+=======
+	private String password;	
+>>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP/
     private String id;
     private String name;
     private String surname;
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP/
     private String email;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP/
     private Language language;
     private Date birthdate;
     private Sex sex;
     private String phone;
+    public void setName(String name) {
+    	this.name = name;
+    }
+    public String getName() {
+    	return name;
+    }
+    
+    public void setSurname(String surname) {
+    	this.surname = surname;
+    }
+    public String getSurname() {
+    	return surname;
+    }
+    public User(String login, String password, String name, String surname) {
+        this.login = login;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+    }
     
     private final Vector<String> functions = new Vector<>(Arrays.asList("Settings", "Change Login", "Change Password", "Check Info"));
     

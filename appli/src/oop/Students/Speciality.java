@@ -31,10 +31,6 @@ public class Speciality {
     * @generated
     */
     private Student student;
-    
-    /**
-    * @generated
-    */
     private Student student;
     
     

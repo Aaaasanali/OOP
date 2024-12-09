@@ -5,36 +5,16 @@ package oop;
 * @generated
 */
 public class Course {
-    
-    /**
-    * @generated
-    */
     private String name;
-    
-    /**
-    * @generated
-    */
-    private Course prereq123123123123123;
-    
-    /**
-    * @generated
-    */
-    private int ectsshdfviwqegr14323;
-    
-    
-    
-
-    /**
-    * @generated
-    */
-    public String getName() {
+    private Course prereq;
+    private int ects;
+    public Course(String courseName, String string) {
+		// TODO Auto-generated constructor stub
+	}
+	public String getName() {
         return this.name;
     }
-    
-    /**
-    * @generated
-    */
-    public String setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
     
@@ -64,9 +44,18 @@ public class Course {
     /**
     * @generated
     */
-    public int setEcts(Integer ects) {
-        this.ects = ects;
+    public void setEcts(Integer ects) {
+         this.ects = ects;
     }
+	public String getCourseName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String getTeacher() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
     
     
     

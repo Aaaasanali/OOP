@@ -1,5 +1,5 @@
 package Consts;
 
 public enum Sex {
-	MALE, FEMALE, OTHER, Bebr;
+	MALE, FEMALE, OTHER, Bebr, HELICOPTER;
 }
