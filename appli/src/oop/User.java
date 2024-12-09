@@ -18,7 +18,6 @@ public abstract class User {
     private Sex sex;
     private String phone;
     
-    Vector<Integer> v = new Vector<>(3, 2);
     private final Vector<String> functions = new Vector<>(Arrays.asList("Settings", "Change Login", "Change Password", "Check Info"));
     
     public User(String login, String password) {
