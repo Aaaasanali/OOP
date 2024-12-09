@@ -1,9 +1,8 @@
 package Consts;
 
 public enum Language {
-	KZ, RU, EN ,UK; 
+	KZ, RU, EN; 
 }
-//gayy
 
 
 
