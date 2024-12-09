@@ -8,7 +8,7 @@ import java.util.Vector;
 */
 public class Manager extends Employee {
     
-	private final Vector<String> functions = new Vector<>(Arrays.asList("Settings", "Change Login", "Change Password", "Check Info"));
+	private final Vector<String> functions = new Vector<>(Arrays.asList("Create Student", "Create Someone", "Find Student"));
 	
     public Manager(String login, String password) {
     	super(login, password);
