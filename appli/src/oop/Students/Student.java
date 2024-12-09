@@ -18,7 +18,12 @@ import oop.User;
     private  attribute4;
     private  attribute5;
     
-    
+    public Student(int id, String name, String course, String ects) {
+        this.id = id;
+        this.name = name;
+        this.faculty = faculty;
+        this.level = level;
+    }
     
     
     private Set<Document> documents;
