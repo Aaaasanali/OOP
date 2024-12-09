@@ -2,7 +2,7 @@ package oop;
 
 import java.util.Scanner;
 
-import oop.Employees.Admin;
+import employees.Admin;
 
 public class Main {
 
