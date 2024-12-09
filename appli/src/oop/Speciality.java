@@ -29,7 +29,7 @@ public class Speciality {
     /**
     * @generated
     */
-    private int attribute1231231AA23;
+    private int attribute1231231AA231;
     
     
     
