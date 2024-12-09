@@ -1,20 +1,31 @@
 	package oop;
 
 import Consts.*;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
-public class User {
+public abstract class User {
 	
 	private String login;
+<<<<<<< HEAD
+	private String password;
+	private int hashPassword;
+	
+=======
 	private String password;	
+>>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP/
     private String id;
     private String name;
     private String surname;
+<<<<<<< HEAD
+=======
 
+>>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP/
     private String email;
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP/
     private Language language;
     private Date birthdate;
     private Sex sex;
@@ -39,18 +50,13 @@ public class User {
         this.surname = surname;
     }
     
+    private final Vector<String> functions = new Vector<>(Arrays.asList("Settings", "Change Login", "Change Password", "Check Info"));
     
     public User(String login, String password) {
     	this.login = login;
     	this.password = password;
+    	this.hashPassword = password.hashCode();
     	this.id = generateId();
-    }
-    
-    public User(String login, String password, String code) {
-    	this.login = login;
-    	this.password = password;
-    	if(code == "001") this.id = "00000";
-    	else this.id = generateId();
     }
     
     private String generateId() {
@@ -63,7 +69,23 @@ public class User {
     	System.out.println("Filling name, email, sex, phone and etc.");
     }
     
-    public String getId() {
+    public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public int getPassword() {
+		return this.hashPassword;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getId() {
     	return this.id;
     }
     

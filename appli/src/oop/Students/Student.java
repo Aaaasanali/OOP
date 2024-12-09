@@ -1,13 +1,22 @@
 package oop.Students;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import oop.Course;
 import oop.User;
 
+<<<<<<< HEAD
  class Student extends User{
+=======
+ class Student extends User  {
+>>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP/
     private int course;
     private int ects;
     private String id;
- 
-    
+    private String faculty;
+    private List<Course> enrolledCourses = new ArrayList<>();
+    private String organization = null;
     public Student(String login, String password, String name, String surname, int course, int ects, String id) {
         super(login, password, name, surname);
         this.course = course;
@@ -39,7 +48,27 @@ import oop.User;
     public void setId(String id) {
         this.id = id;
     }
+    
+    
+    public String getFaculty() {
+		return faculty;
+	}
 
+
+	public void setFaculty(String faculty) {
+		this.faculty = faculty;
+	}
+
+	public String getOrganization() {
+		return organization;
+	}
+
+
+	public void setOrganization(String organization) {
+		this.organization = organization;
+	}
+
+    
 
 
     @Override
@@ -51,6 +80,52 @@ import oop.User;
                 ", id=" + id +
                 '}';
     }
-}
+
+    public List<Course> viewCourse() {//показать список курсов
+        return enrolledCourses;
+    }
+    
+    
+    
+    public Course viewCourse(String courseName) {// списки по нвз-ния курса
+        for (Course course : enrolledCourses) {
+            if (course.getCourseName().equalsIgnoreCase(courseName)) {
+                return course;
+            }
+        }
+        return null; //если нет курсов
+    }
+    public void registerForCourse(String courseName) { //регистрация на курс
+        enrolledCourses.add(new Course(courseName, "Unknown Teacher"));
+        System.out.println("Successfully registered for course: " + courseName);
+    }
+
+    public String viewTeacherInfo(String courseName) {// инфо про препода
+        for (Course course : enrolledCourses) {
+            if (course.getCourseName().equalsIgnoreCase(courseName)) {
+                return "Teacher for " + courseName + ": " + course.getTeacher();
+            }
+        }
+        return "Course not found!";
+    }
+    
+    
+  //  public String viewMarks() {
+  //      return transcript.getGrades();
+  //  }'
+  //  public String getTranscript() {
+  //      return transcript.getGrades();
+  //  }
+    public void rateTeacher(String teacherName, Integer rating) {
+        System.out.println("Rated teacher " + teacherName + " with a score of " + rating + "/10.");
+    }	
+    
+    
+    
+    
+ }
+	
  
-}
+ 
+ 
+

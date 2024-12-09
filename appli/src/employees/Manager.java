@@ -1,65 +1,17 @@
 package employees;
 
+import java.util.Arrays;
+import java.util.Vector;
 
 /**
 * @generated
 */
 public class Manager extends Employee {
     
-    /**
-    * @generated
-    */
-    private ManagerType mangerType;
-    
-    
-    /**
-    * @generated
-    */
-    private Data data;
-    
-    
-
-    /**
-    * @generated
-    */
-    private ManagerType getMangerType() {
-        return this.mangerType;
+	private final Vector<String> functions = new Vector<>(Arrays.asList("Create Student", "Create Someone", "Find Student"));
+	
+    public Manager(String login, String password) {
+    	super(login, password);
     }
-    
-    /**
-    * @generated
-    */
-    private ManagerType setMangerType(ManagerType mangerType) {
-        this.mangerType = mangerType;
-    }
-    
-    
-    
-    /**
-    * @generated
-    */
-    public Data getData() {
-        return this.data;
-    }
-    
-    /**
-    * @generated
-    */
-    public Data setData(Data data) {
-        this.data = data;
-    }
-    
-    
-    
-
-    //                          Operations                                  
-    
-    /**
-    * @generated
-    */
-    public void addCoursesForRegistration() {
-        //TODO
-    }
-    
     
 }
