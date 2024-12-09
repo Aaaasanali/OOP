@@ -2,12 +2,11 @@ package oop;
 
 import oop.User;
 
-/**
-* @generated
-*/
 public class Employee extends User {
     
-    private Employee() {};
+    private Employee() {
+    	
+    };
     private String position;
     
     /**
