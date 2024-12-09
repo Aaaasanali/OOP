@@ -2,76 +2,27 @@ package oop.Students;
 
 import oop.User;
 
-/**
-* @generated
-*/
-public class Student extends User implements Researcher {
+ class Student extends User implements Researcher {
 
+    public Student(String login, String password) {
+		super(login, password);
+		
+	}
     private String name;
-    
-    /**
-    * @generated
-    */
     private int course;
-    
-    /**
-    * @generated
-    */
     private int ects;
-    
-    /**
-    * @generated
-    */
-    private int admissionYear;
-    
-    /**
-    * @generated
-    */
-    private Speciality speciality;
-    
-    /**
-    * @generated
-    */
     private int id;
-    
-    /**
-    * @generated
-    */
-    private studyType studyType;
-    
-    /**
-    * @generated
-    */
     private  attribute2;
-    
-    /**
-    * @generated
-    */
     private  attribute;
-    
-    /**
-    * @generated
-    */
     private  attribute3;
-    
-    /**
-    * @generated
-    */
     private  attribute4;
-    
-    /**
-    * @generated
-    */
     private  attribute5;
     
-    /**
-    * @generated
-    */
+    
+    
+    
     private Set<Document> documents;
     
-    /**
-    * @generated
-    */
     private Set<Lesson> lessons;
     
     /**
@@ -192,7 +143,7 @@ public class Student extends User implements Researcher {
     /**
     * @generated
     */
-    private int setCourse(Integer course) {
+    private void setCourse(Integer course) {
         this.course = course;
     }
     
@@ -207,7 +158,7 @@ public class Student extends User implements Researcher {
     /**
     * @generated
     */
-    private int setEcts(Integer ects) {
+    private void setEcts(Integer ects) {
         this.ects = ects;
     }
     
@@ -222,7 +173,7 @@ public class Student extends User implements Researcher {
     /**
     * @generated
     */
-    private int setAdmissionYear(Integer admissionYear) {
+    private void setAdmissionYear(Integer admissionYear) {
         this.admissionYear = admissionYear;
     }
     
@@ -252,7 +203,7 @@ public class Student extends User implements Researcher {
     /**
     * @generated
     */
-    private int setId(Integer id) {
+    private void setId(Integer id) {
         this.id = id;
     }
     
@@ -650,18 +601,6 @@ public class Student extends User implements Researcher {
         //TODO
         return null;
     }
-    
-    /**
-    * @generated
-    */
-    public Course viewCourse() {
-        //TODO
-        return null;
-    }
-    
-    /**
-    * @generated
-    */
     public void registeForCourse() {
         //TODO
     }

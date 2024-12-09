@@ -14,12 +14,12 @@ public class Course {
     /**
     * @generated
     */
-    private Course prereq123123123123123;
+    private Course prereq;
     
     /**
     * @generated
     */
-    private int ectsshdfviwqegr14323;
+    private int ects;
     
     
     
