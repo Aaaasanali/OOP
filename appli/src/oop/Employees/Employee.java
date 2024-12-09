@@ -7,9 +7,7 @@ import oop.User;
 */
 public class Employee extends User {
     
-    /**
-    * @generated
-    */
+    private Employee() {};
     private String position;
     
     /**

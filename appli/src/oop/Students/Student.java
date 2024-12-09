@@ -6,15 +6,7 @@ import oop.User;
 * @generated
 */
 public class Student extends User implements Researcher {
-    
-    /**
-    * @generated
-    */
-    private String id;
-    
-    /**
-    * @generated
-    */
+
     private String name;
     
     /**
