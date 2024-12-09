@@ -8,10 +8,13 @@ public class Course {
     private String name;
     private Course prereq;
     private int ects;
-    public String getName() {
+    public Course(String courseName, String string) {
+		// TODO Auto-generated constructor stub
+	}
+	public String getName() {
         return this.name;
     }
-    public String setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
     
@@ -41,9 +44,18 @@ public class Course {
     /**
     * @generated
     */
-    public int setEcts(Integer ects) {
-        this.ects = ects;
+    public void setEcts(Integer ects) {
+         this.ects = ects;
     }
+	public String getCourseName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String getTeacher() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
     
     
     
