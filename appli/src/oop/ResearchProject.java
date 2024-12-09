@@ -10,7 +10,7 @@ public class ResearchProject {
     /**
     * @generated
     */
-    private Researcher researcher;
+    private Researcher resjfkfdlfsdearcher;
     
     /**
     * @generated

@@ -17,6 +17,15 @@ public class Main {
 //			String login = inp.next();
 //			String password = inp.next();
 //		}
+		boolean run = true;
+		while(run) {
+			System.out.println("Welcome To AAAAAAA??");
+			System.out.print("Login: ");
+			String login = "asd"; 
+					
+		
+			System.out.println("Welcome To 123");
+		}
 	}
 
 }
