@@ -3,7 +3,7 @@ package oop;
 import java.util.HashMap;
 import java.util.Map;
 
-import oop.Employees.Admin;
+import employees.Admin;
 
 /**
 * @generated

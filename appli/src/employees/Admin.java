@@ -1,4 +1,4 @@
-package oop.Employees;
+package employees;
 
 import oop.Data;
 import oop.User;
