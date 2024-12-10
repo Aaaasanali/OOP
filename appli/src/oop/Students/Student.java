@@ -6,11 +6,10 @@ import java.util.List;
 import oop.Course;
 import oop.User;
 
-<<<<<<< HEAD
- class Student extends User{
-=======
+ 
+
  class Student extends User  {
->>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP/
+
     private int course;
     private int ects;
     private String id;

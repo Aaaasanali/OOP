@@ -1,5 +1,11 @@
 package employees;
 
+import java.util.Set;
+
+import Consts.TeacherTitle;
+import oop.Document;
+import oop.Lesson;
+import oop.Research.Researcher;
 
 /**
 * @generated
