@@ -37,7 +37,7 @@ public abstract class User {
         this.surname = surname;
     }
     
-    private final Vector<String> functions = new Vector<>(Arrays.asList("Settings", "Change Login", "Change Password", "Check Info"));
+    private final Vector<String> functions = new Vector<>(Arrays.asList("Settings", "Change Login", "Change Password", "Check Info", "Logout"));
     
     public User(String login, String password) {
     	this.login = login;
