@@ -9,6 +9,7 @@ import research.Researcher;
 */
 public class GraduateStudent extends Student {
     
+	public GraduateStudent() {};
 
     public GraduateStudent(String login, String password, String name, String surname, int course, int ects,
 			String id) {
