@@ -2,12 +2,15 @@ package user;
 
 
 import database.Data;
+import oop.NamedRunnable;
 import students.*;
 
 import java.util.*;
 
 public abstract class User {
 	
+	Scanner inp = new Scanner(System.in);
+
 	private String login;
 	private String password;
 	private int hashPassword;
@@ -23,29 +26,7 @@ public abstract class User {
     private Education education; 
     
     
-    
-    
-    public void setName(String name) {
-    	this.name = name;
-    }
-    public String getName() {
-    	return name;
-    }
-    
-    public void setSurname(String surname) {
-    	this.surname = surname;
-    }
-    public String getSurname() {
-    	return surname;
-    }
-    public User(String login, String password, String name, String surname) {
-        this.login = login;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-    }
-    
-    private final Vector<String> functions = new Vector<>(Arrays.asList("Settings", "Change Login", "Change Password", "Check Info", "Logout"));
+    public User() {};
     
     public User(String login, String password) {
     	this.login = login;
@@ -77,20 +58,52 @@ public abstract class User {
 		return this.hashPassword;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getId() {
     	return this.id;
     }
     
-	public String getFunc() {
-    	String res = "";
-    	for(String i : functions) {
-    		res += i + "\n";
-    	}
-    	return res;
-    }
+	public void changeLanguage() {
+		// выберите язык - Data.changeLanguage(Choice);
+		System.out.println("Pick Language to Change\n1 - RU\n2 - EN\n3 - KZ");
+		switch(inp.nextInt()) {
+		case 0:
+			Data.setLanguage(Language.RU);
+		case 1:
+			Data.setLanguage(Language.EN);
+		case 2:
+			Data.setLanguage(Language.KZ);
+		}
+	}
+	
+	public void changePassword() {
+		while(true) {
+			System.out.println("Change Password\n0 - Back");
+			
+			System.out.println("Old Password: ");
+			String oldPassword = inp.next();
+			
+			if(oldPassword.equals(String.valueOf(0))) return;
+			
+			if(this.password.equals(oldPassword)) {
+				System.out.println("New Password: ");
+				this.password = inp.next();
+				System.out.println("Your New Password is: " + this.password);
+				return;
+			}
+			System.out.println("Incorrect Old Password");
+		}
+	}
+	
+	public void logOut() {
+		System.exit(0);
+	}
+	
+	public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex){
+		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
+		functions.put(startIndex++, new NamedRunnable(this::changePassword, "Change Password"));
+        functions.put(startIndex++, new NamedRunnable(this::changeLanguage, "Change Language"));
+        functions.put(startIndex++, new NamedRunnable(this::logOut, "Logout"));
+		return functions;
+	}
 	
 }
