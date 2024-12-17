@@ -21,6 +21,7 @@ public class Course {
     
     
     
+    
     public Course() {
     	this.id = "";
         this.name = "";
