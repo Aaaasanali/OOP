@@ -54,10 +54,18 @@ public class GraduateStudent extends Student {
     
 
     
-    
+    public String toString() {
+        return super.toString() + 
+               ", GraduateStudent{" +
+               "projects=" + (projects != null ? projects.toString() : "No projects") +
+               ", supervisor=" + (supervisor != null ? supervisor.toString() : "No supervisor") +
+               '}';
+    }
     
 
     //                          Operations                                  
     
-    
+    public void assignSupervisor(String name) {
+    	
+    }
 }

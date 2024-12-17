@@ -36,6 +36,17 @@ public abstract class User {
     	Data.addUser(this);
     }
     
+    public User(String login, String password, String name, String surname, String id) {
+    	this.login = login;
+    	this.password = password;
+    	this.hashPassword = password.hashCode();
+    	this.id = generateId();
+    	Data.addUser(this);
+    	
+    	this.name = name;
+    	this.surname = surname;
+    }
+    
     private String generateId() {
     	Date d = new Date();
     	Random r = new Random();
@@ -61,6 +72,28 @@ public abstract class User {
 	public String getId() {
     	return this.id;
     }
+	
+	
+	
+	
+	public String toString() {
+	    return "User{" +
+	            "login='" + login + '\'' +
+	            ", id='" + id + '\'' +
+	            ", name='" + name + '\'' +
+	            ", surname='" + surname + '\'' +
+	            ", email='" + email + '\'' +
+	            ", language=" + language +
+	            ", birthdate=" + birthdate +
+	            ", sex=" + sex +
+	            ", phone='" + phone + '\'' +
+	            ", education=" + education +
+	            '}';
+	}
+	
+	
+	
+	
     
 	public void changeLanguage() {
 		// выберите язык - Data.changeLanguage(Choice);

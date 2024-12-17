@@ -2,21 +2,56 @@ package database;
 
 import java.util.*;
 
+import documents.Course;
+import documents.Mark;
 import employees.Admin;
+import employees.Teacher;
+import students.Student;
 import user.Language;
 import user.User;
 
 
 public final class Data {
 	
-	public static Language currentLanguage = Language.EN;
+	// Singleton instance
+    private static final Data instance = new Data();
+
+    // University name
+    private static String universityName;
+
+    // Current language
+    public static Language currentLanguage = Language.EN;
+
+    // Users: stores all users (students, admins, etc.)
+    private static final Map<String, User> users = new HashMap<>();
+    private static final Vector<Admin> admins = new Vector<>();
+
+    // Students
+    private static final Map<String, Student> students = new HashMap<>();
+
+    // Courses
+    private static final Map<String, Course> courses = new HashMap<>();
+    private static final List<Course> allCourses = new ArrayList<>();
+
+    // Marks/Grades for each student per course
+    private static final Map<String, List<Mark>> studentMarks = new HashMap<>();
+
+    // Teachers
+    private static final Map<String, Teacher> teachers = new HashMap<>();
+
+    // Student Organizations
+    private static final Map<String, List<String>> studentOrganizations = new HashMap<>();
+
+    // Logs for auditing purposes
+    private static final Stack<String> logs = new Stack<>();	
 	
-	private static String UniversityName;
-	private static final Vector<Admin> admins = new Vector<>();
 	
-	private static final Map<String, User> users = new HashMap<>();
 	
-	private static final Stack<String> logs = new Stack<>();
+	
+	
+	
+	
+	
 	
 	
 	public static void addUser(User a) {
@@ -28,8 +63,8 @@ public final class Data {
 		users.put(a.getLogin(), a);
 	}
 	
-	public static void setUniName(String n) {
-		UniversityName = n;
+	public static void setUniName(String name) {
+		universityName = name;
 	}
 	
 	public static User findUserByLogin(String login) {

@@ -36,6 +36,11 @@ public class Course {
         this.prerequisites = null;
     }
     
+    public Course(String name, int year) {
+    	this.name = name;
+    	this.year = year;
+    }
+    
     public Course(String id, String name, Integer credits, String formula, 
             Integer year, CourseType type, 
             List<Lesson> schedule, String description) {

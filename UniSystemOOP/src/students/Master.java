@@ -17,22 +17,34 @@ public class Master extends GraduateStudent {
     private Thesis thesis;
 
 
-    private Thesis getThesis() {
-        return this.thesis;
+    private void getThesis() {											// void/Thesis?    return thesis or just print it?
+    	System.out.println(this.thesis);
     }
     
     private void getString() {
-    	System.out.println("AD");
+    	System.out.println(this);
     }
     
     private void setThesis(Thesis thesis) {
         this.thesis = thesis;
     }
     
+    
+    
+    
+    
     public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
         Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
         functions.put(startIndex++, new NamedRunnable(this::getThesis, "Get Thesis"));
         functions.put(startIndex++, new NamedRunnable(this::getString, "Get String"));
         return functions;
+    }
+    
+    
+    
+    
+    
+    public String toString() {
+        return super.toString() + ", Thesis: " + (thesis != null ? thesis.toString() : "No thesis assigned");
     }
 }
