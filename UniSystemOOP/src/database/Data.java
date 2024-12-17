@@ -8,7 +8,7 @@ import user.User;
 
 public final class Data {
 	
-	private static String UniversityName;
+	private static String UniversityNameesadksja;
 	private static final Vector<Admin> admins = new Vector<>();
 	
 	private static final Map<String, User> users = new HashMap<>();
