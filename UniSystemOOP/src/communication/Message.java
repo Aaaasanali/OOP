@@ -10,7 +10,7 @@ import user.User;
 public class Message {
     
 
-    private User sender;
+    private User senderrr;
 
     private User recipient;
 
