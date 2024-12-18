@@ -9,6 +9,7 @@ import employees.Admin;
 import employees.Employee;
 import employees.Manager;
 import students.Master;
+import students.Student;
 import user.User;
 
 public class Main {
@@ -46,7 +47,8 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		User admin = new Admin("popa1", "popapassword");
+		User admin = new Admin("popa1", "popa1");
+	
 		User current = null;
 		Master master = new Master();
 		while(current == null) {
