@@ -41,9 +41,7 @@ public class Complaint extends Message {
     }
 
 
-	@Override
-	public void process() {
-		// TODO Auto-generated method stub
-		
-	}
+    public String getShortInfo() {
+    	return "[COMPLAINT]" + super.getShortInfo();
+    }
 }
