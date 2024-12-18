@@ -48,12 +48,12 @@ public class Main {
 	public static void main(String[] args) {
 		
 
-		User admin = new Admin("popa1", "popa1");
+		
 	
 		User current = null;
 
 		User admin = new Admin("popa1", "popapassword");
-		User current = admin;
+		User current1 = admin;
 
 		Master master = new Master();
 //		while(current == null) {
@@ -62,7 +62,7 @@ public class Main {
 		
 		while(true) {	
 			
-	        Map<Integer, NamedRunnable> functionsMap = current.getFunctionsMap(0);
+	        Map<Integer, NamedRunnable> functionsMap = current1.getFunctionsMap(0);
 	
 	        int i = 0;
 	        for (Map.Entry<Integer, NamedRunnable> entry : functionsMap.entrySet()) {
