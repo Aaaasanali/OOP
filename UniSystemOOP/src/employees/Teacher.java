@@ -30,10 +30,8 @@ public class Teacher extends Employee implements Researcher, Serializable {
     private double rating;
     private Vector<Double> ratingMarks = new Vector<>();;
     
-
     //private Set<Lesson> lessons; lessons are contains in courses
     
-
     private TeacherTitle teacherType;
     
 

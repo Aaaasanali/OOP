@@ -72,6 +72,11 @@ public class GraduateStudent extends Student implements Serializable{
 		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
 		
 		functions.put(startIndex++, new NamedRunnable(this::assignSupervisor, "Assign supervisor"));
+		
+		for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
+            functions.put(startIndex++, entry.getValue());
+        }
+		
 		return functions;
 	}
     

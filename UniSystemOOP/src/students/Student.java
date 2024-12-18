@@ -40,8 +40,10 @@ public class Student extends User implements Serializable {
         this.courses = new HashMap<>();
     }
 
-    public Student(String name) {
-        super.setName(name);
+    public Student(String login, String password) {
+        super(login, password);
+        this.documents = new ArrayList<>();
+        this.courses = new HashMap<>();
     }
 
     // Getter and Setter methods
@@ -315,11 +317,6 @@ public class Student extends User implements Serializable {
     public void getTranscript() {
         
     }
-    
-    
-    
-    
-    
     
     
     public void addMarkToCourse(Course course, int firstAttestation, int secondAttestation, int finalExam) {

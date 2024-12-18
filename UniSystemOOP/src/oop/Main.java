@@ -47,11 +47,20 @@ public class Main {
 	public static void main(String[] args) {
 		
 		User admin = new Admin("popa1", "popapassword");
-		User current = null;
+		
+		Master student3 = new Master("john_smith", "password123", "Alex", "Smith");
+		
+		
+		
+		
+		Data.INSTANCE.addUser(student3);
+		
+		User current = student3; //null
 		Master master = new Master();
-		while(current == null) {
-			current = login();
-		}
+//		while(current == null) {
+//			current = login();
+//		}
+		
 		Map<Integer, NamedRunnable> functionsMap = current.getFunctionsMap(0);
 		while(true) {	
 	
