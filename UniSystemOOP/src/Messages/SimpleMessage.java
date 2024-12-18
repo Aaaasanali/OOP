@@ -49,4 +49,6 @@ public class SimpleMessage extends Message {
     public String getShortInfo() {
         return "Message to: " + receiver + "\nSubject: " + subject + "\nSent at: " + timestamp + "\nContent: " + getContent();
     }
+
+
 }

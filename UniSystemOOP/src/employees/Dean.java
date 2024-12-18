@@ -100,7 +100,7 @@ public class Dean extends Employee{
 	    public void checkInbox() {
 	        System.out.println("Inbox - Requests:");
 	        for (Request r : requests) {
-	            System.out.println("- " + r.getContent() + " | Signed: " + r.isSigned());
+	            System.out.println("- " + r.getContent());
 	        }
 	        System.out.println("Inbox - Complaints:");
 	        for (Complaint c : complaints) {

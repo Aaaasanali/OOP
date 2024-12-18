@@ -44,4 +44,7 @@ public class Complaint extends Message {
     public String getShortInfo() {
     	return "[COMPLAINT]" + super.getShortInfo();
     }
+
+
+	
 }
