@@ -38,9 +38,9 @@ public class Teacher extends Employee implements Researcher, Serializable {
     
 
 
-    private Set<Course> getCourses() {
+    private Vector<Course> getCourses() {
         if (this.courses == null) {
-            this.courses = new HashSet<Course>();
+            this.courses = new Vector<Course>();
         }
         return this.courses;
     }
@@ -70,17 +70,17 @@ public class Teacher extends Employee implements Researcher, Serializable {
     
     
 
-    private Set<Lesson> getLessons() {
-        if (this.lessons == null) {
-            this.lessons = new HashSet<Lesson>();
-        }
-        return this.lessons;
-    }
-    
-
-    private void setLessons(Lesson lesson) {
-        this.lessons.add(lesson);
-    }
+//    private Set<Lesson> getLessons() {						change, get lessons from courses
+//        if (this.lessons == null) {
+//            this.lessons = new HashSet<Lesson>();
+//        }
+//        return this.lessons;
+//    }
+//    
+//
+//    private void setLessons(Lesson lesson) {
+//        this.lessons.add(lesson);
+//    }
     
     
     
@@ -168,11 +168,32 @@ public class Teacher extends Employee implements Researcher, Serializable {
     
 
 
+	@Override
+	public String toString() {
+	    // Get the teacher's courses as a list of course names (you can modify this to include other details if needed)
+	    StringBuilder courseNames = new StringBuilder();
+	    if (this.courses != null && !this.courses.isEmpty()) {
+	        for (Course course : this.courses) {
+	            courseNames.append(course.getName()).append(", ");
+	        }
+	        // Remove last comma and space
+	        courseNames.setLength(courseNames.length() - 2);
+	    } else {
+	        courseNames.append("No courses assigned");
+	    }
+
+	    // Build the string representation
+	    return "Teacher Login: " + this.getLogin() + "\n" +
+	           "Rating: " + this.rating + "\n" +
+	           "Courses: " + courseNames.toString() + "\n" +
+	           "Teacher Type: " + (this.teacherType != null ? this.teacherType.toString() : "Not assigned") + "\n";
+	}
     
-    
+	
+	
     
 
-    }
+}
     
     
     

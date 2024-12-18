@@ -141,17 +141,30 @@ public class Student extends User implements Serializable {
 
     // Method to view teacher information for a specific course
     public void viewTeacherInfo() {
+        // Prompt the user for course details
         System.out.print("Enter the course name to view teacher info: ");
         String courseName = n.next();
+        System.out.print("Enter the year for the course: ");
+        int year = n.nextInt();
+        System.out.print("Enter the semester for the course (FALL/SPRING): ");
+        Semester semester = Semester.valueOf(n.next().toUpperCase());
 
+        // Iterate through the enrolled courses
         for (Course course : courses.keySet()) {
-            if (course.getName().equalsIgnoreCase(courseName)) {
+            if (course.getName().equalsIgnoreCase(courseName) &&
+                course.getYear() == year &&
+                course.getSemester() == semester) {
+                // Print the teacher information if the course matches
                 System.out.println("Teacher for " + courseName + ": " + course.getTeachers());
                 return;
             }
         }
+
+        // If no course is found, print an error message
         System.out.println("Course not found!");
     }
+    
+    
 
     // Method to view marks
     public void viewMarks() {
