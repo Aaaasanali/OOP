@@ -3,13 +3,18 @@ package employees;
 import user.User;
 import user.UserFactory;
 
+import java.io.Serializable;
 import java.util.*;
 
+import Factories.NamedRunnable;
 import Interfaces.CreatingUsers;
 import database.Data;
+<<<<<<< HEAD
 import factories.NamedRunnable;
+=======
+>>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP/
 
-public class Admin extends User implements CreatingUsers{
+public class Admin extends User implements CreatingUsers, Serializable{
 	
 	private Scanner n = new Scanner(System.in);
 	

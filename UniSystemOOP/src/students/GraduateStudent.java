@@ -1,26 +1,31 @@
 package students;
 
+import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 
+import Factories.NamedRunnable;
 import research.ResearchProject;
 import research.Researcher;
 /**
 * @generated
 */
-public class GraduateStudent extends Student {
+public class GraduateStudent extends Student implements Serializable{
     
+	private Set<ResearchProject> projects;
+    private Researcher supervisor;
+    
+	
 	public GraduateStudent() {};
 
-    public GraduateStudent(String login, String password, String name, String surname, int course, int ects,
-			String id) {
-		super(login, password, name, surname, course, ects, id);
+    public GraduateStudent(String login, String password, String name, String surname) {
+		super(login, password, name, surname);
 		// TODO Auto-generated constructor stub
 	}
 
 
-	private Set<ResearchProject> projects;
-
-    private Researcher supervisor;
+	
    
     
     private Set<ResearchProject> getProjects() {
@@ -32,10 +37,7 @@ public class GraduateStudent extends Student {
         this.projects.add(project);
     }
     
-
     
-    
-
     private Researcher getSupervisor() {
         return this.supervisor;
     }
@@ -49,10 +51,34 @@ public class GraduateStudent extends Student {
     
 
     
-    
+    public String toString() {
+        return super.toString() + 
+               ", GraduateStudent{" +
+               "projects=" + (projects != null ? projects.toString() : "No projects") +
+               ", supervisor=" + (supervisor != null ? supervisor.toString() : "No supervisor") +
+               '}';
+    }
     
 
     //                          Operations                                  
+    
+    public void assignSupervisor() {
+    	
+    }
+    
+    
+    
+    public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex){
+		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
+		
+		functions.put(startIndex++, new NamedRunnable(this::assignSupervisor, "Assign supervisor"));
+		
+		for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
+            functions.put(startIndex++, entry.getValue());
+        }
+		
+		return functions;
+	}
     
     
 }

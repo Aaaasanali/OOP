@@ -1,7 +1,8 @@
 package documents;
 
+import java.io.Serializable;
 
-public class Mark {
+public class Mark implements Serializable{
     private int firstAttestation;
     private int secondAttestation;
     private int finalExam;
@@ -41,10 +42,6 @@ public class Mark {
     public void setFinalExamScore(int finalScore) {
     	this.finalExam = finalScore;
     }
-    
-    
-
-
     
     
     public int getFirstAttestation() {
@@ -97,11 +94,6 @@ public class Mark {
         else if (grade >= 1.0) return "D";
         else return "F"; 
     }
-    
-    
-    
-    
-    
     
     public String toString() {
 		return "Mark [att1=" + this.firstAttestation + ", att2=" + this.secondAttestation + ", finalExam=" + this.finalExam + "]";

@@ -1,7 +1,7 @@
 package employees;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.*;
 
 import documents.Document;
 import documents.Lesson;
@@ -10,38 +10,40 @@ import research.Researcher;
 import documents.Course;
 import students.Student;
 
-public class Teacher extends Employee implements Researcher {
+public class Teacher extends Employee implements Researcher, Serializable {
     
 
     public Teacher(String login, String password) {
 		super(login, password);
 		// TODO Auto-generated constructor stub
 	}
+    
+    public Teacher(String login, String password, String name, String surname) {
+		super(login, password, name, surname);
+
+	}
 
 
-	private Set<Course> courses;
+	private Vector<Course> courses;
     
 
     private double rating;
+    private Vector<Double> ratingMarks = new Vector<>();;
     
-
-    private Set<Lesson> lessons;
+    //private Set<Lesson> lessons; lessons are contains in courses
     
-
     private TeacherTitle teacherType;
     
 
     private Set<Document> documents;
     
-
-    //private Set<Student> students;				not in UML
     
     
 
 
-    private Set<Course> getCourses() {
+    private Vector<Course> getCourses() {
         if (this.courses == null) {
-            this.courses = new HashSet<Course>();
+            this.courses = new Vector<Course>();
         }
         return this.courses;
     }
@@ -71,17 +73,17 @@ public class Teacher extends Employee implements Researcher {
     
     
 
-    private Set<Lesson> getLessons() {
-        if (this.lessons == null) {
-            this.lessons = new HashSet<Lesson>();
-        }
-        return this.lessons;
-    }
-    
-
-    private void setLessons(Lesson lesson) {
-        this.lessons.add(lesson);
-    }
+//    private Set<Lesson> getLessons() {						change, get lessons from courses
+//        if (this.lessons == null) {
+//            this.lessons = new HashSet<Lesson>();
+//        }
+//        return this.lessons;
+//    }
+//    
+//
+//    private void setLessons(Lesson lesson) {
+//        this.lessons.add(lesson);
+//    }
     
     
     
@@ -151,7 +153,9 @@ public class Teacher extends Employee implements Researcher {
 		
 	}
     
-    
+    public void addRating(Double rating) {
+    	this.ratingMarks.add(rating);
+    }
     
 /*
     public Set<Student> getStudent() {
@@ -169,11 +173,45 @@ public class Teacher extends Employee implements Researcher {
     
 
 
+	@Override
+	public String toString() {
+	    // Get the teacher's courses as a list of course names (you can modify this to include other details if needed)
+	    StringBuilder courseNames = new StringBuilder();
+	    if (this.courses != null && !this.courses.isEmpty()) {
+	        for (Course course : this.courses) {
+	            courseNames.append(course.getName()).append(", ");
+	        }
+	        // Remove last comma and space
+	        courseNames.setLength(courseNames.length() - 2);
+	    } else {
+	        courseNames.append("No courses assigned");
+	    }
+
+	    // Build the string representation
+	    return "Teacher Login: " + this.getLogin() + " " +
+	           "Rating: " + this.rating + " " +
+	           "Courses: " + courseNames.toString() + " " +
+	           "Teacher Type: " + (this.teacherType != null ? this.teacherType.toString() : "Not assigned") + " ";
+	}
+
+
+	public void updateAverageRating() {
+        if (ratingMarks.isEmpty()) {
+            rating = 0.0;  // No ratings yet, so the average is 0
+        } else {
+            double sum = 0;
+            for (Double mark : ratingMarks) {
+                sum += mark;
+            }
+            rating = sum / ratingMarks.size();  // Calculate the average rating
+        }
+    }
     
-    
+	
+	
     
 
-    }
+}
     
     
     

@@ -1,71 +1,67 @@
 package documents;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.*;
 
 import employees.Teacher;
 
-public class Course {
+public class Course implements Serializable {
     
     private String id;
     private String name;
     private Integer credits;
-    private List<Lesson> lessons;
+    private Vector<Lesson> lessons;
+    private Semester semester;
     private String formula;
     private Integer year;
-    private List<Teacher> teachers;
+    private Vector<Teacher> teachers;
     private CourseType type;
-    private List<Lesson> schedule;
     private String description;
-    private List<Course> prerequisites;
+    private Vector<Course> prerequisites;
 
-    
-    
-    
     public Course() {
-    	this.id = "";
-        this.name = "";
-        this.credits = 0;
-        this.lessons = null;
-        this.formula = "";
-        this.year = 0;
-        this.teachers = null;
-        this.type = null;
-        this.schedule = null;
-        this.description = "";
-        this.prerequisites = null;
+    	
     }
     
-    public Course(String id, String name, Integer credits, String formula, 
-            Integer year, CourseType type, 
-            List<Lesson> schedule, String description) {
-  this.id = id;
-  this.name = name;
-  this.credits = credits;
-  this.formula = formula;
-  this.year = year;
-  this.type = type;
-  this.schedule = schedule;
-  this.description = description;
-
-}
-    
-    public Course(String id, String name, Integer credits, List<Lesson> lessons, String formula, 
-                  Integer year, List<Teacher> teachers, CourseType type, 
-                  List<Lesson> schedule, String description, List<Course> prerequisites) {
-        this.id = id;
-        this.name = name;
-        this.credits = credits;
-        this.lessons = lessons;
-        this.formula = formula;
-        this.year = year;
-        this.teachers = teachers;
-        this.type = type;
-        this.schedule = schedule;
-        this.description = description;
-        this.prerequisites = prerequisites;
+    public Course(String name, int year, Semester semester) {
+    	this.name = name;
+    	this.year = year;
+    	this.semester = semester;
     }
+    
 
-    // 
+    
+    public Course(String id, String name, int credits, String formula, int year, CourseType type, String description, Semester semester) {
+		  this.id = id;
+		  this.name = name;
+		  this.credits = credits;
+		  this.formula = formula;
+		  this.year = year;
+		  this.type = type;
+		//  this.schedule = schedule;
+		  this.description = description;
+		  this.semester = semester;
+
+    }
+    
+    public Course(String id, String name, int credits, Vector<Lesson> lessons, 
+    	Semester semester, String formula, int year, 
+    	Vector<Teacher> teachers, CourseType type, 
+        String description, Vector<Course> prerequisites) {
+    		
+    	this(name, year, semester);
+    	
+		this.id = id;
+		this.credits = credits;
+		this.lessons = (lessons != null) ? lessons : new Vector<>();
+		this.formula = formula;
+		this.teachers = (teachers != null) ? teachers : new Vector<>();
+		this.type = type;
+		this.description = description;
+		this.prerequisites = (prerequisites != null) ? prerequisites : new Vector<>();
+	}
+    
+    
     public String getId() {
         return id;
     }
@@ -94,7 +90,7 @@ public class Course {
         return lessons;
     }
 
-    public void setLessons(List<Lesson> lessons) {
+    public void setLessons(Vector<Lesson> lessons) {
         this.lessons = lessons;
     }
 
@@ -114,11 +110,11 @@ public class Course {
         this.year = year;
     }
 
-    public List<Teacher> getTeachers() {
-        return teachers;
+    public Vector<Teacher> getTeachers() {
+        return this.teachers;
     }
 
-    public void setTeachers(List<Teacher> teachers) {
+    public void setTeachers(Vector<Teacher> teachers) {
         this.teachers = teachers;
     }
 
@@ -129,14 +125,22 @@ public class Course {
     public void setType(CourseType type) {
         this.type = type;
     }
-
-    public List<Lesson> getSchedule() {
-        return schedule;
+    
+    public void setSemester(Semester semester) {
+    	this.semester = semester;
+    }
+    
+    public Semester getSemester() {
+    	return this.semester;
     }
 
-    public void setSchedule(List<Lesson> schedule) {
-        this.schedule = schedule;
-    }
+//    public List<Lesson> getSchedule() {
+//        return schedule;
+//    }
+//
+//    public void setSchedule(List<Lesson> schedule) {
+//        this.schedule = schedule;
+//    }
 
     public String getDescription() {
         return description;
@@ -150,7 +154,7 @@ public class Course {
         return prerequisites;
     }
 
-    public void setPrerequisites(List<Course> prerequisites) {
+    public void setPrerequisites(Vector<Course> prerequisites) {
         this.prerequisites = prerequisites;
     }
 
@@ -165,9 +169,18 @@ public class Course {
                 ", year=" + year +
                 ", teachers=" + teachers +
                 ", type=" + type +
-                ", schedule=" + schedule +
+//                ", schedule=" + schedule +
                 ", description='" + description + '\'' +
                 ", prerequisites=" + prerequisites +
                 '}';
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        
+        return year.equals(course.year) && name.equals(course.name) && semester.equals(this.semester);  
     }
 }
