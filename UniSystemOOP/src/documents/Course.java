@@ -23,6 +23,7 @@ public class Course implements Serializable {
     	
     }
     
+    
     public Course(String name, int year, Semester semester) {
     	this.name = name;
     	this.year = year;

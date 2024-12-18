@@ -15,7 +15,6 @@ public class StudentOrganization {
     private Vector<Student> students;
     
     
-    
     public StudentOrganization(String name, String description) {
         this.name = name;
         this.description = description;

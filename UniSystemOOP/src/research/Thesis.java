@@ -14,8 +14,6 @@ public class Thesis {
    
     
     
-    
-    
     private String getTitle() {
         return this.title;
     }    

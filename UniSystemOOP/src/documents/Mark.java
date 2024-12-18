@@ -95,6 +95,7 @@ public class Mark implements Serializable{
         else return "F"; 
     }
     
+    
     public String toString() {
 		return "Mark [att1=" + this.firstAttestation + ", att2=" + this.secondAttestation + ", finalExam=" + this.finalExam + "]";
 	}

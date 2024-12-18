@@ -19,7 +19,6 @@ public class ResearchProject {
     private ResearchPaper researchPaper;
     
     
-
     private String getTopic() {
         return this.topic;
     }

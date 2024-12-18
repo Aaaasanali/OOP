@@ -28,7 +28,6 @@ public class Lesson implements Serializable{
     private Set<Student> students;
 
     
-    
 
 
     private LessonType getLessonType() {

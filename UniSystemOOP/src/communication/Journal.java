@@ -23,6 +23,7 @@ public class Journal {
   
     
     
+    
     private String getName() {
         return this.name;
     }

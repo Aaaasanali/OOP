@@ -109,6 +109,7 @@ public class StudentsTest {
         
         
         
+        
         student1.rateTeacher();
 //        student2.rateTeacher();
 //        student3.rateTeacher();

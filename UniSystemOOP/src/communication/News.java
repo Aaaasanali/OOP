@@ -20,6 +20,7 @@ public class News {
 
     
     
+    
 
 
     private String getTitle() {

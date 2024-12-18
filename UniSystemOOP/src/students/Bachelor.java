@@ -11,8 +11,6 @@ public class Bachelor extends Student implements Serializable{
 	}
 
 
-
-
     
 
 

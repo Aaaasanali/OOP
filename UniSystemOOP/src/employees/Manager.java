@@ -28,7 +28,6 @@ public class Manager extends Employee implements Serializable {
     }
     
     
-    
     private void addStudent(String name) {
 		System.out.println("Enter name: ");
 		Data.INSTANCE.getAllStudents().add(new Student(name));

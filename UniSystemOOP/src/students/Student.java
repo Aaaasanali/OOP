@@ -22,6 +22,7 @@ public class Student extends User implements Serializable {
     private StudyType studyType;
 
     
+    
     private List<Document> documents;
     public Map<Course, Mark> courses;
 

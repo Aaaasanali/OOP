@@ -24,7 +24,6 @@ public class ResearchPaper {
     
 
     
-    
 
     private String getTitle() {
         return this.title;

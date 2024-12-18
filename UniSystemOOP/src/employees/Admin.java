@@ -54,6 +54,7 @@ public class Admin extends User implements CreatingUsers, Serializable{
     	System.out.println("User " + current.getId() + "has been deleted!");
     }
     
+    
     public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
         Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
         functions.put(startIndex++, new NamedRunnable(this::createUser, "Create User"));

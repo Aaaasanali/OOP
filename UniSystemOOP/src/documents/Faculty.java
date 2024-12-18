@@ -18,7 +18,6 @@ public class Faculty implements Serializable{
     private Set<String> electiveRules;
     
 
-
     private String getName() {
         return this.name;
     }

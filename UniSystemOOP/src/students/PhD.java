@@ -22,6 +22,7 @@ public class PhD extends GraduateStudent implements Serializable {
 		super(login, password, name, surname, id);
 		// TODO Auto-generated constructor stub
 	}
+    
 
 	
 

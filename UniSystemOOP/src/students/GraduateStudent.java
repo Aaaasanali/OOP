@@ -24,8 +24,6 @@ public class GraduateStudent extends Student implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-
-	
    
     
     private Set<ResearchProject> getProjects() {

@@ -17,6 +17,7 @@ public class Employee extends User implements Serializable{
 		messageInbox = new ArrayList<String>();
 	}
 	
+	
 	private final Vector<String> functions = new Vector<>(Arrays.asList("Check Salary", "Check Inbox"));
 	
     public Employee(String login, String password) {

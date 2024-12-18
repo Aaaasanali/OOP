@@ -39,6 +39,7 @@ public abstract class User implements Serializable{
     	
     }
     
+    
     public User(String login, String password, String name, String surname) {
     	this.login = login;
     	this.password = password;

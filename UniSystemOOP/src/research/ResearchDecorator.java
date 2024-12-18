@@ -18,7 +18,6 @@ public class ResearchDecorator implements Researcher {
 
     private Student student;
     
-    
 
 
     public Researcher getBaseObject() {

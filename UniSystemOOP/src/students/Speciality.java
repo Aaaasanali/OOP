@@ -14,6 +14,7 @@ public class Speciality {
 
     
     
+    
 
     private String getName() {
         return this.name;

@@ -17,6 +17,7 @@ public class Master extends GraduateStudent implements Serializable {
 	}
    
     
+    
     private Thesis thesis;
 
 
