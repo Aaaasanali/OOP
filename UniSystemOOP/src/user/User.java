@@ -107,7 +107,7 @@ public abstract class User {
 		return functions;
 	}
 
-	protected abstract void changeData();
+	public void changeData();
 
 	public String getName() {
 		
