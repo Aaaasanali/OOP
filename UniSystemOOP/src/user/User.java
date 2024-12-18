@@ -8,8 +8,14 @@ import java.io.Serializable;
 import java.util.*;
 
 import Factories.NamedRunnable;
+<<<<<<< HEAD
 
 public abstract class User implements Serializable{
+=======
+import Messages.SimpleMessage;
+
+public abstract class User {
+>>>>>>> refs/remotes/origin/Alkash
 	
 	Scanner inp = new Scanner(System.in);
 
@@ -26,7 +32,7 @@ public abstract class User implements Serializable{
     private Sex sex;
     private String phone;
     private Education education; 
-    
+    private List<SimpleMessage> inbox;
     
     public User() {};
     
@@ -159,5 +165,28 @@ public abstract class User implements Serializable{
         functions.put(startIndex++, new NamedRunnable(this::exit, "Exit"));
 		return functions;
 	}
+
+	public void changeData();
+
+	public String getName() {
+		
+		return this.name;
+	}
+
+	   public void receiveMessage(SimpleMessage message) {
+	        
+	        inbox.add(message);
+	        System.out.println("Message received by " + login + ": " + message.getContent());
+	    }
+	   public void viewInbox() {
+	        if (inbox.isEmpty()) {
+	            System.out.println("No messages in inbox.");
+	        } else {
+	            System.out.println("Inbox for " + login + ":");
+	            for (SimpleMessage message : inbox) {
+	                System.out.println(message.getShortInfo());
+	            }
+	        }
+	    }
 	
 }
