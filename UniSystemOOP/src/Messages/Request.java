@@ -57,4 +57,11 @@ public class Request extends Message {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
+
+	public void setSignedStatus(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
 }

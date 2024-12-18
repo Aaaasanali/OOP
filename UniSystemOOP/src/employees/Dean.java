@@ -47,21 +47,66 @@ public class Dean extends Employee{
 	        return Objects.hash(this.getName(), this.getDepartment());
 	    }
 	    
-	    
-	    
-	    
-	    public Map<Integer, NamedRunnable> getFunctions(int startIndex){
+	
+	    public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex){
 	    	Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
 	    	functions.put(startIndex++, new NamedRunnable(this::approveRequest,"approveRequest"));
 	    	functions.put(startIndex++, new NamedRunnable(this::rejectRequest,"rejectRequest"));
 	    	functions.put(startIndex++, new NamedRunnable(this::assignComplaint,"assignComplaint"));
 	    	functions.put(startIndex++, new NamedRunnable(this::archiveComplaint,"archiveComplaint"));
+	    	functions.put(startIndex++, new NamedRunnable(this::checkInbox,"checkInbox"));
 	    	
-	    	for(Map.Entry<Integer,NameRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
-	    		functions.put(startIndex++, entry.getValue());
+	    	for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
+	    	    functions.put(startIndex++, entry.getValue());
 	    	}
+
 	    	return functions;
 	    	
 	    }
+	    public void approveRequest() {
+	        if (!requests.isEmpty()) {
+	            Request r = requests.get(0); 
+	            r.setSignedStatus(true);
+	            System.out.println("Request approved: " + r.getContent());
+	        } else {
+	            System.out.println("No requests to approve.");
+	        }
+	    }
+	    public void rejectRequest() {
+	        if (!requests.isEmpty()) {
+	            Request r = requests.remove(0); 
+	            System.out.println("Request rejected: " + r.getContent());
+	        } else {
+	            System.out.println("No requests to reject.");
+	        }
+	    }
+	    public void assignComplaint() {
+	        if (!complaints.isEmpty()) {
+	            Complaint c = complaints.get(0); 
+	            System.out.println("Complaint assigned: " + c.getContent());
+	            
+	        } else {
+	            System.out.println("No complaints to assign.");
+	        }
+	    }
+	    public void archiveComplaint() {
+	        if (!complaints.isEmpty()) {
+	            Complaint c = complaints.remove(0); 
+	            System.out.println("Complaint archived: " + c.getContent());
+	        } else {
+	            System.out.println("No complaints to archive.");
+	        }
+	    }
+	    public void checkInbox() {
+	        System.out.println("Inbox - Requests:");
+	        for (Request r : requests) {
+	            System.out.println("- " + r.getContent() + " | Signed: " + r.isSigned());
+	        }
+	        System.out.println("Inbox - Complaints:");
+	        for (Complaint c : complaints) {
+	            System.out.println("- " + c.getContent());
+	        }
+	    }
+
 	}
 
