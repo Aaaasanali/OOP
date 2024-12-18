@@ -42,7 +42,7 @@ import java.util.Scanner;
 	            System.out.println("No dean found for department: " + sender.getDepartment());
 	        }
 	    }
-	
+	    }
 		
 	
 		public void setSignedStatus(boolean b) {
