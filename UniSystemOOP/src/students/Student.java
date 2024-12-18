@@ -1,5 +1,6 @@
 package students;
 
+import java.io.Serializable;
 import java.util.*;
 
 import java.util.List;
@@ -12,10 +13,10 @@ import user.User;
 
  
 
- public class Student extends User  {
+ public class Student extends User implements Serializable{
 
     
-    private int ects;
+    
     private int admissionYear;
     private Speciality speciality;
     private String faculty;
@@ -35,7 +36,7 @@ import user.User;
     	this.courses = new HashMap<>();
     };
     
-    public Student(String login, String password, String name, String surname, int ects, String id) {
+    public Student(String login, String password, String name, String surname, String id) {
     	super(login, password, name, surname, id);
     	
     	
@@ -43,34 +44,17 @@ import user.User;
     	this.documents = new ArrayList<>();
     	this.courses = new HashMap<>();
         
-        
-        this.ects = ects;
-        
-        Data.addUser(this);
+
     }
     
-    
-
-    public int getEcts() {
-        return ects;
-    }
-
-    public void setEcts(int ects) {
-        this.ects = ects;
-    }
-
-    /*											id уже есть у каждого usera
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-    */
+   
     
     
-    public String getFaculty() {
+    public Student(String name) {
+		super.setName(name);
+	}
+
+	public String getFaculty() {
 		return faculty;
 	}
 
@@ -95,7 +79,6 @@ import user.User;
     public String toString() {
         return super.toString() +
                ", Student{" +
-               ", ects=" + ects +
                ", admissionYear=" + admissionYear +
                ", speciality=" + speciality +
                ", studytype=" + studytype +
@@ -104,7 +87,6 @@ import user.User;
                ", fails=" + fails +
                ", MAXCREDITS=" + MAXCREDITS +
                ", documents=" + documents +
-               ", enrolledCourses=" + enrolledCourses +
                '}';
     }    
     
@@ -116,14 +98,14 @@ import user.User;
     
     
     public void viewMarks() {
-        for (Map.Entry<Course, Mark> entry : transcript.entrySet()) {
+        for (Map.Entry<Course, Mark> entry : courses.entrySet()) {
             System.out.println("Course: " + entry.getKey().getName() + " - " + entry.getValue());
         }
     }
     
     
     
-    
+    /*
     public static Student findStudentByLogin(String login) {
         User user = Data.findUserByLogin(login);
         if (user instanceof Student) {
@@ -139,7 +121,7 @@ import user.User;
         }
         return null;
     }
-    
+    */
     
     
     

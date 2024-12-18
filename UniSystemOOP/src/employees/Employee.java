@@ -1,5 +1,6 @@
 package employees;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.Vector;
 
 import user.User;
 
-public class Employee extends User {
+public class Employee extends User implements Serializable{
     
 	public String department;
 	private List<String> messageInbox;

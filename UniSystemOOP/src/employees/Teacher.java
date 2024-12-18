@@ -1,5 +1,6 @@
 package employees;
 
+import java.io.Serializable;
 import java.util.*;
 
 import documents.Document;
@@ -9,7 +10,7 @@ import research.Researcher;
 import documents.Course;
 import students.Student;
 
-public class Teacher extends Employee implements Researcher {
+public class Teacher extends Employee implements Researcher, Serializable {
     
 
     public Teacher(String login, String password) {

@@ -1,9 +1,10 @@
 package documents;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Faculty {
+public class Faculty implements Serializable{
     
 
     private String name;

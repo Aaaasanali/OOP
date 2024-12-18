@@ -1,16 +1,18 @@
 package students;
 
 import research.Thesis;
+
+import java.io.Serializable;
 import java.util.*;
 import oop.NamedRunnable;
 
-public class Master extends GraduateStudent {
+public class Master extends GraduateStudent implements Serializable {
     
 
 	public Master() {};
 	
-    public Master(String login, String password, String name, String surname, int course, int ects, String id) {
-		super(login, password, name, surname, course, ects, id);
+    public Master(String login, String password, String name, String surname, String id) {
+		super(login, password, name, surname, id);
 		// TODO Auto-generated constructor stub
 	}
     

@@ -13,14 +13,8 @@ import user.User;
 
 
 public final class Data implements Serializable{
-	
-	// Singleton instance
-    private static final Data instance = new Data();
-
     
-    private static final Vector<User> users = new Vector<User>();
-    
-    
+     public static Vector<User> users = new Vector<User>();
     
     
     // University name
@@ -31,19 +25,19 @@ public final class Data implements Serializable{
 
 
     // Courses
-    private static final Map<String, Course> courses = new HashMap<>();
-    private static final List<Course> allCourses = new ArrayList<>();
+     Map<String, Course> courses = new HashMap<>();
+     List<Course> allCourses = new ArrayList<>();
 
 
     																								//Teachers, Students, Admins contains in users, access them through method getAllTeachers
 
     // Student Organizations
-    private static final Map<String, List<String>> studentOrganizations = new HashMap<>();
+     Map<String, List<String>> studentOrganizations = new HashMap<>();
 
     
     
     // Logs for auditing purposes
-    private static final Stack<String> logs = new Stack<>();	
+     Stack<String> logs = new Stack<>();	
 	
 	
 	
@@ -62,16 +56,16 @@ public final class Data implements Serializable{
 
 	}	
 	
-	public static Data read() throws IOException, ClassNotFoundException{
-		FileInputStream fis = new FileInputStream("data");
-		ObjectInputStream oin = new ObjectInputStream(fis);
-		return (Data) oin.readObject();
+	public static Data read() throws IOException, ClassNotFoundException {
+	    try (ObjectInputStream oin = new ObjectInputStream(new FileInputStream("data"))) {
+	        return (Data) oin.readObject();
+	    }
 	}
-	public static void write()throws IOException{
-		FileOutputStream fos = new FileOutputStream("data");
-		ObjectOutputStream oos = new ObjectOutputStream(fos);
-		oos.writeObject(INSTANCE);
-		oos.close();
+
+	public static void write() throws IOException {
+	    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data"))) {
+	        oos.writeObject(INSTANCE);
+	    }
 	}
 	
 	
@@ -92,6 +86,11 @@ public final class Data implements Serializable{
 		universityName = name;
 	}
 	
+	
+	
+	
+	
+	/*
 	public static User findUserByLogin(String login) {
 		if(users.contains(login)) return //;
 		return null;
@@ -103,7 +102,7 @@ public final class Data implements Serializable{
 		}
 		return null;
 	}
-	
+	*/
 	
 	
 	
@@ -153,6 +152,11 @@ public final class Data implements Serializable{
 		}
 		
 		return v;
+	}
+
+	public static User findUserByLogin(String login) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

@@ -1,10 +1,11 @@
 package documents;
 
+import java.io.Serializable;
 import java.util.List;
 
 import employees.Teacher;
 
-public class Course {
+public class Course implements Serializable {
     
     private String id;
     private String name;

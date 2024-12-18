@@ -5,9 +5,10 @@ import database.Data;
 import oop.NamedRunnable;
 import students.*;
 
+import java.io.Serializable;
 import java.util.*;
 
-public abstract class User {
+public abstract class User implements Serializable{
 	
 	Scanner inp = new Scanner(System.in);
 
@@ -33,7 +34,7 @@ public abstract class User {
     	this.password = password;
     	this.hashPassword = password.hashCode();
     	this.id = generateId();
-    	Data.addUser(this);
+    	//Data.addUser(this);
     }
     
     public User(String login, String password, String name, String surname, String id) {
@@ -41,7 +42,7 @@ public abstract class User {
     	this.password = password;
     	this.hashPassword = password.hashCode();
     	this.id = generateId();
-    	Data.addUser(this);
+    	//Data.addUser(this);
     	
     	this.name = name;
     	this.surname = surname;
@@ -55,6 +56,14 @@ public abstract class User {
     
     public void setAllData() {
     	System.out.println("Filling name, email, sex, phone and etc.");
+    }
+    
+    public void setName(String name) {
+    	this.name = name;
+    }
+    
+    public String getName() {
+    	return this.name;
     }
     
     public String getLogin() {

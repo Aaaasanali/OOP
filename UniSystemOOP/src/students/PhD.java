@@ -1,5 +1,6 @@
 package students;
 
+import java.io.Serializable;
 import java.util.*;
 
 
@@ -9,7 +10,7 @@ import research.Dissertation;
 /**
 * @generated
 */
-public class PhD extends GraduateStudent {
+public class PhD extends GraduateStudent implements Serializable {
 	
     private Dissertation dissertation;
 

@@ -1,7 +1,8 @@
 package documents;
 
+import java.io.Serializable;
 
-public class Mark {
+public class Mark implements Serializable{
     private int firstAttestation;
     private int secondAttestation;
     private int finalExam;
