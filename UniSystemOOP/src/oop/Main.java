@@ -51,10 +51,8 @@ public class Main {
 		while(current == null) {
 			current = login();
 		}
-		
+		Map<Integer, NamedRunnable> functionsMap = current.getFunctionsMap(0);
 		while(true) {	
-			
-	        Map<Integer, NamedRunnable> functionsMap = current.getFunctionsMap(0);
 	
 	        int i = 0;
 	        for (Map.Entry<Integer, NamedRunnable> entry : functionsMap.entrySet()) {
