@@ -21,23 +21,21 @@ public class Student extends User implements Serializable {
     private String faculty;
     private StudyType studyType;
 
-    private List<String> studentOrganizations;
+    
     private List<Document> documents;
-    private Map<Course, Mark> courses;
+    public Map<Course, Mark> courses;
 
     private int fails;
     private final int MAXCREDITS = 21;
 
     public Student() {
         super();
-        this.studentOrganizations = new ArrayList<>();
         this.documents = new ArrayList<>();
         this.courses = new HashMap<>();
     }
 
-    public Student(String login, String password, String name, String surname, String id) {
-        super(login, password, name, surname, id);
-        this.studentOrganizations = new ArrayList<>();
+    public Student(String login, String password, String name, String surname) {
+        super(login, password, name, surname);
         this.documents = new ArrayList<>();
         this.courses = new HashMap<>();
     }
@@ -55,9 +53,6 @@ public class Student extends User implements Serializable {
         this.faculty = faculty;
     }
 
-    public List<String> getOrganization() {
-        return this.studentOrganizations;
-    }
 
     private int getMAXCREDITS() {
         return this.MAXCREDITS;
@@ -71,7 +66,7 @@ public class Student extends User implements Serializable {
                 ", speciality=" + speciality +
                 ", studyType=" + studyType +
                 ", faculty='" + faculty + '\'' +
-                ", studentOrganizations=" + studentOrganizations +
+//                ", studentOrganizations=" + studentOrganizations +
                 ", fails=" + fails +
                 ", MAXCREDITS=" + MAXCREDITS +
                 ", documents=" + documents +
@@ -109,29 +104,28 @@ public class Student extends User implements Serializable {
 
         // Search for an existing course in the system
         for (Course course : data.courses) {
-            if (course.equals(tempCourse)) { // Use equals method
+            if (course.equals(tempCourse)) { // Use equals method to compare courses
                 existingCourse = course;
                 break;
             }
         }
 
-        // If no existing course is found, create a new one
+        // Check if the course is found in the system
         if (existingCourse == null) {
-            data.courses.add(tempCourse); // Add the new course to the system
-            System.out.println("New course added to the system.");
-            existingCourse = tempCourse; // Use the newly created course
+            System.out.println("No such course found in the system.");
+            return false; // Return false as course is not found
         } else {
             System.out.println("Course already exists in the system.");
         }
 
-        // Add the course to the student's enrolled courses
+        // Add the course to the student's enrolled courses if not already enrolled
         if (!courses.containsKey(existingCourse)) {
             courses.put(existingCourse, new Mark(0, 0, 0)); // Add with a default Mark
             System.out.println("Successfully registered for course: " + courseName);
             return true; // Registration successful
         } else {
             System.out.println("You are already registered for the course: " + courseName);
-            return false; // Registration failed
+            return false; // Registration failed as the student is already registered
         }
     }    
     
@@ -180,40 +174,133 @@ public class Student extends User implements Serializable {
             return;
         }
         for (Map.Entry<Course, Mark> entry : courses.entrySet()) {
-            System.out.println("Course: " + entry.getKey().getName() + " - Mark: " + entry.getValue());
-        }
+            Course course = entry.getKey();
+            Mark mark = entry.getValue();
+            System.out.println("Course: " + course.getName() +
+                    " | First Attestation: " + mark.getFirstAttestation() +
+                    " | Second Attestation: " + mark.getSecondAttestation() +
+                    " | Final Exam: " + mark.getFinalExam());
+        }     
     }
 
     // Method to join an organization
     public void joinOrganization() {
         System.out.print("Enter the name of the organization you want to join: ");
         String orgName = n.next();
-        studentOrganizations.add(orgName);
-        System.out.println("Joined the organization: " + orgName);
+
+        // Fetch the list of organizations from Data
+        Data data = Data.INSTANCE;
+
+        // Look for the organization in the Data class
+        StudentOrganization organization = null;
+        for (StudentOrganization org : data.getStudentOrganizations()) { // Assuming getStudentOrganizations() returns a list of organizations
+            if (org.getName().equalsIgnoreCase(orgName)) {
+                organization = org;
+                break;
+            }
+        }
+
+        // If the organization exists, add the student to it using addMember()
+        if (organization != null) {
+            organization.addMember(this);  // Add the current student using the addMember method
+            System.out.println("Successfully joined the organization: " + orgName);
+        } else {
+            // If the organization doesn't exist, print an error message
+            System.out.println("Organization not found.");
+        }
     }
 
+    
+    
     // Method to leave an organization
     public void leaveOrganization() {
         System.out.print("Enter the name of the organization you want to leave: ");
         String orgName = n.next();
 
-        if (studentOrganizations.contains(orgName)) {
-            studentOrganizations.remove(orgName);
-            System.out.println("Left the organization: " + orgName);
+        // Fetch the list of organizations from Data
+        Data data = Data.INSTANCE;
+
+        // Look for the organization in the Data class
+        StudentOrganization organization = null;
+        for (StudentOrganization org : data.getStudentOrganizations()) { // Using getStudentOrganizations to get the Vector
+            if (org.getName().equalsIgnoreCase(orgName)) {
+                organization = org;
+                break;
+            }
+        }
+
+        // If the organization exists, remove the student from it
+        if (organization != null && organization.getStudents().contains(this)) {
+            organization.removeMember(this);  // Assuming you have a method to remove a member in StudentOrganization
+            System.out.println("Successfully left the organization: " + orgName);
         } else {
             System.out.println("You are not part of this organization.");
         }
     }
+    
+    
+    public void viewStudentOrganizations() {
+        // Fetch all organizations and check which ones this student is part of
+        Data data = Data.INSTANCE;
+        Vector<String> studentOrganizations = new Vector<>();
 
+        // Iterate over all organizations
+        for (StudentOrganization org : data.getStudentOrganizations()) {
+            if (org.getStudents().contains(this)) {  // Check if this student is in the organization
+                studentOrganizations.add(org.getName());  // Add organization name to the list
+            }
+        }
+
+        // Display the organizations
+        if (studentOrganizations.isEmpty()) {
+            System.out.println("You are not part of any student organizations.");
+        } else {
+            System.out.println("Student Organizations:");
+            for (String orgName : studentOrganizations) {
+                System.out.println("- " + orgName);
+            }
+        }
+    }    
+    
+    
+    
+    
     
     public void rateTeacher() {
-//        System.out.print("Enter the name of the teacher you want to rate: ");
-//        String teacherName = n.next();
-//        System.out.print("Enter the rating (1-10): ");
-//        int rating = n.nextInt();
-//        System.out.println("Rated teacher " + teacherName + " with a score of " + rating + "/10.");
-    }
+        System.out.print("Enter the name of the teacher you want to rate: ");
+        String teacherName = n.next();
+        
+        System.out.print("Enter the surname of the teacher you want to rate: ");
+        String teacherSurName = n.next();
+        
+        System.out.print("Enter the rating (1-10): ");
+        int rating = n.nextInt();
+        
+        // Validate rating
+        if (rating < 1 || rating > 10) {
+            System.out.println("Invalid rating. Please enter a rating between 1 and 10.");
+            return;
+        }
 
+        System.out.println("Rated teacher " + teacherName + " " + teacherSurName + " with a score of " + rating + "/10.");
+
+        // Find the teacher in the list of all teachers
+        Teacher teacher = null;
+        for (Teacher t : Data.INSTANCE.getAllTeachers()) {
+            if (t.getName().equalsIgnoreCase(teacherName) && t.getSurname().equalsIgnoreCase(teacherSurName)) {
+                teacher = t;
+                break;
+            }
+        }
+
+        if (teacher != null) {
+            // Add the rating and update the average
+            teacher.addRating((double) rating);
+            teacher.updateAverageRating();
+        } else {
+            System.out.println("Teacher not found.");
+        }
+    }
 
     public void viewTranscript() {
         
@@ -223,6 +310,40 @@ public class Student extends User implements Serializable {
     public void getTranscript() {
         
     }
+    
+    
+    
+    
+    
+    
+    
+    public void addMarkToCourse(Course course, int firstAttestation, int secondAttestation, int finalExam) {
+        // Create a new Mark object
+        Mark mark = new Mark(firstAttestation, secondAttestation, finalExam);
+
+        // Check if the course is already in the student's courses map
+        if (courses.containsKey(course)) {
+            // Update the mark if the course is already present
+            courses.put(course, mark);
+            System.out.println("Updated mark for course: " + course.getName());
+        } else {
+            // Add the course and the new mark if the course is not already in the map
+            courses.put(course, mark);
+            System.out.println("Added mark for course: " + course.getName());
+        }
+    } 
+    public void addMarkToCourse(Course course, Mark mark) {
+        // Check if the course is already in the student's courses map
+        if (courses.containsKey(course)) {
+            // Update the mark if the course is already present
+            courses.put(course, mark);
+            System.out.println("Updated mark for course: " + course.getName());
+        } else {
+            // Print an error message if the student is not registered for the course
+            System.out.println("You are not registered for this course: " + course.getName());
+        }
+    }
+
 
     
     public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
@@ -231,12 +352,13 @@ public class Student extends User implements Serializable {
         functions.put(startIndex++, new NamedRunnable(this::viewCourses, "View Courses"));													//+
         functions.put(startIndex++, new NamedRunnable(this::registerForCourse, "Register for Course"));										//+
         functions.put(startIndex++, new NamedRunnable(this::viewTeacherInfo, "View Teacher Info"));											//+
-        functions.put(startIndex++, new NamedRunnable(this::viewMarks, "View Marks"));														//
+        functions.put(startIndex++, new NamedRunnable(this::viewMarks, "View Marks"));														//+
         functions.put(startIndex++, new NamedRunnable(this::viewTranscript, "View Transcript"));											//
         functions.put(startIndex++, new NamedRunnable(this::getTranscript, "Get Transcript"));												//
-        functions.put(startIndex++, new NamedRunnable(this::rateTeacher, "Rate Teacher"));													//
-        functions.put(startIndex++, new NamedRunnable(this::joinOrganization, "Join Organization"));										//
-        functions.put(startIndex++, new NamedRunnable(this::leaveOrganization, "Leave Organization"));										//
+        functions.put(startIndex++, new NamedRunnable(this::rateTeacher, "Rate Teacher"));													//+
+        functions.put(startIndex++, new NamedRunnable(this::viewStudentOrganizations, "View Organizations"));								//+
+        functions.put(startIndex++, new NamedRunnable(this::joinOrganization, "Join Organization"));										//+
+        functions.put(startIndex++, new NamedRunnable(this::leaveOrganization, "Leave Organization"));										//+
 
    
         for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {

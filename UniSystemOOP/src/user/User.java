@@ -35,15 +35,14 @@ public abstract class User implements Serializable{
     	this.password = password;
     	this.hashPassword = password.hashCode();
     	this.id = generateId();
-    	//Data.addUser(this);
+
     }
     
-    public User(String login, String password, String name, String surname, String id) {
+    public User(String login, String password, String name, String surname) {
     	this.login = login;
     	this.password = password;
     	this.hashPassword = password.hashCode();
     	this.id = generateId();
-    	//Data.addUser(this);
     	
     	this.name = name;
     	this.surname = surname;
@@ -65,6 +64,10 @@ public abstract class User implements Serializable{
     
     public String getName() {
     	return this.name;
+    }
+    
+    public String getSurname() {
+    	return this.surname;
     }
     
     public String getLogin() {

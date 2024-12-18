@@ -8,6 +8,7 @@ import documents.Mark;
 import employees.Admin;
 import employees.Teacher;
 import students.Student;
+import students.StudentOrganization;
 import user.Language;
 import user.User;
 
@@ -32,9 +33,7 @@ public final class Data implements Serializable{
     																								//Teachers, Students, Admins contains in users, access them through method getAllTeachers
 
 
-     Map<String, List<String>> studentOrganizations = new HashMap<>();
-
-    
+     public static Vector<StudentOrganization> studentOrganizations = new Vector<StudentOrganization>();
     
 
      Stack<String> logs = new Stack<>();	
@@ -81,6 +80,13 @@ public final class Data implements Serializable{
 		users.add(a);
 	}
 	
+	public void addCourse(Course course) {
+		this.courses.add(course);
+	}
+	
+	public static void addStudentOrganization(StudentOrganization studOrg) {
+		studentOrganizations.add(studOrg);
+	}
 	
 	public static void setUniName(String name) {
 		universityName = name;
@@ -134,7 +140,9 @@ public final class Data implements Serializable{
 	}
 
 	
-	
+	public static Vector<StudentOrganization> getStudentOrganizations() {
+        return studentOrganizations;
+    }
 	
 	
 	
@@ -163,8 +171,5 @@ public final class Data implements Serializable{
 	
 	
 
-	public void addCourse(Course course) {
-		this.courses.add(course);
-		
-	}
+
 }

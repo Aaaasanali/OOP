@@ -6,6 +6,7 @@ import database.Data;
 import documents.Course;
 import documents.CourseType;
 import documents.Lesson;
+import documents.Mark;
 import documents.Semester;
 import employees.Teacher;
 
@@ -18,85 +19,101 @@ public class StudentsTest {
 
 	public static void main(String[] args) {
 
-        Student student = new Student("studentLogin", "studentPassword123", "John", "Doe", "12345");
+        Student student1 = new Student("studentLogin", "studentPassword123", "Ben", "Doe");
+        Student student2 = new Student("john_doe", "password", "John", "Doe");
+        Master student3 = new Master("john_smith", "password123", "Alex", "Smith");
 
-
-        //student.setFaculty("Engineering");
-        
-
-        
-        //student.registerForCourse("Introduction to Java", 2024);
-
-        
-        
-        //System.out.println(student);
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        //Thesis thesis = new Thesis("Machine Learning Algorithms", "Prof. John Doe", "2024-05-15");     //no thesis now
-
-        // Create a Master student and initialize it
-        Master masterStudent = new Master("john_smith", "password123", "John", "Smith", "2024B12345");
-        //masterStudent.registerForCourse("Introduction to Java", 2024);
-
-     
-        //masterStudent.setThesis(thesis);
-        
-     
-        //System.out.println(masterStudent);
-        
-        // Access and display thesis information
-        //System.out.println("Thesis Title: " + masterStudent.getThesis().getTitle());
-        //System.out.println("Thesis Supervisor: " + masterStudent.getThesis().getSupervisor());
-        
-        
-        
-        
-        
-        Data.INSTANCE.addUser(masterStudent);
-        Data.INSTANCE.addUser(student);
-        
-        
-        //printList(Data.INSTANCE.users);
-        Student student2 = new Student("john_doe", "password", "John", "Doe", "12345");
-        
-        
-        Data.INSTANCE.addCourse(new Course("OOP", 2024, Semester.FALL));
-        
-        
-        
-        Teacher teacher1 = new Teacher("teacher1_login", "teacher1_password");
-        Teacher teacher2 = new Teacher("teacher2_login", "teacher2_password");
-        Teacher teacher3 = new Teacher("teacher3_login", "teacher3_password");
-        
+        Teacher teacher1 = new Teacher("teacher1_login", "teacher1_password", "Pakizar", "Shamoi");
+        Teacher teacher2 = new Teacher("teacher2_login", "teacher2_password", "Alimzhan", "Amanov");
+        Teacher teacher3 = new Teacher("teacher3_login", "teacher3_password", "Suhrab", "Yoldash");
         
         Vector<Teacher> teachers = new Vector<>();
         teachers.add(teacher1);
         teachers.add(teacher2);
-        teachers.add(teacher3);        
-        
-        Course course3 = new Course("ADS", 2024, Semester.FALL);
-        course3.setTeachers(teachers);        
-        Data.INSTANCE.addCourse(course3);
+        teachers.add(teacher3);    
         
         
+        Course ads = new Course("ADS", 2024, Semester.FALL);
+        ads.setTeachers(teachers);  
         
-        student2.registerForCourse();
+        Course oop = new Course("OOP", 2024, Semester.FALL);
+        oop.setTeachers(teachers);       
+        
+        Mark mark75 = new Mark(30,30,15);
+        Mark mark85 = new Mark(30,30,25);
+        Mark mark95 = new Mark(30,30,35);
+        Mark mark100 = new Mark(30,30,40);
+        
+        StudentOrganization bigCityLights = new StudentOrganization("BigCityLights", "A club for city dwellers and enthusiasts of urban culture.");
+        StudentOrganization osit = new StudentOrganization("OSIT", "A student organization for open source and IT enthusiasts.");
+        StudentOrganization faces = new StudentOrganization("Faces", "A student group for those interested in arts, creativity, and expression.");
+
+        bigCityLights.addMember(student1);
+        osit.addMember(student2);
+        faces.addMember(student3);
+        
+        bigCityLights.addMember(student2);
+        osit.addMember(student3);
+        faces.addMember(student1);
+        
+        
+        
+        Data.INSTANCE.addUser(student3);
+        Data.INSTANCE.addUser(student1);
+        Data.INSTANCE.addCourse(oop);
+        Data.INSTANCE.addCourse(ads);
+        
+        Data.INSTANCE.addStudentOrganization(faces);
+        Data.INSTANCE.addStudentOrganization(osit);
+        Data.INSTANCE.addStudentOrganization(bigCityLights);
+        
+        Data.INSTANCE.addUser(teacher1);
+        Data.INSTANCE.addUser(teacher2);
+        Data.INSTANCE.addUser(teacher3);
+        
+    
+        
+              
+        
+        
+        
+        
+//        student2.registerForCourse();												//Registration works
+//        student2.registerForCourse();
 //        student2.viewTeacherInfo();
 //        
 //        System.out.println(course3.getTeachers());
         
-        student2.viewCourses();
+        //student2.viewCourses();													//View courses works
+        
+        //student2.addMarkToCourse(ads, mark100);
+        //student2.addMarkToCourse(oop, mark85);
+        
+
+        //student2.viewMarks();														//View marks works
+        
+
+        
+//        System.out.println(Data.INSTANCE.studentOrganizations);
+//        
+//        
+//      System.out.println("");
+//      System.out.println("");
+//      System.out.println("");
+//      
+//      	student1.viewStudentOrganizations();
+        
+        
+        
+        
+        
+        student1.rateTeacher();
+        student2.rateTeacher();
+        student3.rateTeacher();
+        
+        System.out.println(Data.INSTANCE.getAllTeachers());
+        
+        
         
     }
 }

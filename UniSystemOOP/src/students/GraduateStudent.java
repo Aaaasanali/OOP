@@ -19,8 +19,8 @@ public class GraduateStudent extends Student implements Serializable{
 	
 	public GraduateStudent() {};
 
-    public GraduateStudent(String login, String password, String name, String surname, String id) {
-		super(login, password, name, surname, id);
+    public GraduateStudent(String login, String password, String name, String surname) {
+		super(login, password, name, surname);
 		// TODO Auto-generated constructor stub
 	}
 

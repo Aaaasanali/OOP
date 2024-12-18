@@ -17,13 +17,18 @@ public class Teacher extends Employee implements Researcher, Serializable {
 		super(login, password);
 		// TODO Auto-generated constructor stub
 	}
+    
+    public Teacher(String login, String password, String name, String surname) {
+		super(login, password, name, surname);
+
+	}
 
 
 	private Vector<Course> courses;
     
 
     private double rating;
-    private Vector<Double> ratingMraks;
+    private Vector<Double> ratingMarks = new Vector<>();;
     
 
     //private Set<Lesson> lessons; lessons are contains in courses
@@ -150,7 +155,9 @@ public class Teacher extends Employee implements Researcher, Serializable {
 		
 	}
     
-    
+    public void addRating(Double rating) {
+    	this.ratingMarks.add(rating);
+    }
     
 /*
     public Set<Student> getStudent() {
@@ -188,6 +195,19 @@ public class Teacher extends Employee implements Researcher, Serializable {
 	           "Courses: " + courseNames.toString() + " " +
 	           "Teacher Type: " + (this.teacherType != null ? this.teacherType.toString() : "Not assigned") + " ";
 	}
+
+
+	public void updateAverageRating() {
+        if (ratingMarks.isEmpty()) {
+            rating = 0.0;  // No ratings yet, so the average is 0
+        } else {
+            double sum = 0;
+            for (Double mark : ratingMarks) {
+                sum += mark;
+            }
+            rating = sum / ratingMarks.size();  // Calculate the average rating
+        }
+    }
     
 	
 	

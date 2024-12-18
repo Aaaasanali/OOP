@@ -23,7 +23,11 @@ public class Employee extends User implements Serializable{
     	super(login, password);
     }
     
-    protected String getDepartment() {
+    public Employee(String login, String password, String name, String surname) {
+    	super(login, password, name, surname);
+	}
+
+	protected String getDepartment() {
     	return department;
     }
     

@@ -1,6 +1,6 @@
 package students;
 
-import java.util.HashSet;
+import java.util.*;
 import java.util.Set;
 
 
@@ -12,40 +12,48 @@ public class StudentOrganization {
     private String description;
     
 
-    private Set<Student> students;
+    private Vector<Student> students;
     
     
+    
+    public StudentOrganization(String name, String description) {
+        this.name = name;
+        this.description = description;
+        this.students = new Vector<Student>(); 
+    }
 
 
-    private String getName() {
+    public String getName() {
         return this.name;
     }
     
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
     
 
-    private String getDescription() {
+    public String getDescription() {
         return this.description;
     }
     
 
-    private void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
     
     
     
-    public Set<Student> getStudent() {
+    public Vector<Student> getStudent() {
         if (this.students == null) {
-            this.students = new HashSet<Student>();
+            this.students = new Vector<Student>();
         }
         return this.students;
     }
     
-
+    public Vector<Student> getStudents() {
+    	return students;
+    }
 
     
     
@@ -58,6 +66,8 @@ public class StudentOrganization {
         this.students.add(student);
     }
     
+    
+    
     public void removeMember(Student student) {
     	this.students.remove(student);
     }
@@ -69,6 +79,19 @@ public class StudentOrganization {
     }
     
     
-
+    public Vector<String> getStudentsNames() {
+    	Vector<String> res = new Vector<>();
+    	
+    	for (Student student : students) {
+    		res.add(student.getName());
+    	}
+    	
+    	
+    	return res;
+    }
+    
+    public String toString() {
+        return "Organization Name: " + name + ", Description: '" + description + "', Members: " + this.getStudentsNames();
+    }
     
 }
