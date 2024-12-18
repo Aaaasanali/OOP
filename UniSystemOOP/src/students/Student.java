@@ -9,7 +9,7 @@ import documents.Document;
 import documents.Mark;
 import documents.Semester;
 import employees.Teacher;
-import oop.NamedRunnable;
+import Factories.NamedRunnable;
 import user.User;
 
 public class Student extends User implements Serializable {
@@ -302,6 +302,11 @@ public class Student extends User implements Serializable {
         }
     }
 
+    
+    
+    
+    
+    
     public void viewTranscript() {
         
     }
