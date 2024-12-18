@@ -52,16 +52,14 @@ public class Request extends Message {
         }
     }
 
-	@Override
-	public void process() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	
 
 	public void setSignedStatus(boolean b) {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public String getShortInfo() {
+    	return "[REQUEST]" + super.getShortInfo();
+    }
 }

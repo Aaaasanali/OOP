@@ -5,18 +5,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
+import Messages.Message;
 import user.User;
 
 public class Employee extends User {
     
 	public String department;
-	private List<String> messageInbox;
+	private List<Message> messageInbox;
 	
 	{
-		messageInbox = new ArrayList<String>();
+		messageInbox = new ArrayList<Message>();
 	}
-	
-	private final Vector<String> functions = new Vector<>(Arrays.asList("Check Salary", "Check Inbox"));
 	
     public Employee(String login, String password) {
     	super(login, password);
@@ -34,13 +33,8 @@ public class Employee extends User {
     	
     }
     
-    public String getFunc() {
-    	String res = "";
-    	for(String i : functions) {
-    		res += i + "\n";
-    	}
-    	res += super.getFunc();
-    	return res;
+    private void checkInbox() {
+    	
     }
     
     public String toString() {

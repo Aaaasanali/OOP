@@ -47,11 +47,11 @@ public class Main {
 	public static void main(String[] args) {
 		
 		User admin = new Admin("popa1", "popapassword");
-		User current = null;
+		User current = admin;
 		Master master = new Master();
-		while(current == null) {
-			current = login();
-		}
+//		while(current == null) {
+//			current = login();
+//		}
 		
 		while(true) {	
 			

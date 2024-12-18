@@ -61,5 +61,11 @@ public abstract class Message {
         return Objects.hash(sender, date, content);
     }
 
-    public abstract void process();
+    public String getShortInfo() {
+    	return this.sender + " " + this.content.substring(0, 30) + "... " + this.date;
+    }
+    
+    public void messageUsing() {
+    	
+    }
 }
