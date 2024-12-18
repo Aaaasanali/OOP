@@ -2,10 +2,11 @@ package user;
 
 
 import database.Data;
-import oop.NamedRunnable;
 import students.*;
 
 import java.util.*;
+
+import Factories.NamedRunnable;
 
 public abstract class User {
 	

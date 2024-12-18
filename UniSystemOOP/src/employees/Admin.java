@@ -5,9 +5,9 @@ import user.UserFactory;
 
 import java.util.*;
 
+import Factories.NamedRunnable;
 import Interfaces.CreatingUsers;
 import database.Data;
-import oop.NamedRunnable;
 
 public class Admin extends User implements CreatingUsers{
 	
