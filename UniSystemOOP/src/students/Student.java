@@ -14,43 +14,42 @@ import user.User;
 
  public class Student extends User  {
 
-    private int course;
+    
     private int ects;
     private int admissionYear;
     private Speciality speciality;
     private String faculty;
     private StudyType studytype;
-    
-    private List<Course> enrolledCourses = new ArrayList<>();
-    private List<String> studentOrganizations = new ArrayList<>();
-    private List<Document> documents = new ArrayList<>();
-    private Map<Course, Mark> transcript = new HashMap<>();
+     
+    private List<String> studentOrganizations;
+    private List<Document> documents;
+    private Map<Course, Mark> courses;						// Хранит все курсы и оценки по ним
     
     private int fails;
     private int MAXCREDITS = 21; 
     
     public Student() {
-    	
-    	
+    	super();
+    	this.studentOrganizations = new ArrayList<>();
+    	this.documents = new ArrayList<>();
+    	this.courses = new HashMap<>();
     };
     
-    public Student(String login, String password, String name, String surname, int course, int ects, String id) {
-        super(login, password, name, surname, id);
-        this.course = course;
+    public Student(String login, String password, String name, String surname, int ects, String id) {
+    	super(login, password, name, surname, id);
+    	
+    	
+    	this.studentOrganizations = new ArrayList<>();
+    	this.documents = new ArrayList<>();
+    	this.courses = new HashMap<>();
+        
+        
         this.ects = ects;
         
         Data.addUser(this);
     }
     
     
- 
-    public int getCourse() {
-        return course;
-    }
-
-    public void setCourse(int course) {
-        this.course = course;
-    }
 
     public int getEcts() {
         return ects;
@@ -83,11 +82,6 @@ import user.User;
 	public List<String> getOrganization() {
 		return this.studentOrganizations;
 	}
-
-
-	public void setOrganization(String organization) {
-		this.organizations = organization;
-	}
 	
 	
 	private int getMAXCREDITS() {
@@ -101,7 +95,6 @@ import user.User;
     public String toString() {
         return super.toString() +
                ", Student{" +
-               "course=" + course +
                ", ects=" + ects +
                ", admissionYear=" + admissionYear +
                ", speciality=" + speciality +
@@ -162,34 +155,34 @@ import user.User;
     
     
     
-    public List<Course> viewCourse() {											//показать список курсов
-        return enrolledCourses;
-    }
-    
-    
-    
-    public Course viewCourse(String courseName) {									// списки по нвз-ния курса
-        for (Course course : enrolledCourses) {
-            if (course.getName().equalsIgnoreCase(courseName)) {
-                return course;
-            }
+    public void viewCourses() { // показать список курсов
+        if (courses.isEmpty()) {
+            System.out.println("No courses registered yet.");
+            return;
         }
-        return null; 																				//если нет курсов
-    }
-    
-    
-    
-    
-    
-    public void registerForCourse(String courseName, int year) { 									//регистрация на курс
-        enrolledCourses.add(new Course(courseName, year));
-        System.out.println("Successfully registered for course: " + courseName);
-    }
 
+        System.out.println("Enrolled Courses:");
+        for (Course course : courses.keySet()) {
+            System.out.println("- " + course.getName());
+        }
+    }        
     
     
     
+    public void registerForCourse(String courseName, int year) { // Регистрация на курс
+        Course newCourse = new Course(courseName, year);
+
+        if (!courses.containsKey(newCourse)) { // Check if the course is already registered
+            courses.put(newCourse, new Mark(0, 0, 0)); // Add to map with a default Mark
+            System.out.println("Successfully registered for course: " + courseName);
+        } else {
+            System.out.println("You are already registered for the course: " + courseName);
+        }
+    }
     
+    
+    
+    /*
     
     public String viewTeacherInfo(String courseName) {										// инфо про препода
         for (Course course : enrolledCourses) {
@@ -199,7 +192,7 @@ import user.User;
         }
         return "Course not found!";
     }
-    
+    */
     
   //  public String viewMarks() {
   //      return transcript.getGrades();
@@ -207,9 +200,24 @@ import user.User;
   //  public String getTranscript() {
   //      return transcript.getGrades();
   //  }
+    
+    
+    
+    
     public void rateTeacher(String teacherName, Integer rating) {
         System.out.println("Rated teacher " + teacherName + " with a score of " + rating + "/10.");
     }	
+    
+    
+    
+    
+    
+    
+    public void joinOrganization() {
+    	
+    }
+    
+    
     
     
     

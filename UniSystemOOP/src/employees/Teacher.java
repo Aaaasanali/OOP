@@ -1,7 +1,6 @@
 package employees;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import documents.Document;
 import documents.Lesson;
@@ -19,13 +18,14 @@ public class Teacher extends Employee implements Researcher {
 	}
 
 
-	private Set<Course> courses;
+	private Vector<Course> courses;
     
 
     private double rating;
+    private Vector<Double> ratingMraks;
     
 
-    private Set<Lesson> lessons;
+    //private Set<Lesson> lessons; lessons are contains in courses
     
 
     private TeacherTitle teacherType;
@@ -33,8 +33,6 @@ public class Teacher extends Employee implements Researcher {
 
     private Set<Document> documents;
     
-
-    //private Set<Student> students;				not in UML
     
     
 
