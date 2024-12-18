@@ -1,7 +1,7 @@
-package communication;
+package news;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+
 
 
 public class News {
@@ -9,21 +9,29 @@ public class News {
 
     private String title;
     
-
     private String content;
     
-
-    private boolean isPinned;
+    private boolean isPinned = false;
     
-
-    private Set<String> comments;
+    private List<String> comments;
 
     
     
     
+    public News() {
+    	this.title = "";
+    	this.content = "";
+    }
 
+    public News(String title, String content, boolean isPinned, List<String> comments) {
+		this.title = title;
+		this.content = content;
+		this.isPinned = isPinned;
+		this.comments = comments;
+	}
 
-    private String getTitle() {
+    
+	public String getTitle() {
         return this.title;
     }
     
@@ -34,7 +42,7 @@ public class News {
     
     
 
-    private String getContent() {
+    public String getContent() {
         return this.content;
     }
 
@@ -54,16 +62,16 @@ public class News {
     }
     
     
- 
+    public boolean isPinned() {
+    	return isPinned;
+    }
 
-    private Set<String> getComments() {
-        if (this.comments == null) {
-            this.comments = new HashSet<String>();
-        }
+
+    public List<String> getComments() {
         return this.comments;
     }
     
-    private void addComment(String comment) {
+    public void addComment(String comment) {
         this.comments.add(comment);
     }
     

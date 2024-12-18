@@ -1,8 +1,6 @@
 package oop;
 
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Vector;
+import java.util.*;
 
 import Factories.NamedRunnable;
 import database.Data;
@@ -13,6 +11,7 @@ import employees.Admin;
 import employees.Employee;
 import employees.Manager;
 import employees.Teacher;
+import news.News;
 import students.Master;
 import students.Student;
 import students.StudentOrganization;
@@ -55,7 +54,7 @@ public class Main {
 		
 		User admin = new Admin("popa1", "popapassword");
 		
-		
+		Manager manager = new Manager("mngr", "mngr");
 		
 		
 		
@@ -93,7 +92,18 @@ public class Main {
         StudentOrganization faces = new StudentOrganization("Faces", "A student group for those interested in arts, creativity, and expression.");
 
         
+        List<String> comments = new ArrayList<String>();
+        comments.add("123");
+        comments.add("123213");
         
+        News news1 = new News("News1", "New news about news", false, comments);
+        News news2 = new News("News2", "New news about news2", false, comments);
+        
+        
+        
+        
+        Data.INSTANCE.addUser(admin);
+        Data.INSTANCE.addUser(manager);
         
         Data.INSTANCE.addUser(student1);
         Data.INSTANCE.addUser(student2);

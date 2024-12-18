@@ -7,6 +7,7 @@ import documents.Course;
 import documents.Mark;
 import employees.Admin;
 import employees.Teacher;
+import news.News;
 import students.Student;
 import students.StudentOrganization;
 import user.Language;
@@ -29,12 +30,14 @@ public final class Data implements Serializable{
 	public static Vector<Course> courses = new Vector<Course>();
 	public static Vector<StudentOrganization> studentOrganizations = new Vector<StudentOrganization>();
 
+	public static List<News> news = new ArrayList<News>();
 
 	Stack<String> logs = new Stack<>();	
 
 
 
-	public static Data INSTANCE;																	//Singleton 
+	public static Data INSTANCE;																	//Singleton
+	
 	static {
 		if(new File("data").exists()) {
 			try {
@@ -143,7 +146,10 @@ public final class Data implements Serializable{
 	public static Vector<Course> getAllCourses(){
 		return courses;
 	}
-
+	
+	public static List<News> getAllNews(){
+		return news;
+	}
 
 
 

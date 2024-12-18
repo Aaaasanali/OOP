@@ -2,6 +2,7 @@ package user;
 
 
 import database.Data;
+import news.News;
 import students.*;
 
 import java.io.Serializable;
@@ -142,6 +143,30 @@ public abstract class User implements Serializable{
 		}
 	}
 	
+	
+	public void checkNews() {
+		System.out.println("All News:");
+
+        List<News> newsList = Data.getAllNews();
+
+        if (newsList.isEmpty()) {
+            System.out.println("No news available.");
+            return;
+        }
+
+        // Sort news: pinned first, then by insertion order
+        newsList.sort((news1, news2) -> Boolean.compare(news2.isPinned(), news1.isPinned()));
+        int i = 1;
+        for (News news : newsList) {
+            System.out.println(i++ + ". " + news.getTitle() + " - " + news.getContent());
+            System.out.println("Comments: " + news.getComments());
+            System.out.println("----------------------------------");
+        }
+	}
+	
+	
+	
+	
 	public void exit() {
 		System.exit(0);
 	}
@@ -155,6 +180,9 @@ public abstract class User implements Serializable{
 		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
 		functions.put(startIndex++, new NamedRunnable(this::changePassword, "Change Password"));
         functions.put(startIndex++, new NamedRunnable(this::changeLanguage, "Change Language"));
+        functions.put(startIndex++, new NamedRunnable(this::checkNews, "Check news"));
+
+        
 //        functions.put(startIndex++, new NamedRunnable(this::logout, "Logout"));
         functions.put(startIndex++, new NamedRunnable(this::exit, "Exit"));
 		return functions;
