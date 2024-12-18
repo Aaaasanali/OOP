@@ -7,6 +7,7 @@ import students.*;
 import java.util.*;
 
 import Factories.NamedRunnable;
+import Messages.SimpleMessage;
 
 public abstract class User {
 	
@@ -25,7 +26,7 @@ public abstract class User {
     private Sex sex;
     private String phone;
     private Education education; 
-    
+    private List<SimpleMessage> inbox;
     
     public User() {};
     
@@ -114,5 +115,20 @@ public abstract class User {
 		return this.name;
 	}
 
+	   public void receiveMessage(SimpleMessage message) {
+	        
+	        inbox.add(message);
+	        System.out.println("Message received by " + login + ": " + message.getContent());
+	    }
+	   public void viewInbox() {
+	        if (inbox.isEmpty()) {
+	            System.out.println("No messages in inbox.");
+	        } else {
+	            System.out.println("Inbox for " + login + ":");
+	            for (SimpleMessage message : inbox) {
+	                System.out.println(message.getShortInfo());
+	            }
+	        }
+	    }
 	
 }
