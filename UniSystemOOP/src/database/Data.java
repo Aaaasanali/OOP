@@ -19,7 +19,6 @@ public final class Data implements Serializable{
 	//Teachers, Students, Admins contains in users, access them through method getAllTeachers
 
 
-
 	// University name
 	private static String universityName;
 
