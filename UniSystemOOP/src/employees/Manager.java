@@ -68,7 +68,7 @@ public class Manager extends Employee implements Serializable {
 	}
 	
 	
-	private void registerStudentToCourse(Student s) {
+	private void registerStudentToCourse() {
 		
 	}
     
@@ -105,8 +105,8 @@ public class Manager extends Employee implements Serializable {
         functions.put(startIndex++, new NamedRunnable(this::addStudent, "Add student"));
         functions.put(startIndex++, new NamedRunnable(this::createNews, "Create news"));												
         functions.put(startIndex++, new NamedRunnable(this::approveStudentRegistration, "Approve student registration"));
-        functions.put(startIndex++, new NamedRunnable(this::approveStudentRegistration, "Add new course"));
-        functions.put(startIndex++, new NamedRunnable(this::approveStudentRegistration, "Register student to course"));
+        functions.put(startIndex++, new NamedRunnable(this::addCourse, "Add new course"));
+        functions.put(startIndex++, new NamedRunnable(this::registerStudentToCourse, "Register student to course"));
    
         for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
             functions.put(startIndex++, entry.getValue());
