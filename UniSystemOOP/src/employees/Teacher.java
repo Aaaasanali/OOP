@@ -29,6 +29,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 	}
 
 
+    
 	private Vector<Course> courses;
     
 

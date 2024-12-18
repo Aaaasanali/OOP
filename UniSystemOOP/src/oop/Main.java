@@ -59,7 +59,6 @@ public class Main {
 		
 		
 		
-		
         Student student1 = new Student("studentLogin", "studentPassword123", "Ben", "Doe");
         Student student2 = new Student("john_doe", "password", "John", "Doe");
         Master student3 = new Master("john_smith", "password123", "Alex", "Smith");
@@ -133,32 +132,48 @@ public class Main {
         //Put mark 									Нужна сериализация данных. Пока пытешься поставить оценку на курс - в это время student not registered for course 
         //												Or make logout function - student logins, registers for course, then teacher put marks for him, then student can view marks
         
-        User current = teacher1;
-//		User current = student3; //null
-		Master master = new Master();
-//		while(current == null) {
-//			current = login();
-//		}
-		
-		Map<Integer, NamedRunnable> functionsMap = current.getFunctionsMap(0);
-		while(true) {	
-			System.out.println("");
-			
-	        int i = 0;
-	        for (Map.Entry<Integer, NamedRunnable> entry : functionsMap.entrySet()) {
-	            System.out.println((++i) + " - " + entry.getValue().getName());
-	        }
-	
-	        int choice = inp.nextInt()-1;
-	
-	        Runnable function = functionsMap.get(choice);
-	        if (function != null) {
-	            function.run();
-	        } else {
-	            System.out.println("Неверный ввод. Такой функции не существует.");
-	        }
-	        
-		}
-	}
+//      User current = teacher1;
+        
+        
+        
+        
+        
+        
+        User current = null;
+        while (true) {
+            // Login loop
+            while (current == null) {
+                current = login();
+            }
 
+            // User menu loop
+            while (true) {
+                System.out.println("");
+
+                Map<Integer, NamedRunnable> functionsMap = current.getFunctionsMap(0);
+                int i = 0;
+
+                for (Map.Entry<Integer, NamedRunnable> entry : functionsMap.entrySet()) {
+                    System.out.println((++i) + " - " + entry.getValue().getName());
+                }
+
+                System.out.println((i + 1) + " - Logout"); // Add a logout option
+
+                int choice = inp.nextInt() - 1;
+
+                if (choice == i) { // If logout option is selected
+                    current.logout(); // Call logout method
+                    current = null; // Reset current user
+                    break; // Break out of the menu loop to return to login
+                }
+
+                Runnable function = functionsMap.get(choice);
+                if (function != null) {
+                    function.run();
+                } else {
+                    System.out.println("Invalid input. This function does not exist.");
+                }
+            }
+        }
+    }
 }
