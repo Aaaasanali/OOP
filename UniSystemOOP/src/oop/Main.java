@@ -56,9 +56,6 @@ public class Main {
 		User admin = new Admin("popa1", "popapassword");
 		
 		
-		
-		
-		
         Student student1 = new Student("studentLogin", "studentPassword123", "Ben", "Doe");
         Student student2 = new Student("john_doe", "password", "John", "Doe");
         Master student3 = new Master("john_smith", "password123", "Alex", "Smith");
