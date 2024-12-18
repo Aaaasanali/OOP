@@ -36,6 +36,7 @@ public abstract class User implements Serializable{
     	this.hashPassword = password.hashCode();
     	this.id = generateId();
 
+    	
     }
     
     public User(String login, String password, String name, String surname) {

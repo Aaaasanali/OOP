@@ -44,11 +44,6 @@ public class Mark implements Serializable{
     }
     
     
-
-
-    
-    
-    
     public int getFirstAttestation() {
         return firstAttestation;
     }
@@ -99,11 +94,6 @@ public class Mark implements Serializable{
         else if (grade >= 1.0) return "D";
         else return "F"; 
     }
-    
-    
-    
-    
-    
     
     public String toString() {
 		return "Mark [att1=" + this.firstAttestation + ", att2=" + this.secondAttestation + ", finalExam=" + this.finalExam + "]";

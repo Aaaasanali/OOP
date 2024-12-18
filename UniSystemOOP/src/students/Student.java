@@ -9,7 +9,7 @@ import documents.Document;
 import documents.Mark;
 import documents.Semester;
 import employees.Teacher;
-import oop.NamedRunnable;
+import Factories.NamedRunnable;
 import user.User;
 
 public class Student extends User implements Serializable {
@@ -40,8 +40,10 @@ public class Student extends User implements Serializable {
         this.courses = new HashMap<>();
     }
 
-    public Student(String name) {
-        super.setName(name);
+    public Student(String login, String password) {
+        super(login, password);
+        this.documents = new ArrayList<>();
+        this.courses = new HashMap<>();
     }
 
     // Getter and Setter methods
@@ -310,11 +312,6 @@ public class Student extends User implements Serializable {
     public void getTranscript() {
         
     }
-    
-    
-    
-    
-    
     
     
     public void addMarkToCourse(Course course, int firstAttestation, int secondAttestation, int finalExam) {
