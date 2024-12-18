@@ -1,4 +1,4 @@
-package News;
+package communication;
 
 import java.util.HashSet;
 import java.util.Set;
