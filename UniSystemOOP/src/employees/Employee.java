@@ -22,7 +22,7 @@ public class Employee extends User {
     	super(login, password);
     }
     
-    protected String getDepartment() {
+    public String getDepartment() {
     	return department;
     }
     

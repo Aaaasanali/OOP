@@ -106,5 +106,13 @@ public abstract class User {
         functions.put(startIndex++, new NamedRunnable(this::logOut, "Logout"));
 		return functions;
 	}
+
+	protected abstract void changeData();
+
+	public String getName() {
+		
+		return this.name;
+	}
+
 	
 }
