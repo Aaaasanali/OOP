@@ -59,13 +59,13 @@ public class Main {
 		
 		
 		
-        Student student1 = new Student("studentLogin", "studentPassword123", "Ben", "Doe");
-        Student student2 = new Student("john_doe", "password", "John", "Doe");
-        Master student3 = new Master("john_smith", "password123", "Alex", "Smith");
+        Student student1 = new Student("stud", "pswrd", "Ben", "Doe");
+        Student student2 = new Student("stud2", "parol", "John", "Chan");
+        Master student3 = new Master("stud3", "log", "Alex", "Smith");
 
-        Teacher teacher1 = new Teacher("teacher1_login", "teacher1_password", "Pakizar", "Shamoi");
-        Teacher teacher2 = new Teacher("teacher2_login", "teacher2_password", "Alimzhan", "Amanov");
-        Teacher teacher3 = new Teacher("teacher3_login", "teacher3_password", "Suhrab", "Yoldash");
+        Teacher teacher1 = new Teacher("tchr", "tchr", "Pakizar", "Shamoi");
+        Teacher teacher2 = new Teacher("tchr2", "tchr2", "Alimzhan", "Amanov");
+        Teacher teacher3 = new Teacher("indus", "indus", "Suhrab", "Yoldash");
         
         Vector<Teacher> teachers = new Vector<>();
         teachers.add(teacher1);
@@ -79,6 +79,10 @@ public class Main {
         Course oop = new Course("OOP", 2024, Semester.FALL);
         oop.setTeachers(teachers);       
         
+        Course cmp = new Course("CMP", 2024, Semester.FALL);
+        cmp.setTeachers(teachers);
+        
+        
         Mark mark75 = new Mark(30,30,15);
         Mark mark85 = new Mark(30,30,25);
         Mark mark95 = new Mark(30,30,35);
@@ -91,11 +95,13 @@ public class Main {
         
         
         
-        
-        Data.INSTANCE.addUser(student3);
         Data.INSTANCE.addUser(student1);
+        Data.INSTANCE.addUser(student2);
+        Data.INSTANCE.addUser(student3);
+        
         Data.INSTANCE.addCourse(oop);
         Data.INSTANCE.addCourse(ads);
+        Data.INSTANCE.addCourse(cmp);
         
         Data.INSTANCE.addStudentOrganization(faces);
         Data.INSTANCE.addStudentOrganization(osit);
@@ -111,10 +117,7 @@ public class Main {
         
 		//register for course - 		OOP, 2024, FALL or ADS 2024, FALL 
 		//view courses		  -			
-		//view teacher info	  - 		OOP, 2024, FALL 																						only after registration
-        
-//        student2.addMarkToCourse(ads, mark100);					//Mark can be added only to registered course
-//        student2.addMarkToCourse(oop, mark85);						//Функция должна быть у teacher-а (Для теста пока что вручную)
+		//view teacher info	  - 		OOP, 2024, FALL 										only after registration
         
         //add mark to course, then check
         
@@ -129,8 +132,8 @@ public class Main {
         
         				//TESTING TEACHER
         
-        //Put mark 									Нужна сериализация данных. Пока пытешься поставить оценку на курс - в это время student not registered for course 
-        //												Or make logout function - student logins, registers for course, then teacher put marks for him, then student can view marks
+        //Put mark 							log to student Register logout - log to teacher Put mark logout - log to student then see marks 					 
+        //												
         
 //      User current = teacher1;
         
@@ -162,10 +165,10 @@ public class Main {
 
                 int choice = inp.nextInt() - 1;
 
-                if (choice == i) { // If logout option is selected
-                    current.logout(); // Call logout method
-                    current = null; // Reset current user
-                    break; // Break out of the menu loop to return to login
+                if (choice == i) { 
+                    current.logout();
+                    current = null; 
+                    break;
                 }
 
                 Runnable function = functionsMap.get(choice);
