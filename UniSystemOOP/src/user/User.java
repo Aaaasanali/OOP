@@ -7,10 +7,8 @@ import students.*;
 import java.io.Serializable;
 import java.util.*;
 
-<<<<<<< HEAD
 import Factories.NamedRunnable;
 
-public abstract class User {
 public abstract class User implements Serializable{
 	
 	Scanner inp = new Scanner(System.in);

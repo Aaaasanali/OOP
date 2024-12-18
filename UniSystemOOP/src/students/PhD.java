@@ -18,8 +18,8 @@ public class PhD extends GraduateStudent implements Serializable {
     
     
     
-    public PhD(String login, String password, String name, String surname, int course, int ects, String id) {
-		super(login, password, name, surname, course, ects, id);
+    public PhD(String login, String password, String name, String surname, String id) {
+		super(login, password, name, surname, id);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -59,7 +59,7 @@ public class PhD extends GraduateStudent implements Serializable {
     
     public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
         Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
-        functions.put(startIndex++, new NamedRunnable(this::getDissertation, "Get Thesis"));
+        functions.put(startIndex++, new NamedRunnable(this::getDissertation, "Get Dissertation"));
         functions.put(startIndex++, new NamedRunnable(this::getString, "Get String"));
         return functions;
     }

@@ -7,6 +7,7 @@ import database.Data;
 import documents.Course;
 import documents.Document;
 import documents.Mark;
+import documents.Semester;
 import oop.NamedRunnable;
 import user.User;
 
@@ -76,7 +77,7 @@ public class Student extends User implements Serializable {
                 '}';
     }
 
-    // Method to view the courses a student is enrolled in
+
     public void viewCourses() {
         if (courses.isEmpty()) {
             System.out.println("No courses registered yet.");
@@ -89,22 +90,54 @@ public class Student extends User implements Serializable {
         }
     }
 
-    // Method to register for a course
-    public void registerForCourse() {
+
+    public boolean registerForCourse() {
+        // Prompt user for course details
         System.out.print("Enter the name of the course you want to register for: ");
         String courseName = n.next();
         System.out.print("Enter the year for the course: ");
         int year = n.nextInt();
+        System.out.print("Enter the semester for the course (FALL/SPRING): ");
+        Semester semester = Semester.valueOf(n.next().toUpperCase());
 
-        Course newCourse = new Course(courseName, year);
+        Data data = Data.INSTANCE;
 
-        if (!courses.containsKey(newCourse)) {
-            courses.put(newCourse, new Mark(0, 0, 0)); // Add with a default Mark
+        // Create a temporary course object to search for matches
+        Course tempCourse = new Course(courseName, year, semester);
+        Course existingCourse = null;
+
+        // Search for an existing course in the system
+        for (Course course : data.courses) {
+            if (course.equals(tempCourse)) { // Use equals method
+                existingCourse = course;
+                break;
+            }
+        }
+
+        // If no existing course is found, create a new one
+        if (existingCourse == null) {
+            data.courses.add(tempCourse); // Add the new course to the system
+            System.out.println("New course added to the system.");
+            existingCourse = tempCourse; // Use the newly created course
+        } else {
+            System.out.println("Course already exists in the system.");
+        }
+
+        // Add the course to the student's enrolled courses
+        if (!courses.containsKey(existingCourse)) {
+            courses.put(existingCourse, new Mark(0, 0, 0)); // Add with a default Mark
             System.out.println("Successfully registered for course: " + courseName);
+            return true; // Registration successful
         } else {
             System.out.println("You are already registered for the course: " + courseName);
+            return false; // Registration failed
         }
-    }
+    }    
+    
+    
+    
+    
+    
 
     // Method to view teacher information for a specific course
     public void viewTeacherInfo() {
@@ -176,7 +209,7 @@ public class Student extends User implements Serializable {
         Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
         // Add student-specific actions
         functions.put(startIndex++, new NamedRunnable(this::viewCourses, "View Courses"));
-        functions.put(startIndex++, new NamedRunnable(this::registerForCourse, "Register for Course"));
+        functions.put(startIndex++, new NamedRunnable(this::registerForCourse, "Register for Course"));										//Немного работает
         functions.put(startIndex++, new NamedRunnable(this::viewTeacherInfo, "View Teacher Info"));
         functions.put(startIndex++, new NamedRunnable(this::viewMarks, "View Marks"));
         functions.put(startIndex++, new NamedRunnable(this::viewTranscript, "View Transcript"));

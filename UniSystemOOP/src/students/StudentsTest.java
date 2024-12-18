@@ -3,6 +3,8 @@ package students;
 import java.util.*;
 
 import database.Data;
+import documents.Course;
+import documents.Semester;
 
 public class StudentsTest {
 
@@ -63,5 +65,13 @@ public class StudentsTest {
         
         
         printList(Data.INSTANCE.users);
+        
+        
+        
+        Data.INSTANCE.addCourse(new Course("OOP", 2024, Semester.FALL));
+        
+        Student student2 = new Student("john_doe", "password", "John", "Doe", "12345");
+        student.registerForCourse();
+        
     }
 }

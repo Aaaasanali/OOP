@@ -25,23 +25,23 @@ public final class Data implements Serializable{
 
 
     // Courses
-     Map<String, Course> courses = new HashMap<>();
+    public Vector<Course> courses = new Vector<Course>();
      List<Course> allCourses = new ArrayList<>();
 
 
     																								//Teachers, Students, Admins contains in users, access them through method getAllTeachers
 
-    // Student Organizations
+
      Map<String, List<String>> studentOrganizations = new HashMap<>();
 
     
     
-    // Logs for auditing purposes
+
      Stack<String> logs = new Stack<>();	
 	
 	
 	
-    public static Data INSTANCE;
+    public static Data INSTANCE;																	//Singleton 
 	static {
 		if(new File("data").exists()) {
 			try {
@@ -85,27 +85,6 @@ public final class Data implements Serializable{
 	public static void setUniName(String name) {
 		universityName = name;
 	}
-	
-	
-	
-	
-	
-	/*
-	public static User findUserByLogin(String login) {
-		if(users.contains(login)) return //;
-		return null;
-	}
-	
-	public static User findUserById(String id) {
-		for(Map.Entry<String, User> entry : users.entrySet()) {
-			if(entry.getValue().getId().equals(id)) return entry.getValue();
-		}
-		return null;
-	}
-	*/
-	
-	
-	
 	
 	
 	public static void setLanguage(Language l) {
@@ -154,10 +133,38 @@ public final class Data implements Serializable{
 		return v;
 	}
 
-	public static User findUserByLogin(String login) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
+	
+	
+	
+	
+	
+	
+	
+	public static User findUserByLogin(String login) {    
+        for (User user : users) {
+            if (user.getLogin().equals(login)) {
+                return user; 
+            }
+        }
+        return null; 
+    }
+
+	public static User findUserById(String id) {
+        for (User user : users) {
+            if (user.getId().equals(id)) {
+                return user;
+            }
+        }
+        return null;
+    }
+	
+	
+	
+	
+
+	public void addCourse(Course course) {
+		this.courses.add(course);
+		
+	}
 }

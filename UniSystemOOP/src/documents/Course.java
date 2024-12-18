@@ -11,11 +11,12 @@ public class Course implements Serializable {
     private String name;
     private Integer credits;
     private List<Lesson> lessons;
+    private Semester semester;
     private String formula;
     private Integer year;
     private List<Teacher> teachers;
     private CourseType type;
-    private List<Lesson> schedule;
+//    private List<Lesson> schedule;
     private String description;
     private List<Course> prerequisites;
 
@@ -32,27 +33,27 @@ public class Course implements Serializable {
         this.year = 0;
         this.teachers = null;
         this.type = null;
-        this.schedule = null;
+//        this.schedule = null;
         this.description = "";
         this.prerequisites = null;
     }
     
-    public Course(String name, int year) {
+    public Course(String name, int year, Semester semester) {
     	this.name = name;
     	this.year = year;
+    	this.semester = semester;
     }
     
-    public Course(String id, String name, Integer credits, String formula, 
-            Integer year, CourseType type, 
-            List<Lesson> schedule, String description) {
+    public Course(String id, String name, int credits, String formula, int year, CourseType type, String description, Semester semester) {
   this.id = id;
   this.name = name;
   this.credits = credits;
   this.formula = formula;
   this.year = year;
   this.type = type;
-  this.schedule = schedule;
+//  this.schedule = schedule;
   this.description = description;
+  this.semester = semester;
 
 }
     
@@ -67,7 +68,7 @@ public class Course implements Serializable {
         this.year = year;
         this.teachers = teachers;
         this.type = type;
-        this.schedule = schedule;
+//        this.schedule = schedule;
         this.description = description;
         this.prerequisites = prerequisites;
     }
@@ -136,14 +137,22 @@ public class Course implements Serializable {
     public void setType(CourseType type) {
         this.type = type;
     }
-
-    public List<Lesson> getSchedule() {
-        return schedule;
+    
+    public void setSemester(Semester semester) {
+    	this.semester = semester;
+    }
+    
+    public Semester getSemester() {
+    	return this.semester;
     }
 
-    public void setSchedule(List<Lesson> schedule) {
-        this.schedule = schedule;
-    }
+//    public List<Lesson> getSchedule() {
+//        return schedule;
+//    }
+//
+//    public void setSchedule(List<Lesson> schedule) {
+//        this.schedule = schedule;
+//    }
 
     public String getDescription() {
         return description;
@@ -172,9 +181,18 @@ public class Course implements Serializable {
                 ", year=" + year +
                 ", teachers=" + teachers +
                 ", type=" + type +
-                ", schedule=" + schedule +
+//                ", schedule=" + schedule +
                 ", description='" + description + '\'' +
                 ", prerequisites=" + prerequisites +
                 '}';
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        
+        return year.equals(course.year) && name.equals(course.name) && semester.equals(this.semester);  
     }
 }

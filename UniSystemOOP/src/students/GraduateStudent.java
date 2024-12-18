@@ -1,8 +1,11 @@
 package students;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 
+import Factories.NamedRunnable;
 import research.ResearchProject;
 import research.Researcher;
 /**
@@ -10,6 +13,10 @@ import research.Researcher;
 */
 public class GraduateStudent extends Student implements Serializable{
     
+	private Set<ResearchProject> projects;
+    private Researcher supervisor;
+    
+	
 	public GraduateStudent() {};
 
     public GraduateStudent(String login, String password, String name, String surname, String id) {
@@ -18,9 +25,7 @@ public class GraduateStudent extends Student implements Serializable{
 	}
 
 
-	private Set<ResearchProject> projects;
-
-    private Researcher supervisor;
+	
    
     
     private Set<ResearchProject> getProjects() {
@@ -32,10 +37,7 @@ public class GraduateStudent extends Student implements Serializable{
         this.projects.add(project);
     }
     
-
     
-    
-
     private Researcher getSupervisor() {
         return this.supervisor;
     }
@@ -60,7 +62,18 @@ public class GraduateStudent extends Student implements Serializable{
 
     //                          Operations                                  
     
-    public void assignSupervisor(String name) {
+    public void assignSupervisor() {
     	
     }
+    
+    
+    
+    public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex){
+		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
+		
+		functions.put(startIndex++, new NamedRunnable(this::assignSupervisor, "Assign supervisor"));
+		return functions;
+	}
+    
+    
 }
