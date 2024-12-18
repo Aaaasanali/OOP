@@ -80,17 +80,19 @@ public class StudentsTest {
         
 //        student2.registerForCourse();												//Registration works
 //        student2.registerForCourse();
+//        student2.viewCourses();														//View courses works
 //        student2.viewTeacherInfo();
+        
 //        
 //        System.out.println(course3.getTeachers());
         
-        //student2.viewCourses();													//View courses works
+        											
         
-        //student2.addMarkToCourse(ads, mark100);
+//        student2.addMarkToCourse(ads, mark100);
         //student2.addMarkToCourse(oop, mark85);
         
 
-        //student2.viewMarks();														//View marks works
+//        student2.viewMarks();														//View marks works
         
 
         
@@ -108,10 +110,10 @@ public class StudentsTest {
         
         
         student1.rateTeacher();
-        student2.rateTeacher();
-        student3.rateTeacher();
-        
-        System.out.println(Data.INSTANCE.getAllTeachers());
+//        student2.rateTeacher();
+//        student3.rateTeacher();
+
+
         
         
         
