@@ -107,15 +107,15 @@ public class Main {
         Data.INSTANCE.addUser(teacher3);
 		
 		
-						//TESTING:
+						//TESTING STUDENT:
         //Function 						Test texts
         
 		//register for course - 		OOP, 2024, FALL or ADS 2024, FALL 
 		//view courses		  -			
 		//view teacher info	  - 		OOP, 2024, FALL 																						only after registration
         
-        student2.addMarkToCourse(ads, mark100);					//Mark can be added only to registered course
-        student2.addMarkToCourse(oop, mark85);						//Функция должна быть у teacher-а (Для теста пока что вручную)
+//        student2.addMarkToCourse(ads, mark100);					//Mark can be added only to registered course
+//        student2.addMarkToCourse(oop, mark85);						//Функция должна быть у teacher-а (Для теста пока что вручную)
         
         //add mark to course, then check
         
@@ -128,9 +128,13 @@ public class Main {
         
         
         
+        				//TESTING TEACHER
         
-		
-		User current = student3; //null
+        //Put mark 									Нужна сериализация данных. Пока пытешься поставить оценку на курс - в это время student not registered for course 
+        //												Or make logout function - student logins, registers for course, then teacher put marks for him, then student can view marks
+        
+        User current = teacher1;
+//		User current = student3; //null
 		Master master = new Master();
 //		while(current == null) {
 //			current = login();

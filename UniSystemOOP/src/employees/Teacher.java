@@ -3,12 +3,17 @@ package employees;
 import java.io.Serializable;
 import java.util.*;
 
+import Factories.NamedRunnable;
+import database.Data;
 import documents.Document;
 import documents.Lesson;
+import documents.Mark;
+import documents.Semester;
 import research.ResearchPaper;
 import research.Researcher;
 import documents.Course;
 import students.Student;
+import user.User;
 
 public class Teacher extends Employee implements Researcher, Serializable {
     
@@ -67,22 +72,33 @@ public class Teacher extends Employee implements Researcher, Serializable {
         this.rating = rating;
     }
     
+    public void addRating(Double rating) {
+    	this.ratingMarks.add(rating);
+    }
     
+	public void updateAverageRating() {
+        if (ratingMarks.isEmpty()) {
+            rating = 0.0;  // No ratings yet, so the average is 0
+        } else {
+            double sum = 0;
+            for (Double mark : ratingMarks) {
+                sum += mark;
+            }
+            rating = sum / ratingMarks.size();  // Calculate the average rating
+        }
+    }
     
     
     
     
 
-//    private Set<Lesson> getLessons() {						change, get lessons from courses
-//        if (this.lessons == null) {
-//            this.lessons = new HashSet<Lesson>();
-//        }
-//        return this.lessons;
+//    private getLessons() {						change, get lessons from courses
+//        
 //    }
 //    
 //
 //    private void setLessons(Lesson lesson) {
-//        this.lessons.add(lesson);
+//        
 //    }
     
     
@@ -122,6 +138,91 @@ public class Teacher extends Employee implements Researcher, Serializable {
     
     
     
+    public void putMark() {
+        Scanner n = new Scanner(System.in);
+
+        // Step 1: Get student details
+        System.out.print("Enter the name of the student: ");
+        String studentName = n.next();
+        System.out.print("Enter the surname of the student: ");
+        String studentSurname = n.next();
+
+        // Step 2: Get course details
+        System.out.print("Enter the name of the course: ");
+        String courseName = n.next();
+        System.out.print("Enter the year of the course: ");
+        int year = n.nextInt();
+        System.out.print("Enter the semester of the course (FALL/SPRING): ");
+        Semester semester = Semester.valueOf(n.next().toUpperCase());
+
+        // Step 3: Find the student
+        Student targetStudent = null;
+        for (User user : Data.INSTANCE.getAllUsers()) {
+            if (user instanceof Student) {
+                Student student = (Student) user;
+                if (student.getName().equalsIgnoreCase(studentName) &&
+                    student.getSurname().equalsIgnoreCase(studentSurname)) {
+                    targetStudent = student;
+                    break;
+                }
+            }
+        }
+
+        if (targetStudent == null) {
+            System.out.println("Student not found.");
+            return;
+        }
+
+        // Step 4: Find the course
+        Course targetCourse = null;
+        for (Course course : Data.INSTANCE.getAllCourses()) {
+            if (course.getName().equalsIgnoreCase(courseName) &&
+                course.getYear() == year &&
+                course.getSemester() == semester) {
+                targetCourse = course;
+                break;
+            }
+        }
+
+        if (targetCourse == null) {
+            System.out.println("Course not found.");
+            return;
+        }
+
+        // Step 5: Ensure the student is registered for the course
+        if (!targetStudent.courses.containsKey(targetCourse)) {
+            System.out.println("Student is not registered for this course.");
+            return;
+        }
+
+        // Step 6: Input marks
+        System.out.print("Enter the mark for the first attestation: ");
+        int firstAttestation = n.nextInt();
+        System.out.print("Enter the mark for the second attestation: ");
+        int secondAttestation = n.nextInt();
+        System.out.print("Enter the mark for the final exam: ");
+        int finalExam = n.nextInt();
+
+        // Step 7: Update the student's marks for the course
+        Mark mark = new Mark(firstAttestation, secondAttestation, finalExam);
+        targetStudent.addMarkToCourse(targetCourse, mark);
+
+        System.out.println("Marks updated successfully for student: " + studentName + " " + studentSurname);
+    }
+    
+    	
+    public void viewStudentsInfo() {																				//NEED TO REALIZE
+    	
+    }
+    
+    public void sentComplaint() {
+    	
+    }
+    	
+//    public void takeAttandance() {													//Ne dumayu chto eto obyazatelno
+//    	
+//    }
+    
     
     
     
@@ -152,24 +253,11 @@ public class Teacher extends Employee implements Researcher, Serializable {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
     
-    public void addRating(Double rating) {
-    	this.ratingMarks.add(rating);
-    }
+
     
-/*
-    public Set<Student> getStudent() {
-        if (this.student == null) {
-            this.student = new HashSet<Student>();
-        }
-        return this.student;
-    }
-    
-   
-    public Set<Student> setStudent(Student student) {
-        this.student = student;
-    }
-    */
     
 
 
@@ -195,28 +283,32 @@ public class Teacher extends Employee implements Researcher, Serializable {
 	}
 
 
-	public void updateAverageRating() {
-        if (ratingMarks.isEmpty()) {
-            rating = 0.0;  // No ratings yet, so the average is 0
-        } else {
-            double sum = 0;
-            for (Double mark : ratingMarks) {
-                sum += mark;
-            }
-            rating = sum / ratingMarks.size();  // Calculate the average rating
+
+    
+	
+	
+    
+
+
+    
+    
+    
+	
+    //                          Operations                                  
+	public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
+        Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
+        // Add student-specific actions	
+        functions.put(startIndex++, new NamedRunnable(this::putMark, "Put mark"));												
+        functions.put(startIndex++, new NamedRunnable(this::printResearchPaper, "Print research paper"));	
+        functions.put(startIndex++, new NamedRunnable(this::viewStudentsInfo, "View students info"));	
+        functions.put(startIndex++, new NamedRunnable(this::sentComplaint, "Sent complaint"));
+//        functions.put(startIndex++, new NamedRunnable(this::takeAttandance, "Take attendance"));							//Ne znayu obyazatelno li eto (mnogo zaparivatsya)
+   
+        for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
+            functions.put(startIndex++, entry.getValue());
         }
+
+        return functions;
     }
     
-	
-	
-    
-
 }
-    
-    
-    
-
-    //                          Operations                                  
-    
-    
-
