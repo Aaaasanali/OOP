@@ -4,11 +4,14 @@ package user;
 import database.Data;
 import students.*;
 
+import java.io.Serializable;
 import java.util.*;
 
+<<<<<<< HEAD
 import Factories.NamedRunnable;
 
 public abstract class User {
+public abstract class User implements Serializable{
 	
 	Scanner inp = new Scanner(System.in);
 
@@ -34,7 +37,18 @@ public abstract class User {
     	this.password = password;
     	this.hashPassword = password.hashCode();
     	this.id = generateId();
-    	Data.addUser(this);
+    	//Data.addUser(this);
+    }
+    
+    public User(String login, String password, String name, String surname, String id) {
+    	this.login = login;
+    	this.password = password;
+    	this.hashPassword = password.hashCode();
+    	this.id = generateId();
+    	//Data.addUser(this);
+    	
+    	this.name = name;
+    	this.surname = surname;
     }
     
     private String generateId() {
@@ -45,6 +59,14 @@ public abstract class User {
     
     public void setAllData() {
     	System.out.println("Filling name, email, sex, phone and etc.");
+    }
+    
+    public void setName(String name) {
+    	this.name = name;
+    }
+    
+    public String getName() {
+    	return this.name;
     }
     
     public String getLogin() {
@@ -62,6 +84,28 @@ public abstract class User {
 	public String getId() {
     	return this.id;
     }
+	
+	
+	
+	
+	public String toString() {
+	    return "User{" +
+	            "login='" + login + '\'' +
+	            ", id='" + id + '\'' +
+	            ", name='" + name + '\'' +
+	            ", surname='" + surname + '\'' +
+	            ", email='" + email + '\'' +
+	            ", language=" + language +
+	            ", birthdate=" + birthdate +
+	            ", sex=" + sex +
+	            ", phone='" + phone + '\'' +
+	            ", education=" + education +
+	            '}';
+	}
+	
+	
+	
+	
     
 	public void changeLanguage() {
 		// выберите язык - Data.changeLanguage(Choice);

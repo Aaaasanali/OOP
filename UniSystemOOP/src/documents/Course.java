@@ -1,10 +1,11 @@
 package documents;
 
+import java.io.Serializable;
 import java.util.List;
 
 import employees.Teacher;
 
-public class Course {
+public class Course implements Serializable {
     
     private String id;
     private String name;
@@ -21,6 +22,7 @@ public class Course {
     
     
     
+    
     public Course() {
     	this.id = "";
         this.name = "";
@@ -33,6 +35,11 @@ public class Course {
         this.schedule = null;
         this.description = "";
         this.prerequisites = null;
+    }
+    
+    public Course(String name, int year) {
+    	this.name = name;
+    	this.year = year;
     }
     
     public Course(String id, String name, Integer credits, String formula, 

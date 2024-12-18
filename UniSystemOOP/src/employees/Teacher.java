@@ -1,7 +1,7 @@
 package employees;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.*;
 
 import documents.Document;
 import documents.Lesson;
@@ -10,7 +10,7 @@ import research.Researcher;
 import documents.Course;
 import students.Student;
 
-public class Teacher extends Employee implements Researcher {
+public class Teacher extends Employee implements Researcher, Serializable {
     
 
     public Teacher(String login, String password) {
@@ -19,13 +19,14 @@ public class Teacher extends Employee implements Researcher {
 	}
 
 
-	private Set<Course> courses;
+	private Vector<Course> courses;
     
 
     private double rating;
+    private Vector<Double> ratingMraks;
     
 
-    private Set<Lesson> lessons;
+    //private Set<Lesson> lessons; lessons are contains in courses
     
 
     private TeacherTitle teacherType;
@@ -33,8 +34,6 @@ public class Teacher extends Employee implements Researcher {
 
     private Set<Document> documents;
     
-
-    //private Set<Student> students;				not in UML
     
     
 
