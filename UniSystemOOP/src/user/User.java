@@ -103,19 +103,11 @@ public abstract class User {
 		System.exit(0);
 	}
 	
-	public void sendMessage() {
-		
-	}
-	
 	public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex){
 		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
 		functions.put(startIndex++, new NamedRunnable(this::changePassword, "Change Password"));
         functions.put(startIndex++, new NamedRunnable(this::changeLanguage, "Change Language"));
         functions.put(startIndex++, new NamedRunnable(this::logOut, "Logout"));
 		return functions;
-	}
-	
-	public void receiveMessage(Message m) {
-		this.unReadedMessages.add(m);
 	}
 }
