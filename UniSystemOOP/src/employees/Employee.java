@@ -2,49 +2,56 @@ package employees;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
-import user.User;
+import Utils.Message;
 
 public class Employee extends User {
-    
-	public String department;
-	private List<String> messageInbox;
-	
-	{
-		messageInbox = new ArrayList<String>();
+
+	private final Vector<String> functions = new Vector<>(Arrays.asList(
+			"Check Salary", "Check Inbox", "Send Message"));
+
+	public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex){
+		
+		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
+		
+		functions.put(startIndex++, new NamedRunnable(this::checkSalary, "Check Salary"));
+		functions.put(startIndex++, new NamedRunnable(this::checkInbox, "Check Inbox"));
+		functions.put(startIndex++, new NamedRunnable(this::sendMessage, "Send Message"));
+		
+		for(Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
+			functions.put(startIndex++, entry.getValue());
+		}
+		
+		return functions;
+	}
+
+	public Employee() {
+
+	}
+
+	public Employee(String login, String password) {
+
 	}
 	
-	private final Vector<String> functions = new Vector<>(Arrays.asList("Check Salary", "Check Inbox"));
+	private void checkSalary() {
+		
+	}
 	
-    public Employee(String login, String password) {
-    	super(login, password);
-    }
-    
-    protected String getDepartment() {
-    	return department;
-    }
-    
-    protected void setDepartment(String department) {
-    	this.department = department;
-    }
-    
-    private void sendMessage(User other, String message) {
-    	
-    }
-    
-    public String getFunc() {
-    	String res = "";
-    	for(String i : functions) {
-    		res += i + "\n";
-    	}
-    	res += super.getFunc();
-    	return res;
-    }
-    
-    public String toString() {
-    	return "Employee is placed in " + department + " department";
-    }
-    
+	private void checkInbox() {
+
+	}
+	
+	private void sendMessage() {
+
+	}
+	
+	public String getFunctions() {
+		return "";
+	}
+
 }
+
