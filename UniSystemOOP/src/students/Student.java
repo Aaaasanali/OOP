@@ -8,6 +8,7 @@ import documents.Course;
 import documents.Document;
 import documents.Mark;
 import documents.Semester;
+import documents.Speciality;
 import employees.Teacher;
 import Factories.NamedRunnable;
 import user.User;

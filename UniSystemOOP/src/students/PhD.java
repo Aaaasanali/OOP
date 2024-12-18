@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 
 
-import oop.NamedRunnable;
+import Factories.NamedRunnable;
 import research.Dissertation;
 
 /**
