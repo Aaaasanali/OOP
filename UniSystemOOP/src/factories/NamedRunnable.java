@@ -1,4 +1,4 @@
-package oop;
+package factories;
 
 public class NamedRunnable implements Runnable {
     private final Runnable task; // Оригинальная логика функции
