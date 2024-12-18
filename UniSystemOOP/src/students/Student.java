@@ -51,6 +51,10 @@ public class Student extends User implements Serializable {
     public String getFaculty() {
         return faculty;
     }
+    
+    public String getId () {
+    	return super.getId();
+    }
 
     public void setFaculty(String faculty) {
         this.faculty = faculty;
@@ -60,7 +64,11 @@ public class Student extends User implements Serializable {
     private int getMAXCREDITS() {
         return this.MAXCREDITS;
     }
-
+    
+    public Map<Course, Mark> getCourses() {
+        return courses;
+    }
+    
     @Override
     public String toString() {
         return super.toString() +
