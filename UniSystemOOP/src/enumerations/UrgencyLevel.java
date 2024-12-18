@@ -1,7 +1,5 @@
 package enumerations;
 
 public enum UrgencyLevel {
-
-	LOW, MEDIUM, HIGH;
-	
+	LOW, MEDIUM, HIGH;	
 }

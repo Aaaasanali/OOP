@@ -38,11 +38,49 @@ public class Employee extends User {
 
 
 	private void checkInbox() {
+		if (messageInbox.isEmpty()) {
+			System.out.println("Your inbox is empty.");
+			return;
+		}
 
+		System.out.println("Inbox:");
+		int index = 1;
+		for (Message message : messageInbox) {
+			System.out.println(index++ + ". " + message.getShortInfo());
+		}
+
+		System.out.println("0 - Back");
+
+		Scanner scanner = new Scanner(System.in);
+
+		while (true) {
+			System.out.print("Choose a message to view details or 0 to go back: ");
+			int choice;
+			try {
+				choice = Integer.parseInt(scanner.nextLine());
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid input. Please enter a number.");
+				continue;
+			}
+
+			if (choice == 0) {
+				System.out.println("Returning to the main menu...");
+				break;
+			}
+
+			if (choice > 0 && choice <= messageInbox.size()) {
+				Message selectedMessage = messageInbox.get(choice - 1);
+				System.out.println("\nFull Message Details:");
+				System.out.println(selectedMessage.getFullInfo());
+			} else {
+				System.out.println("Invalid choice. Please try again.");
+			}
+		}
 	}
 
-	private void sendMessage(Employee other, Message message) {
 
+
+	private void sendMessage(Employee other, Message message) {
 		Scanner input = new Scanner(System.in);
 
 		System.out.println("Which message you want to send?");
@@ -67,13 +105,13 @@ public class Employee extends User {
 		}
 
 		MessageFactory messageFactory = new MessageFactory();
-		messageFactory.createMessage(messageType);
+		Message message = messageFactory.createMessage(messageType);
 
 		String content = input.nextLine();
 		message.setContent(content);
-		
+
 		other.messageInbox.push(message);
-		
+
 		System.out.println("Message was sent");
 	}
 
