@@ -8,11 +8,6 @@ public class Document {
     private String name;
     
     private String link;
-    
-
-    
-    
-
 
     private String getName() {
         return this.name;

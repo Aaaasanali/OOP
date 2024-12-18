@@ -16,9 +16,10 @@ import user.User;
     private String id;
     private String faculty;
     private List<Course> enrolledCourses = new ArrayList<>();
-    private String organization = null;
+    private String organization;
     private int MAXCREDITS = 21; 
     
+    public Student() {};
     
     public Student(String login, String password, String name, String surname, int course, int ects, String id) {
         super(login, password, name, surname);
