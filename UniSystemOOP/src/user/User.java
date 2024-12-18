@@ -1,9 +1,18 @@
 package user;
 
 
-import database.Data;
-import news.News;
+import communication.*;
+import database.*;
+import documents.*;
+import employees.*;
+import Factories.*;
+import Factories.NamedRunnable;
+import Interfaces.*;
+import news.*;
+import oop.*;
+import research.*;
 import students.*;
+import user.*;
 
 import java.io.Serializable;
 import java.util.*;

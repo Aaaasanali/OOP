@@ -3,14 +3,18 @@ package students;
 import java.io.Serializable;
 import java.util.*;
 
-import database.Data;
-import documents.Course;
-import documents.Document;
-import documents.Mark;
-import documents.Semester;
-import employees.Teacher;
+import communication.*;
+import database.*;
+import documents.*;
+import employees.*;
+import Factories.*;
 import Factories.NamedRunnable;
-import user.User;
+import Interfaces.*;
+import news.*;
+import oop.*;
+import research.*;
+import students.*;
+import user.*;
 
 public class Student extends User implements Serializable {
 

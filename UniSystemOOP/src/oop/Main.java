@@ -2,20 +2,18 @@ package oop;
 
 import java.util.*;
 
+import communication.*;
+import database.*;
+import documents.*;
+import employees.*;
+import Factories.*;
 import Factories.NamedRunnable;
-import database.Data;
-import documents.Course;
-import documents.Mark;
-import documents.Semester;
-import employees.Admin;
-import employees.Employee;
-import employees.Manager;
-import employees.Teacher;
-import news.News;
-import students.Master;
-import students.Student;
-import students.StudentOrganization;
-import user.User;
+import Interfaces.*;
+import news.*;
+import oop.*;
+import research.*;
+import students.*;
+import user.*;
 
 public class Main {
 

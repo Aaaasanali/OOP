@@ -3,15 +3,18 @@ package database;
 import java.io.*;
 import java.util.*;
 
-import documents.Course;
-import documents.Mark;
-import employees.Admin;
-import employees.Teacher;
-import news.News;
-import students.Student;
-import students.StudentOrganization;
-import user.Language;
-import user.User;
+import communication.*;
+import database.*;
+import documents.*;
+import employees.*;
+import Factories.*;
+import Factories.NamedRunnable;
+import Interfaces.*;
+import news.*;
+import oop.*;
+import research.*;
+import students.*;
+import user.*;
 
 
 public final class Data implements Serializable{

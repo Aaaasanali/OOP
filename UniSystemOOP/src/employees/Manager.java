@@ -3,13 +3,18 @@ package employees;
 import java.io.Serializable;
 import java.util.*;
 
+import communication.*;
+import database.*;
+import documents.*;
+import employees.*;
+import Factories.*;
 import Factories.NamedRunnable;
-import database.Data;
-import documents.Course;
-import documents.Mark;
-import documents.Semester;
-import news.News;
-import students.Student;
+import Interfaces.*;
+import news.*;
+import oop.*;
+import research.*;
+import students.*;
+import user.*;
 
 /**
 * @generated
@@ -203,9 +208,9 @@ public class Manager extends Employee implements Serializable {
         // Add student-specific actions	
         functions.put(startIndex++, new NamedRunnable(this::addStudent, "Add student"));
         functions.put(startIndex++, new NamedRunnable(this::createNews, "Create news"));												
-        functions.put(startIndex++, new NamedRunnable(this::approveStudentRegistration, "Approve student registration"));
+//        functions.put(startIndex++, new NamedRunnable(this::approveStudentRegistration, "Approve student registration"));
         functions.put(startIndex++, new NamedRunnable(this::addCourse, "Add new course"));
-        functions.put(startIndex++, new NamedRunnable(this::registerStudentToCourse, "Register student to course"));
+//        functions.put(startIndex++, new NamedRunnable(this::registerStudentToCourse, "Register student to course"));
    
         for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
             functions.put(startIndex++, entry.getValue());
