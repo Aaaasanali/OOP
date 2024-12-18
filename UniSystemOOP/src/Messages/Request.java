@@ -7,7 +7,7 @@
 	
 	public class Request extends Message {
 	
-	    private boolean signed = false;
+	 
 	    private RequestStatus status = RequestStatus.WAITING;
 	    public Request(Employee sender, String content) {
 	        super(sender, content);

@@ -71,27 +71,27 @@ public abstract class Message {
 				"\n1 - approve\n" +
 		           "2 - not approve\n" +
 		           "0 - back");
-		Scanner scanner = new Scanner(System.in);
-		
-		 while (true) {
-		        System.out.print("Choose an action: ");
-		        String input = scanner.nextLine();
-		        switch (input) {
-		            case "1": // Approve
-		                approveMessage();
-		                return; 
-		            case "2": 
-		                notApproveMessage();
-		                return; 
+		try (Scanner scanner = new Scanner(System.in)) {
+			while (true) {
+			        System.out.print("Choose an action: ");
+			        String input = scanner.nextLine();
+			        switch (input) {
+			            case "1": // Approve
+			                approveMessage();
+			                return; 
+			            case "2": 
+			                notApproveMessage();
+			                return; 
 
-		            case "0":
-		                System.out.println("Returning to the previous menu...");
-		                return;
+			            case "0":
+			                System.out.println("Returning to the previous menu...");
+			                return;
 
-		            default:
-		                System.out.println("Invalid choice. Please try again.");
-		        }
-		    }
+			            default:
+			                System.out.println("Invalid choice. Please try again.");
+			        }
+			    }
+		}
 		}
 
 	private void approveMessage() {
