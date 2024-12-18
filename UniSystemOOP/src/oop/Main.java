@@ -89,13 +89,7 @@ public class Main {
         StudentOrganization osit = new StudentOrganization("OSIT", "A student organization for open source and IT enthusiasts.");
         StudentOrganization faces = new StudentOrganization("Faces", "A student group for those interested in arts, creativity, and expression.");
 
-        bigCityLights.addMember(student1);
-        osit.addMember(student2);
-        faces.addMember(student3);
         
-        bigCityLights.addMember(student2);
-        osit.addMember(student3);
-        faces.addMember(student1);
         
         
         
@@ -113,7 +107,7 @@ public class Main {
         Data.INSTANCE.addUser(teacher3);
 		
 		
-		
+						//TESTING:
         //Function 						Test texts
         
 		//register for course - 		OOP, 2024, FALL or ADS 2024, FALL 
@@ -144,7 +138,8 @@ public class Main {
 		
 		Map<Integer, NamedRunnable> functionsMap = current.getFunctionsMap(0);
 		while(true) {	
-	
+			System.out.println("");
+			
 	        int i = 0;
 	        for (Map.Entry<Integer, NamedRunnable> entry : functionsMap.entrySet()) {
 	            System.out.println((++i) + " - " + entry.getValue().getName());
