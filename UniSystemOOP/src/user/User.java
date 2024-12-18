@@ -2,10 +2,12 @@ package user;
 
 
 import database.Data;
-import oop.NamedRunnable;
 import students.*;
 
 import java.util.*;
+
+import Factories.NamedRunnable;
+import Messages.Message;
 
 public abstract class User {
 	
@@ -25,6 +27,8 @@ public abstract class User {
     private String phone;
     private Education education; 
     
+    private Stack<Message> unReadedMessages;
+    private Stack<Message> readedMessages;
     
     public User() {};
     
@@ -63,7 +67,6 @@ public abstract class User {
     }
     
 	public void changeLanguage() {
-		// выберите язык - Data.changeLanguage(Choice);
 		System.out.println("Pick Language to Change\n1 - RU\n2 - EN\n3 - KZ");
 		switch(inp.nextInt()) {
 		case 0:
@@ -74,6 +77,8 @@ public abstract class User {
 			Data.setLanguage(Language.KZ);
 		}
 	}
+	
+	
 	
 	public void changePassword() {
 		while(true) {
@@ -98,6 +103,10 @@ public abstract class User {
 		System.exit(0);
 	}
 	
+	public void sendMessage() {
+		
+	}
+	
 	public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex){
 		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
 		functions.put(startIndex++, new NamedRunnable(this::changePassword, "Change Password"));
@@ -106,4 +115,7 @@ public abstract class User {
 		return functions;
 	}
 	
+	public void receiveMessage(Message m) {
+		this.unReadedMessages.add(m);
+	}
 }

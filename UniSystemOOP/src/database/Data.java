@@ -2,7 +2,7 @@ package database;
 
 import java.util.*;
 
-import employees.Admin;
+import employees.*;
 import user.Language;
 import user.User;
 
@@ -15,7 +15,7 @@ public final class Data {
 	private static final Vector<Admin> admins = new Vector<>();
 	
 	private static final Map<String, User> users = new HashMap<>();
-	
+	private static final Vector<Dean> deans = new Vector<>();
 	private static final Stack<String> logs = new Stack<>();
 	
 	
@@ -56,5 +56,9 @@ public final class Data {
 	
 	public static void setLanguage(Language l) {
 		currentLanguage = l;
+	}
+	
+	public static Vector<Dean> getDeans(){
+		return deans;
 	}
 }

@@ -1,8 +1,8 @@
-package oop;
+package Factories;
 
 public class NamedRunnable implements Runnable {
-    private final Runnable task; // Оригинальная логика функции
-    private final String name;   // Название функции
+    private final Runnable task;
+    private final String name;
 
     public NamedRunnable(Runnable task, String name) {
         this.task = task;

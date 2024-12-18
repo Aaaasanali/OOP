@@ -22,7 +22,7 @@ public class Employee extends User {
     	super(login, password);
     }
     
-    protected String getDepartment() {
+    public String getDepartment() {
     	return department;
     }
     
@@ -32,15 +32,6 @@ public class Employee extends User {
     
     private void sendMessage(User other, String message) {
     	
-    }
-    
-    public String getFunc() {
-    	String res = "";
-    	for(String i : functions) {
-    		res += i + "\n";
-    	}
-    	res += super.getFunc();
-    	return res;
     }
     
     public String toString() {

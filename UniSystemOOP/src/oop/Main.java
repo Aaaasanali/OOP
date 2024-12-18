@@ -3,6 +3,7 @@ package oop;
 import java.util.Map;
 import java.util.Scanner;
 
+import Factories.NamedRunnable;
 import database.Data;
 import employees.Admin;
 import employees.Employee;
@@ -58,7 +59,7 @@ public class Main {
 	
 	        int i = 0;
 	        for (Map.Entry<Integer, NamedRunnable> entry : functionsMap.entrySet()) {
-	            System.out.println((++i) + " - " + entry.getValue().getName());
+	            System.out.println(++i + " - " + entry.getValue().getName());
 	        }
 	
 	        int choice = inp.nextInt()-1;

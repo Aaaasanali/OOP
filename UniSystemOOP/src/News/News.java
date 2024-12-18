@@ -1,27 +1,19 @@
-package communication;
+package News;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import user.User;
+
 
 public class News {
-    
-
     private String title;
-    
-
     private String content;
-    
-
-    private boolean isPinned;
-    
-
+    private User author;
     private Set<String> comments;
 
-    
-    
 
-
+    
     private String getTitle() {
         return this.title;
     }
