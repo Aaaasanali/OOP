@@ -12,13 +12,6 @@ import Utils.Message;
 import user.User;
 
 public class Employee extends User {
-	
-	private final Vector<String> functions = new Vector<>(Arrays.asList(
-			"Check Salary", "Check Inbox", "Send Message"));
-
-	
-	
-	
 
 	
 	public Employee() {
@@ -38,7 +31,13 @@ public class Employee extends User {
 	}
 	
 	private void sendMessage() {
-
+		// which type of message you want to send??
+		// 1 - Simple 2 - Request 3 - Complaint
+		// message = MessageFactory.getMessage("Simple", this)
+		
+		//message.setReceiver()
+		//enter content of the message
+		// message.send()
 	}
 	
 	
