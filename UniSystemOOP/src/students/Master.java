@@ -2,7 +2,8 @@ package students;
 
 import research.Thesis;
 import java.util.*;
-import oop.NamedRunnable;
+
+import factories.NamedRunnable;
 
 public class Master extends GraduateStudent {
     

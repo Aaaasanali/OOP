@@ -21,12 +21,7 @@ public class GraduateStudent extends Student {
 	private Set<ResearchProject> projects;
 
     private Researcher supervisor;
-    
-
-
-    
    
-    
     
     private Set<ResearchProject> getProjects() {
         return this.projects;

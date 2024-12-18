@@ -7,6 +7,7 @@ import database.Data;
 import employees.Admin;
 import employees.Employee;
 import employees.Manager;
+import factories.NamedRunnable;
 import students.Master;
 import user.User;
 
@@ -51,10 +52,8 @@ public class Main {
 		while(current == null) {
 			current = login();
 		}
-		
+		Map<Integer, NamedRunnable> functionsMap = current.getFunctionsMap(0);
 		while(true) {	
-			
-	        Map<Integer, NamedRunnable> functionsMap = current.getFunctionsMap(0);
 	
 	        int i = 0;
 	        for (Map.Entry<Integer, NamedRunnable> entry : functionsMap.entrySet()) {
