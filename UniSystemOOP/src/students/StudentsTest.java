@@ -68,7 +68,7 @@ public class StudentsTest {
         
         
         //printList(Data.INSTANCE.users);
-        
+        Student student2 = new Student("john_doe", "password", "John", "Doe", "12345");
         
         
         Data.INSTANCE.addCourse(new Course("OOP", 2024, Semester.FALL));
@@ -85,18 +85,18 @@ public class StudentsTest {
         teachers.add(teacher2);
         teachers.add(teacher3);        
         
-        Course course3 = new Course("2", "ADS", 6, new Vector<>(), Semester.FALL, "2/0/1", 2024, teachers, CourseType.MAJOR, "descr", new Vector<>()); 
+        Course course3 = new Course("ADS", 2024, Semester.FALL);
+        course3.setTeachers(teachers);        
+        Data.INSTANCE.addCourse(course3);
         
         
         
-        
-        Student student2 = new Student("john_doe", "password", "John", "Doe", "12345");
-        
-//        student2.registerForCourse();
-//        
+        student2.registerForCourse();
 //        student2.viewTeacherInfo();
+//        
+//        System.out.println(course3.getTeachers());
         
-        System.out.println(course3.getTeachers());
+        student2.viewCourses();
         
     }
 }

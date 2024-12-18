@@ -110,8 +110,8 @@ public class Course implements Serializable {
         this.year = year;
     }
 
-    public List<Teacher> getTeachers() {
-        return teachers;
+    public Vector<Teacher> getTeachers() {
+        return this.teachers;
     }
 
     public void setTeachers(Vector<Teacher> teachers) {

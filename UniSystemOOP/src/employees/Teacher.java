@@ -183,10 +183,10 @@ public class Teacher extends Employee implements Researcher, Serializable {
 	    }
 
 	    // Build the string representation
-	    return "Teacher Login: " + this.getLogin() + "\n" +
-	           "Rating: " + this.rating + "\n" +
-	           "Courses: " + courseNames.toString() + "\n" +
-	           "Teacher Type: " + (this.teacherType != null ? this.teacherType.toString() : "Not assigned") + "\n";
+	    return "Teacher Login: " + this.getLogin() + " " +
+	           "Rating: " + this.rating + " " +
+	           "Courses: " + courseNames.toString() + " " +
+	           "Teacher Type: " + (this.teacherType != null ? this.teacherType.toString() : "Not assigned") + " ";
 	}
     
 	

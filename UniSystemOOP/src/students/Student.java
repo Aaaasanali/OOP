@@ -8,6 +8,7 @@ import documents.Course;
 import documents.Document;
 import documents.Mark;
 import documents.Semester;
+import employees.Teacher;
 import oop.NamedRunnable;
 import user.User;
 
@@ -137,7 +138,6 @@ public class Student extends User implements Serializable {
     
     
     
-    
 
     // Method to view teacher information for a specific course
     public void viewTeacherInfo() {
@@ -155,7 +155,14 @@ public class Student extends User implements Serializable {
                 course.getYear() == year &&
                 course.getSemester() == semester) {
                 // Print the teacher information if the course matches
-                System.out.println("Teacher for " + courseName + ": " + course.getTeachers());
+                System.out.println("Teachers for " + courseName + ": ");
+                if (course.getTeachers() != null && !course.getTeachers().isEmpty()) {
+                    for (Teacher teacher : course.getTeachers()) {
+                        System.out.println("- " + teacher);  // Will call Teacher's toString() method
+                    }
+                } else {
+                    System.out.println("No teachers assigned to this course.");
+                }
                 return;
             }
         }
@@ -220,16 +227,16 @@ public class Student extends User implements Serializable {
     
     public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
         Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
-        // Add student-specific actions
-        functions.put(startIndex++, new NamedRunnable(this::viewCourses, "View Courses"));
-        functions.put(startIndex++, new NamedRunnable(this::registerForCourse, "Register for Course"));										//Немного работает
-        functions.put(startIndex++, new NamedRunnable(this::viewTeacherInfo, "View Teacher Info"));
-        functions.put(startIndex++, new NamedRunnable(this::viewMarks, "View Marks"));
-        functions.put(startIndex++, new NamedRunnable(this::viewTranscript, "View Transcript"));
-        functions.put(startIndex++, new NamedRunnable(this::getTranscript, "Get Transcript"));
-        functions.put(startIndex++, new NamedRunnable(this::rateTeacher, "Rate Teacher"));
-        functions.put(startIndex++, new NamedRunnable(this::joinOrganization, "Join Organization"));
-        functions.put(startIndex++, new NamedRunnable(this::leaveOrganization, "Leave Organization"));
+        // Add student-specific actions	
+        functions.put(startIndex++, new NamedRunnable(this::viewCourses, "View Courses"));													//+
+        functions.put(startIndex++, new NamedRunnable(this::registerForCourse, "Register for Course"));										//+
+        functions.put(startIndex++, new NamedRunnable(this::viewTeacherInfo, "View Teacher Info"));											//+
+        functions.put(startIndex++, new NamedRunnable(this::viewMarks, "View Marks"));														//
+        functions.put(startIndex++, new NamedRunnable(this::viewTranscript, "View Transcript"));											//
+        functions.put(startIndex++, new NamedRunnable(this::getTranscript, "Get Transcript"));												//
+        functions.put(startIndex++, new NamedRunnable(this::rateTeacher, "Rate Teacher"));													//
+        functions.put(startIndex++, new NamedRunnable(this::joinOrganization, "Join Organization"));										//
+        functions.put(startIndex++, new NamedRunnable(this::leaveOrganization, "Leave Organization"));										//
 
    
         for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
