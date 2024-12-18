@@ -141,15 +141,21 @@ public abstract class User implements Serializable{
 		}
 	}
 	
-	public void logOut() {
+	public void exit() {
 		System.exit(0);
 	}
+	
+	public void logout() {
+		System.out.println("Logging out...");
+	}
+	
 	
 	public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex){
 		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
 		functions.put(startIndex++, new NamedRunnable(this::changePassword, "Change Password"));
         functions.put(startIndex++, new NamedRunnable(this::changeLanguage, "Change Language"));
-        functions.put(startIndex++, new NamedRunnable(this::logOut, "Logout"));
+//        functions.put(startIndex++, new NamedRunnable(this::logout, "Logout"));
+        functions.put(startIndex++, new NamedRunnable(this::exit, "Exit"));
 		return functions;
 	}
 	
