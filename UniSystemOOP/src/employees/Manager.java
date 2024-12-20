@@ -3,6 +3,7 @@ package employees;
 import java.io.Serializable;
 import java.util.*;
 
+<<<<<<< HEAD
 import communication.*;
 import database.*;
 import documents.*;
@@ -15,20 +16,52 @@ import oop.*;
 import research.*;
 import students.*;
 import user.*;
+=======
+<<<<<<< HEAD
+import database.Data;
+import students.Student;
+>>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP
 
 /**
 * @generated
 */
 public class Manager extends Employee implements Serializable {
+<<<<<<< HEAD
 	
 	Scanner n = new Scanner(System.in);
 	
+=======
+=======
+
+public class Manager extends Employee {
+>>>>>>> refs/remotes/origin/Alkash
+    
+>>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP
 	private final Vector<String> functions = new Vector<>(Arrays.asList("Create Student", "Create Someone", "Find Student"));
 	
     public Manager(String login, String password) {
     	super(login, password);
     }
     
+    
+    public void createStudent(String name) {
+        System.out.println("Student " + name + " has been created.");
+    }
+
+    public void findStudent(String name) {
+        System.out.println("Searching for student: " + name);
+    }
+    public void addFunction(String func) {
+        if (!functions.contains(func)) {
+            functions.add(func);
+        }
+    }
+
+    public void removeFunction(String func) {
+        functions.remove(func);
+    }
+    
+ 
     public String getFunc() {
     	String res = "";
     	for(String i : functions) {

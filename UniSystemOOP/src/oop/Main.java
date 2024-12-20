@@ -8,12 +8,30 @@ import documents.*;
 import employees.*;
 import Factories.*;
 import Factories.NamedRunnable;
+<<<<<<< HEAD
 import Interfaces.*;
 import news.*;
 import oop.*;
 import research.*;
 import students.*;
 import user.*;
+=======
+import database.Data;
+import documents.Course;
+import documents.Mark;
+import documents.Semester;
+import employees.Admin;
+import employees.Employee;
+import employees.Manager;
+import employees.Teacher;
+import students.Master;
+import students.Student;
+<<<<<<< HEAD
+import students.StudentOrganization;
+=======
+>>>>>>> refs/remotes/origin/Alkash
+import user.User;
+>>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP
 
 public class Main {
 
@@ -49,16 +67,67 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
+<<<<<<< HEAD
 		
+=======
+		
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP
 		User admin = new Admin("popa1", "popapassword");
+=======
+
 		
+<<<<<<< HEAD
 		Manager manager = new Manager("mngr", "mngr");
+=======
+	
+		User current = null;
+
+		User admin = new Admin("popa1", "popapassword");
+		User current1 = admin;
+
+		Master master = new Master();
+//		while(current == null) {
+//			current = login();
+//		}
+>>>>>>> refs/remotes/origin/Alkash
+>>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP
 		
+<<<<<<< HEAD
 		
 		
         Student student1 = new Student("stud", "pswrd", "Ben", "Doe");
         Student student2 = new Student("stud2", "parol", "John", "Chan");
         Master student3 = new Master("stud3", "log", "Alex", "Smith");
+=======
+<<<<<<< HEAD
+		
+        Student student1 = new Student("studentLogin", "studentPassword123", "Ben", "Doe");
+        Student student2 = new Student("john_doe", "password", "John", "Doe");
+        Master student3 = new Master("john_smith", "password123", "Alex", "Smith");
+=======
+		while(true) {	
+			
+	        Map<Integer, NamedRunnable> functionsMap = current1.getFunctionsMap(0);
+	
+	        int i = 0;
+	        for (Map.Entry<Integer, NamedRunnable> entry : functionsMap.entrySet()) {
+	            System.out.println((++i) + " - " + entry.getValue().getName());
+	        }
+	
+	        int choice = inp.nextInt()-1;
+	
+	        Runnable function = functionsMap.get(choice);
+	        if (function != null) {
+	            function.run();
+	        } else {
+	            System.out.println("Неверный ввод. Такой функции не существует.");
+	        }
+	        
+		}
+	}
+>>>>>>> refs/remotes/origin/Alkash
+>>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP
 
         Teacher teacher1 = new Teacher("tchr", "tchr", "Pakizar", "Shamoi");
         Teacher teacher2 = new Teacher("tchr2", "tchr2", "Alimzhan", "Amanov");
@@ -151,7 +220,6 @@ public class Main {
         
         
         User current = null;
-
         while (true) {
             // Login loop
             while (current == null) {

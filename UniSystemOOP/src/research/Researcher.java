@@ -1,8 +1,14 @@
 package research;
 
-public interface Researcher {
-	public void addResearchPaper();
-	public ResearchPaper getresearchPaper();
-	public int calculateHIndex();
-	public void printResearchPaper();
+import user.User;
+
+public class Researcher extends User{
+	
+	private 
+	
+	public Researcher() {}
+	
+	private void uploadResearch() {}
+	
+	
 }
