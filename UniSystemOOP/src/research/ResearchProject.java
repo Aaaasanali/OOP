@@ -1,11 +1,12 @@
 package research;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import students.GraduateStudent;
 
-public class ResearchProject {
+public class ResearchProject implements Serializable{
     
 
     private String topic;

@@ -1,7 +1,8 @@
 package students;
 
+import java.io.Serializable;
 
-public class Speciality {
+public class Speciality implements Serializable{
 
     private String name;
     

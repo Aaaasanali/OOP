@@ -124,7 +124,7 @@ public class Student extends User implements Serializable {
                 Course tempCourse = new Course(courseName, year, semester);
                 Course existingCourse = null;
 
-                for (Course course : data.courses) {
+                for (Course course : data.getAllCourses()) {
                     if (course.equals(tempCourse)) {
                         existingCourse = course;
                         break;

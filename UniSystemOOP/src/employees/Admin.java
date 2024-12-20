@@ -16,11 +16,10 @@ public class Admin extends User implements CreatingUsers, Serializable {
 
     public Admin(String login, String password) {
         super(login, password);
-        Data.addUser(this);
     }
 
     public void setUniName(String name) {
-        Data.setUniName(name);
+    	Data.INSTANCE.setUniName(name);
     }
 
     public void createUser() {
@@ -67,7 +66,7 @@ public class Admin extends User implements CreatingUsers, Serializable {
             }
         }
 
-        User current = Data.findUserById(id);
+        User current = Data.INSTANCE.findUserById(id);
         if (current == null) {
             System.out.println("User not found with the ID: " + id);
             return; // Exit if user not found
@@ -95,13 +94,13 @@ public class Admin extends User implements CreatingUsers, Serializable {
             }
         }
 
-        User current = Data.findUserById(id);
+        User current = Data.INSTANCE.findUserById(id);
         if (current == null) {
             System.out.println("User not found with the ID: " + id);
             return; // Exit if user not found
         }
 
-        Data.deleteUser(current);
+        Data.INSTANCE.deleteUser(current);
         System.out.println("User " + current.getId() + " has been deleted!");
     }
 

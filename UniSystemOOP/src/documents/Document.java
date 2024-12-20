@@ -1,9 +1,11 @@
 package documents;
 
+import java.io.Serializable;
+
 import employees.Teacher;
 import students.Student;
 
-public class Document {
+public class Document implements Serializable{
 
     private String name;
     

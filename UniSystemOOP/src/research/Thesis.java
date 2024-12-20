@@ -1,8 +1,9 @@
 package research;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Thesis {
+public class Thesis implements Serializable{
     
 
     private String title;
