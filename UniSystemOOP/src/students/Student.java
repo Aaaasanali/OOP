@@ -15,7 +15,7 @@ import oop.*;
 import research.*;
 import students.*;
 import user.*;
-import utils.InputPrompt;  // Importing the InputPrompt utility class
+import utils.InputPrompt;
 
 public class Student extends User implements Serializable {
 
@@ -92,7 +92,7 @@ public class Student extends User implements Serializable {
 
     // Function where you want to print the "quit" message once
     public void viewCourses() {
-        System.out.println("Type 'quit' at any time to exit.");
+
         if (courses.isEmpty()) {
             System.out.println("No courses registered yet.");
             return;
@@ -105,7 +105,7 @@ public class Student extends User implements Serializable {
     }
 
     public boolean registerForCourse() {
-        System.out.println("Type 'quit' at any time to exit.");
+    	System.out.println("Type 'quit' at any time to exit");
         while (true) {
             try {
                 String courseName = promptInput("Enter the name of the course you want to register for: ");
@@ -153,7 +153,7 @@ public class Student extends User implements Serializable {
     }
 
     public void viewTeacherInfo() {
-        System.out.println("Type 'quit' at any time to exit.");
+    	System.out.println("Type 'quit' at any time to exit");
         while (true) {
             try {
                 String courseName = promptInput("Enter the course name to view teacher info: ");
@@ -193,7 +193,7 @@ public class Student extends User implements Serializable {
     }
 
     public void viewMarks() {
-        System.out.println("Type 'quit' at any time to exit.");
+
         if (courses.isEmpty()) {
             System.out.println("No marks to display.");
             return;
@@ -209,17 +209,17 @@ public class Student extends User implements Serializable {
     }
 
     public void viewTranscript() {
-        System.out.println("Type 'quit' at any time to exit.");
+
         // Assuming you have some implementation for this
     }
 
     public void getTranscript() {
-        System.out.println("Type 'quit' at any time to exit.");
+
         // Assuming you have some implementation for this
     }
 
     public void rateTeacher() {
-        System.out.println("Type 'quit' at any time to exit.");
+    	System.out.println("Type 'quit' at any time to exit");
         while (true) {
             try {
                 String teacherName = promptInput("Enter the name of the teacher you want to rate: ");
@@ -284,7 +284,7 @@ public class Student extends User implements Serializable {
     }
 
     public void leaveOrganization() {
-        System.out.println("Type 'quit' at any time to exit.");
+    	System.out.println("Type 'quit' at any time to exit");
         String orgName = promptInput("Enter the name of the organization you want to leave: ");
         if (orgName == null) return;
 
@@ -306,7 +306,7 @@ public class Student extends User implements Serializable {
     }
 
     public void viewStudentOrganizations() {
-        System.out.println("Type 'quit' at any time to exit.");
+
         Data data = Data.INSTANCE;
         Vector<String> studentOrganizations = new Vector<>();
 
@@ -325,6 +325,39 @@ public class Student extends User implements Serializable {
             }
         }
     }
+    
+    
+    
+    
+    public void addMarkToCourse(Course course, int firstAttestation, int secondAttestation, int finalExam) {
+        // Create a new Mark object
+        Mark mark = new Mark(firstAttestation, secondAttestation, finalExam);
+
+        // Check if the course is already in the student's courses map
+        if (courses.containsKey(course)) {
+            // Update the mark if the course is already present
+            courses.put(course, mark);
+            System.out.println("Updated mark for course: " + course.getName());
+        } else {
+            // Add the course and the new mark if the course is not already in the map
+            courses.put(course, mark);
+            System.out.println("Added mark for course: " + course.getName());
+        }
+    } 
+    public void addMarkToCourse(Course course, Mark mark) {
+        // Check if the course is already in the student's courses map
+        if (courses.containsKey(course)) {
+            // Update the mark if the course is already present
+            courses.put(course, mark);
+            System.out.println("Updated mark for course: " + course.getName());
+        } else {
+            // Print an error message if the student is not registered for the course
+            System.out.println("You are not registered for this course: " + course.getName());
+        }
+    }
+    
+    
+    
 
     // The method for registering available actions in the map
     public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
