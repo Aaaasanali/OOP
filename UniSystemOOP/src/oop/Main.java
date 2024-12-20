@@ -19,6 +19,25 @@ public class Main {
 
 	private static Scanner inp = new Scanner(System.in);
 	
+	public static Runnable pickFunc(Map<Integer, NamedRunnable> functions) {
+		while(true) {
+			int i=1;
+			for (Map.Entry<Integer, NamedRunnable> entry : functions.entrySet()) {
+	            System.out.println((++i) + " - " + entry.getValue().getName());
+	        }
+
+	        int choice = inp.nextInt()-1;
+	        
+	        if(choice==-1) return null;
+
+	        Runnable function = functions.get(choice);
+	        if (function != null) {
+	            return function;
+	        }
+	        System.out.println("Invalid input. This function does not exist.");
+		}
+	}
+	
 	public static User login() {
 		while(true) {
 		System.out.println("Welcome To UniSystem2000ProMax??");

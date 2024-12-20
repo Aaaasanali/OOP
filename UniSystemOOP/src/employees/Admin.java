@@ -9,6 +9,7 @@ import java.util.*;
 import Factories.NamedRunnable;
 import Interfaces.CreatingUsers;
 import database.Data;
+import oop.Main;
 
 public class Admin extends User implements CreatingUsers, Serializable{
 	
@@ -21,6 +22,22 @@ public class Admin extends User implements CreatingUsers, Serializable{
     
     public void setUniName(String name) {
     	Data.setUniName(name);
+    }
+    
+    public void usersSettings() {
+    	Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
+    	int startIndex = 0;
+        functions.put(startIndex++, new NamedRunnable(this::createUser, "Create User"));
+        functions.put(startIndex++, new NamedRunnable(this::updateUser, "Update User"));
+        functions.put(startIndex++, new NamedRunnable(this::deleteUser, "Delete User"));
+        
+        while(true) {
+        	Runnable pick = Main.pickFunc(functions);
+            
+            if(pick == null) return;
+            
+            pick.run();
+        }
     }
     
     public void createUser() {
@@ -57,9 +74,7 @@ public class Admin extends User implements CreatingUsers, Serializable{
     
     public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
         Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
-        functions.put(startIndex++, new NamedRunnable(this::createUser, "Create User"));
-        functions.put(startIndex++, new NamedRunnable(this::updateUser, "Update User"));
-        functions.put(startIndex++, new NamedRunnable(this::deleteUser, "Delete User"));
+        functions.put(startIndex++, new NamedRunnable(this::usersSettings, "Users"));
         
         for(Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
         	functions.put(startIndex++, entry.getValue());

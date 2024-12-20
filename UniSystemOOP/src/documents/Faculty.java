@@ -4,81 +4,47 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Faculty implements Serializable{
-    
+import students.Student;
 
+import java.util.*;
+
+public class Faculty{
     private String name;
-    
-    private String id;
+    private String discription;
+    private final Vector<Student> students = new Vector<>();
+    private final Vector<Speciality> specialities = new Vector<>();
 
-    private String description;
+    public Faculty() {}
 
-    private Course courses;
+	public String getName() {
+		return name;
+	}
 
-    private Set<String> electiveRules;
-    
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    private String getName() {
-        return this.name;
-    }
+	public String getDiscription() {
+		return discription;
+	}
 
-    private void setName(String name) {
-        this.name = name;
-    }
-    
-    
+	public void setDiscription(String discription) {
+		this.discription = discription;
+	}
 
-    private String getId() {
-        return this.id;
-    }
+	public Vector<Student> getStudents() {
+		return students;
+	}
 
-    private void setId(String id) {
-        this.id = id;
-    }
+	public Vector<Speciality> getSpecialities() {
+		return specialities;
+	}
     
-    
-    
-    
-
-    private String getDescription() {
-        return this.description;
+    public void addSpeciality(Speciality s) {
+    	this.specialities.add(s);
     }
     
-
-    private void setDescription(String description) {
-        this.description = description;
+    public void addStudent(Student s) {
+    	this.students.add(s);
     }
-    
-    
- 
-    private Course getCourses() {
-        return this.courses;
-    }
-    
-
-    private void setCourses(Course courses) {
-        this.courses = courses;
-    }
-    
-
-    private Set<String> getElectiveRules() {
-        if (this.electiveRules == null) {
-            this.electiveRules = new HashSet<String>();
-        }
-        return this.electiveRules;
-    }
-    
-
-    private void addElectiveRule(String electiveRules) {
-        this.electiveRules.add(electiveRules);
-    }
-    
-    
-    
-
-
-} 
-    
-    
-
-    //                          Operations                                  
+}                                  
