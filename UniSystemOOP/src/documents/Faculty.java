@@ -14,7 +14,9 @@ public class Faculty{
     private final Vector<Student> students = new Vector<>();
     private final Vector<Speciality> specialities = new Vector<>();
 
-    public Faculty() {}
+    public Faculty(String name) {
+    	this.name = name;
+    }
 
 	public String getName() {
 		return name;

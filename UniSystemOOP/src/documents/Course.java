@@ -24,13 +24,19 @@ public class Course implements Serializable {
     }
     
     
-    public Course(String name, int year, Semester semester) {
+    public Course(String name, String id,int year, Semester semester) {
     	this.name = name;
     	this.year = year;
     	this.semester = semester;
+    	this.id = id;
     }
     
-
+    public Course(String name,int year, Semester semester) {
+    	this.name = name;
+    	this.year = year;
+    	this.semester = semester;
+    	this.id = id;
+    }
     
     public Course(String id, String name, int credits, String formula, int year, CourseType type, String description, Semester semester) {
 		  this.id = id;

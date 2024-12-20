@@ -31,6 +31,7 @@ public final class Data implements Serializable{
 
 	// Courses
 	public static Vector<Course> courses = new Vector<Course>();
+	
 	public static Vector<StudentOrganization> studentOrganizations = new Vector<StudentOrganization>();
 
 	public static List<News> news = new ArrayList<News>();
@@ -132,7 +133,6 @@ public final class Data implements Serializable{
 				v.add(u);
 			}
 		}
-
 		return v;
 	}
 
@@ -173,10 +173,9 @@ public final class Data implements Serializable{
 		}
 		return null;
 	}
-
-
-
-
-
+	
+	public static String getUniName() {
+		return universityName;
+	}
 
 }
