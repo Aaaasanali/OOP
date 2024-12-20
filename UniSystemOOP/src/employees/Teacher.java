@@ -15,7 +15,7 @@ import documents.Course;
 import students.Student;
 import user.User;
 
-public class Teacher extends Employee implements  Serializable {
+public class Teacher extends Employee implements Researcher, Serializable {
     
 
     public Teacher(String login, String password) {

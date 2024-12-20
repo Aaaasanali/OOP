@@ -3,21 +3,11 @@ package students;
 import java.io.Serializable;
 import java.util.*;
 
-<<<<<<< HEAD
 import communication.*;
 import database.*;
 import documents.*;
 import employees.*;
 import Factories.*;
-=======
-import database.Data;
-import documents.Course;
-import documents.Document;
-import documents.Mark;
-import documents.Semester;
-import documents.Speciality;
-import employees.Teacher;
->>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP
 import Factories.NamedRunnable;
 import Interfaces.*;
 import news.*;

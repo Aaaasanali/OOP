@@ -6,23 +6,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
-import Messages.Message;
 import user.User;
 
-<<<<<<< HEAD
 public class Employee extends User implements Serializable{
     
-=======
-public class Employee extends User {
-
->>>>>>> refs/remotes/origin/Alkash
 	public String department;
-	private List<Message> messageInbox;
-
+	private List<String> messageInbox;
+	
 	{
-		messageInbox = new ArrayList<Message>();
+		messageInbox = new ArrayList<String>();
 	}
-<<<<<<< HEAD
 	
 	
 	private final Vector<String> functions = new Vector<>(Arrays.asList("Check Salary", "Check Inbox"));
@@ -60,31 +53,4 @@ public class Employee extends User {
     	return "Employee is placed in " + department + " department";
     }
     
-=======
-
-	public Employee(String login, String password) {
-		super(login, password);
-	}
-
-	public String getDepartment() {
-		return department;
-	}
-
-	protected void setDepartment(String department) {
-		this.department = department;
-	}
-
-	private void sendMessage(User other, String message) {
-
-	}
-
-	private void checkInbox() {
-
-	}
-
-	public String toString() {
-		return "Employee is placed in " + department + " department";
-	}
-
->>>>>>> refs/remotes/origin/Alkash
 }

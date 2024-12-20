@@ -11,6 +11,8 @@ public class ResearchDecorator implements Researcher {
 
     private  papers;
     
+    
+
     private Teacher teacher;
     
 

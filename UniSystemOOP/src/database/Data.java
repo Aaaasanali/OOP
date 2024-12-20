@@ -3,7 +3,6 @@ package database;
 import java.io.*;
 import java.util.*;
 
-<<<<<<< HEAD
 import communication.*;
 import database.*;
 import documents.*;
@@ -16,23 +15,8 @@ import oop.*;
 import research.*;
 import students.*;
 import user.*;
-=======
-import documents.Course;
-import documents.Mark;
-import employees.Admin;
-<<<<<<< HEAD
-import employees.Teacher;
-import students.Student;
-import students.StudentOrganization;
-=======
-import employees.Dean;
->>>>>>> refs/remotes/origin/Alkash
-import user.Language;
-import user.User;
->>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP
 
 
-<<<<<<< HEAD
 public final class Data implements Serializable{
 
 	public static Vector<User> users = new Vector<User>();
@@ -63,52 +47,6 @@ public final class Data implements Serializable{
 				INSTANCE = read();
 			} catch (Exception e) {
 				e.printStackTrace();
-=======
-public final class Data {
-	
-	public static Language currentLanguage = Language.EN;
-	
-	private static String UniversityName;
-	private static final Vector<Admin> admins = new Vector<>();
-	
-	private static final Map<String, User> users = new HashMap<>();
-	private static List<Dean> deans = new ArrayList<>();
-
-	
-	private static final Stack<String> logs = new Stack<>();
-	
-	
-	public static void addUser(User a) {
-		users.put(a.getLogin(), a);
-	}
-	
-	public static void addUser(Admin a) {
-		admins.add(a);
-		users.put(a.getLogin(), a);
-	}
-	
-	public static void setUniName(String n) {
-		UniversityName = n;
-	}
-	
-	public static User findUserByLogin(String login) {
-		if(users.containsKey(login)) return users.get(login);
-		return null;
-	}
-	
-	public static User findUserById(String id) {
-		for(Map.Entry<String, User> entry : users.entrySet()) {
-			if(entry.getValue().getId().equals(id)) return entry.getValue();
-		}
-		return null;
-	}
-	
-	public static boolean deleteUser(User us) {
-		for(Map.Entry<String, User> entry : users.entrySet()) {
-			if(entry.getValue().equals(us)) {
-				users.remove(entry.getKey());
-				return true;
->>>>>>> refs/remotes/origin/Alkash
 			}
 		}
 		else INSTANCE = new Data();
@@ -156,7 +94,6 @@ public final class Data {
 		currentLanguage = l;
 	}
 
-<<<<<<< HEAD
 
 
 
@@ -242,9 +179,4 @@ public final class Data {
 
 
 
-=======
-	public static List<Dean> getDeans() {
-	    return deans;
-	}
->>>>>>> refs/remotes/origin/Alkash
 }
