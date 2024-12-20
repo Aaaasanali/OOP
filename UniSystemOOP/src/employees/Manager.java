@@ -29,7 +29,11 @@ public class Manager extends Employee implements Serializable {
     	super(login, password);
     }
     
-    public String getFunc() {
+    public Manager() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getFunc() {
     	String res = "";
     	for(String i : functions) {
     		res += i + "\n";

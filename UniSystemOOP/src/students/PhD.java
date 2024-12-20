@@ -27,7 +27,15 @@ public class PhD extends GraduateStudent implements Serializable {
 	
 
 
-    private Dissertation getDissertation() {
+    public PhD() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+
+
+	private Dissertation getDissertation() {
         return this.dissertation;
     }
 

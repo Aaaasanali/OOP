@@ -13,12 +13,13 @@ public class UserFactory {
 		case "PhD":
 			return new PhD();
 		case "Manager":
-			if(caller instanceof Admin || (caller instanceof Manager && ((Manager) caller).getType() == ManagerType.OR);
+//			if(caller instanceof Admin || (caller instanceof Manager && ((Manager) caller).getType() == ManagerType.OR);
 			return new Manager();
 		case "Teacher":
 			return new Teacher();
 		default:
 			System.out.println("Invalid User Type: " + type);
 		}
+		return null;
 	}
 }

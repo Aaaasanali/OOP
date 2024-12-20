@@ -10,6 +10,10 @@ public class Bachelor extends Student implements Serializable{
 
 	}
 
+	public Bachelor() {
+		// TODO Auto-generated constructor stub
+	}
+
 
     
 

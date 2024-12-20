@@ -30,6 +30,12 @@ public class Teacher extends Employee implements Researcher, Serializable {
 
 
     
+	public Teacher() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	private Vector<Course> courses;
     
 

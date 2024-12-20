@@ -21,7 +21,7 @@ public class Main {
 	
 	public static Runnable pickFunc(Map<Integer, NamedRunnable> functions) {
 		while(true) {
-			int i=1;
+			int i=0;
 			for (Map.Entry<Integer, NamedRunnable> entry : functions.entrySet()) {
 	            System.out.println((++i) + " - " + entry.getValue().getName());
 	        }

@@ -39,18 +39,23 @@ public class Admin extends User implements CreatingUsers, Serializable{
             pick.run();
         }
     }
-    
+
     public void createUser() {
     	
-    	System.out.println("Enter User Type: ");
-    	User current = UserFactory.getUser(n.next(), this);
+    	User current = null;
+    	while(current == null) {
+    		System.out.println("Enter User Type(0 to Cancel): ");
+    		String type = n.next();
+    		if(type.equals("0")) return;
+        	current = UserFactory.getUser(type, this);
+    	}
+    	
     	System.out.println("Enter Login: ");
     	String login = n.next();
     	current.setLogin(login);
         
     	System.out.println(current.getClass().getSimpleName() + " has been created\nlogin: " + current.getLogin() + "\npassword: " + current.getPassword());
     }
-    
     public void updateUser() {
     	System.out.println("Enter User id: ");
     	String id = n.next();
@@ -60,7 +65,6 @@ public class Admin extends User implements CreatingUsers, Serializable{
 
     	System.out.println("User " + current.getId() + "has been updated!");
     }
-    
     public void deleteUser() {
     	System.out.println("Enter User id: ");
     	String id = n.next();
@@ -71,6 +75,9 @@ public class Admin extends User implements CreatingUsers, Serializable{
     	System.out.println("User " + current.getId() + "has been deleted!");
     }
     
+    public void uniSettings() {
+    	
+    }
     
     public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
         Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
