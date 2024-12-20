@@ -184,6 +184,16 @@ public abstract class User implements Serializable{
 		System.out.println("Logging out...");
 	}
 	
+	private void tabs(Map<Integer, NamedRunnable> functions) {
+    	while(true) {
+        	Runnable pick = Main.pickFunc(functions);
+            
+            if(pick == null) return;
+            
+            pick.run();
+        }
+    }
+	
 	
 	public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex){
 		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
@@ -196,5 +206,7 @@ public abstract class User implements Serializable{
         functions.put(startIndex++, new NamedRunnable(this::exit, "Exit"));
 		return functions;
 	}
+	
+	
 	
 }

@@ -31,13 +31,7 @@ public class Admin extends User implements CreatingUsers, Serializable{
         functions.put(startIndex++, new NamedRunnable(this::updateUser, "Update User"));
         functions.put(startIndex++, new NamedRunnable(this::deleteUser, "Delete User"));
         
-        while(true) {
-        	Runnable pick = Main.pickFunc(functions);
-            
-            if(pick == null) return;
-            
-            pick.run();
-        }
+        tabs(functions);
     }
 
     public void createUser() {
