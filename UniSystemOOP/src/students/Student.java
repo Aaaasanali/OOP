@@ -15,7 +15,7 @@ import oop.*;
 import research.*;
 import students.*;
 import user.*;
-import utils.InputPrompt;  // Importing the InputPrompt utility class
+import utils.InputPrompt;
 
 public class Student extends User implements Serializable {
 
@@ -325,6 +325,39 @@ public class Student extends User implements Serializable {
             }
         }
     }
+    
+    
+    
+    
+    public void addMarkToCourse(Course course, int firstAttestation, int secondAttestation, int finalExam) {
+        // Create a new Mark object
+        Mark mark = new Mark(firstAttestation, secondAttestation, finalExam);
+
+        // Check if the course is already in the student's courses map
+        if (courses.containsKey(course)) {
+            // Update the mark if the course is already present
+            courses.put(course, mark);
+            System.out.println("Updated mark for course: " + course.getName());
+        } else {
+            // Add the course and the new mark if the course is not already in the map
+            courses.put(course, mark);
+            System.out.println("Added mark for course: " + course.getName());
+        }
+    } 
+    public void addMarkToCourse(Course course, Mark mark) {
+        // Check if the course is already in the student's courses map
+        if (courses.containsKey(course)) {
+            // Update the mark if the course is already present
+            courses.put(course, mark);
+            System.out.println("Updated mark for course: " + course.getName());
+        } else {
+            // Print an error message if the student is not registered for the course
+            System.out.println("You are not registered for this course: " + course.getName());
+        }
+    }
+    
+    
+    
 
     // The method for registering available actions in the map
     public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
