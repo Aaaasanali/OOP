@@ -26,7 +26,7 @@ public class Main {
 		System.out.print("Login: ");
 		String login = inp.next();
 		
-		User u = Data.findUserByLogin(login); 
+		User u = Data.INSTANCE.findUserByLogin(login); 
 		if(u == null) {
 			System.out.println("User's not found");
 			continue;
