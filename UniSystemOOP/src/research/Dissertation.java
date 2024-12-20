@@ -1,11 +1,12 @@
 package research;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
 * @generated
 */
-public class Dissertation {
+public class Dissertation implements Serializable{
     
 
     private String title;

@@ -16,6 +16,7 @@ import user.*;
 
 public class Main {
 
+
     private static Scanner inp = new Scanner(System.in);
 
     public static User login() {
@@ -31,7 +32,7 @@ public class Main {
             // Use validateLogin to validate the user login and password
             if (User.validateLogin(login, password)) {
                 // If login is valid, fetch the user by login
-                User u = Data.findUserByLogin(login);
+                User u = Data.INSTANCE.findUserByLogin(login);
                 System.out.println("Logging in...!");
                 return u; // Return the logged-in user
             } else {
@@ -40,10 +41,15 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) {
-
-        User admin = new Admin("popa1", "popapassword");
-        Manager manager = new Manager("mngr", "mngr");
+	
+	public static void main(String[] args) {
+		
+		User admin = new Admin("popa1", "popapassword");
+		
+		Manager manager = new Manager("mngr", "mngr");
+		
+		
+		
 
         Student student1 = new Student("stud", "pswrd", "Ben", "Doe");
         Student student2 = new Student("stud2", "parol", "John", "Chan");
