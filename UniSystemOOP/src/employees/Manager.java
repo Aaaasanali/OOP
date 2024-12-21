@@ -1,5 +1,6 @@
 package employees;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
@@ -21,6 +22,8 @@ import utils.InputPrompt;
  * @generated
  */
 public class Manager extends Employee implements Serializable {
+	
+	private static final long serialVersionUID = 9134543246365552631L;
 
     private transient final Scanner n = new Scanner(System.in);
     private final Vector<String> functions = new Vector<>(Arrays.asList("Create Student", "Create Someone", "Find Student"));
@@ -29,14 +32,14 @@ public class Manager extends Employee implements Serializable {
         super(login, password);
     }
 
-    public String getFunc() {
-        String res = "";
-        for (String i : functions) {
-            res += i + "\n";
-        }
-        res += super.getFunc();
-        return res;
-    }
+//    public String getFunc() {
+//        String res = "";
+//        for (String i : functions) {
+//            res += i + "\n";
+//        }
+//        res += super.getFunc();
+//        return res;
+//    }
 
     // Add a new student
     public void addStudent() {
@@ -54,7 +57,7 @@ public class Manager extends Employee implements Serializable {
         String password = InputPrompt.promptInput("Enter student's password: ");
         if (password == null) return;
 
-        Student newStudent = new Student(login, password, firstName, lastName);
+        Student newStudent = new Bachelor(login, password, firstName, lastName);
         Data.INSTANCE.addUser(newStudent);
 
         System.out.println("Student added successfully!");
@@ -190,6 +193,97 @@ public class Manager extends Employee implements Serializable {
     }
     
     
+    public boolean assignTeacherToCourse() {
+        System.out.println("Type 'quit' at any time to exit");
+        while (true) {
+            try {
+                // Prompt for the course name
+                String courseName = InputPrompt.promptInput("Enter the name of the course you want to assign a teacher to: ");
+                if (courseName == null) return false;
+
+                // Prompt for the course year
+                String yearInput = InputPrompt.promptInput("Enter the year for the course: ");
+                if (yearInput == null) return false;
+                int year = Integer.parseInt(yearInput);
+
+                // Prompt for the semester
+                String semesterInput = InputPrompt.promptInput("Enter the semester for the course (Fall/Spring/Summer): ");
+                if (semesterInput == null) return false;
+                Semester semester = Semester.valueOf(semesterInput.toUpperCase());
+
+                // Fetch all available courses from Data
+                Data data = Data.INSTANCE;
+
+                // Search for the matching course
+                Course tempCourse = new Course(courseName, year, semester);
+                Course existingCourse = null;
+
+                for (Course course : data.getAllCourses()) {
+                    if (course.equals(tempCourse)) {
+                        existingCourse = course;
+                        break;
+                    }
+                }
+
+                if (existingCourse == null) {
+                    System.out.println("No such course found in the system.");
+                    return false;
+                }
+
+                // Prompt for the teacher's first name
+                String firstName = InputPrompt.promptInput("Enter the first name of the teacher you want to assign: ");
+                if (firstName == null) return false;
+
+                // Prompt for the teacher's surname
+                String lastName = InputPrompt.promptInput("Enter the surname of the teacher you want to assign: ");
+                if (lastName == null) return false;
+
+                // Search for the teacher in the system
+                Teacher foundTeacher = null;
+                for (Teacher teacher : data.getAllTeachers()) {
+                    if (teacher.getName().equalsIgnoreCase(firstName) && teacher.getSurname().equalsIgnoreCase(lastName)) {
+                        foundTeacher = teacher;
+                        break;
+                    }
+                }
+
+                if (foundTeacher == null) {
+                    System.out.println("No such teacher found in the system.");
+                    return false;
+                }
+
+                // Check if the teacher is already assigned to this course
+                if (existingCourse.getTeachers().contains(foundTeacher)) {
+                    System.out.println("Teacher is already assigned to this course.");
+                    return false;
+                }
+
+                // Assign the teacher to the course and the course to the teacher
+                existingCourse.getTeachers().add(foundTeacher);
+                foundTeacher.getCourses().add(existingCourse);
+
+                // Print debug information
+                System.out.println("Teacher's courses after assignment: " + foundTeacher.getCourses());
+                System.out.println("Course's teachers after assignment: " + existingCourse.getTeachers());
+
+                System.out.println("Successfully assigned " + foundTeacher.getName() + " " + foundTeacher.getSurname() + " to the course: " + courseName);
+
+                // Save changes to data
+                Data.write();
+                return true;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid year. Please enter a valid number.");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid semester value. Please enter Fall, Spring, or Summer.");
+            } catch (IOException e) {
+                System.out.println("Failed to save changes. Try again.");
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    
+    
 
     // Function map for the Manager
     public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
@@ -200,7 +294,9 @@ public class Manager extends Employee implements Serializable {
         functions.put(startIndex++, new NamedRunnable(this::addCourse, "Add new course"));
 //      functions.put(startIndex++, new NamedRunnable(this::approveStudentRegistration, "Approve student registration"));
 //      functions.put(startIndex++, new NamedRunnable(this::registerStudentToCourse, "Register student to course"));
-
+        functions.put(startIndex++, new NamedRunnable(this::assignTeacherToCourse, "Assign teacher to course"));
+        
+        
         // Add parent class functions
         for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
             functions.put(startIndex++, entry.getValue());

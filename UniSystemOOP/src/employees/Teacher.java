@@ -18,15 +18,8 @@ import user.*;
 import utils.InputPrompt;
 
 public class Teacher extends Employee implements Researcher, Serializable {
-
-    public Teacher(String login, String password) {
-        super(login, password);
-        // TODO Auto-generated constructor stub
-    }
-
-    public Teacher(String login, String password, String name, String surname) {
-        super(login, password, name, surname);
-    }
+	
+	private static final long serialVersionUID = -6261577719787557070L;
 
     private Vector<Course> courses;
 
@@ -37,7 +30,20 @@ public class Teacher extends Employee implements Researcher, Serializable {
 
     private Set<Document> documents;
 
-    private Vector<Course> getCourses() {
+    
+    
+    public Teacher(String login, String password) {
+        super(login, password);
+        this.courses = new Vector<Course>();
+        // TODO Auto-generated constructor stub
+    }
+
+    public Teacher(String login, String password, String name, String surname) {
+        super(login, password, name, surname);
+        this.courses = new Vector<Course>();
+    }
+   
+    public Vector<Course> getCourses() {
         if (this.courses == null) {
             this.courses = new Vector<Course>();
         }
@@ -62,13 +68,13 @@ public class Teacher extends Employee implements Researcher, Serializable {
 
     public void updateAverageRating() {
         if (ratingMarks.isEmpty()) {
-            rating = 0.0;  // No ratings yet, so the average is 0
+            rating = 0.0;  
         } else {
             double sum = 0;
             for (Double mark : ratingMarks) {
                 sum += mark;
             }
-            rating = sum / ratingMarks.size();  // Calculate the average rating
+            rating = sum / ratingMarks.size();  
         }
     }
 
@@ -91,6 +97,12 @@ public class Teacher extends Employee implements Researcher, Serializable {
         this.documents = documents;
     }
 
+    
+    
+    
+    
+    
+    
     
     
     public void putMark() {
@@ -184,13 +196,82 @@ public class Teacher extends Employee implements Researcher, Serializable {
 
     
     
-    public void viewStudentsInfo() { 
-        //NEED TO REALIZE
+    
+    
+    
+    
+    public void viewStudentsInfo() {
+        if (courses == null || courses.isEmpty()) {
+            System.out.println("You are not assigned to any courses.");
+            return;
+        }
+
+        System.out.println("Select a course to view student information:");
+        for (int i = 0; i < courses.size(); i++) {
+            System.out.printf("%d. %s\n", i + 1, courses.get(i).getName());
+        }
+
+        int choice = InputPrompt.promptIntInput("Enter course number (or 0 to cancel): ");
+        if (choice <= 0 || choice > courses.size()) {
+            System.out.println("Cancelled or invalid choice.");
+            return;
+        }
+
+        Course selectedCourse = courses.get(choice - 1);
+
+        System.out.println("Students enrolled in " + selectedCourse.getName() + ":");
+        if (selectedCourse.getEnrolledStudents().isEmpty()) {
+            System.out.println("No students are enrolled in this course.");
+        } else {
+            for (Student student : selectedCourse.getEnrolledStudents()) {
+                System.out.println(student); // Assuming Student has a meaningful toString() method
+            }
+        }
     }
 
-    public void sentComplaint() {
-        // Functionality yet to be implemented
+    
+    
+    
+    public void viewCourses() {
+        if (courses == null || courses.isEmpty()) {
+            System.out.println("No courses are registered for this teacher.");
+            return;
+        }
+
+        // Print courses if the list is not empty
+        System.out.println("Courses for this teacher:");
+        for (Course course : courses) {
+            System.out.println(course.getName());  // Assuming Course has a getName() method
+        }
     }
+    
+    
+    
+    
+    public void sentComplaint() {
+        System.out.println("Please enter your complaint:");
+        String complaintText = InputPrompt.promptInput("Complaint: ");  // A method to capture user input
+        if (complaintText == null || complaintText.isEmpty()) {
+            System.out.println("Complaint not sent. No text provided.");
+            return;
+        }
+
+        System.out.println("Set urgency level (LOW, MEDIUM, HIGH):");
+        String urgencyInput = InputPrompt.promptInput("Urgency: ");
+        UrgencyLevel urgencyLevel;
+        try {
+            urgencyLevel = UrgencyLevel.valueOf(urgencyInput.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid urgency level. Defaulting to LOW.");
+            urgencyLevel = UrgencyLevel.LOW;
+        }
+
+        Complaint complaint = new Complaint(this.getName(), complaintText, urgencyLevel);
+        Dean.complaints.add(complaint);
+
+        System.out.println("Complaint sent successfully!");
+    }
+
 
     @Override
     public void addResearchPaper() {
@@ -238,6 +319,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
     public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
         Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
         // Add student-specific actions    
+        functions.put(startIndex++, new NamedRunnable(this::viewCourses, "View Courses"));  
         functions.put(startIndex++, new NamedRunnable(this::putMark, "Put mark"));
         functions.put(startIndex++, new NamedRunnable(this::printResearchPaper, "Print research paper"));
         functions.put(startIndex++, new NamedRunnable(this::viewStudentsInfo, "View students info"));
