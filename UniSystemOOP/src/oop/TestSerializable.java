@@ -56,8 +56,8 @@ public class TestSerializable {
 			
 			
 
-	        Student student1 = new Student("stud", "pswrd", "Ben", "Doe");
-	        Student student2 = new Student("stud2", "parol", "John", "Chan");
+			Bachelor student = new Bachelor("stud", "pswrd", "Ben", "Doe");
+	        Master student2 = new Master("stud2", "parol", "John", "Chan");
 	        Master student3 = new Master("stud3", "log", "Alex", "Smith");
 
 	        Teacher teacher1 = new Teacher("tchr", "tchr", "Pakizar", "Shamoi");
@@ -97,7 +97,7 @@ public class TestSerializable {
 	        // Adding users and data to the system
 //	        Data.INSTANCE.addUser(admin);
 //	        Data.INSTANCE.addUser(manager);
-	        Data.INSTANCE.addUser(student1);
+	        Data.INSTANCE.addUser(student);
 //	        Data.INSTANCE.addUser(student2);
 //	        Data.INSTANCE.addUser(student3);
 //	        Data.INSTANCE.addUser(teacher1);

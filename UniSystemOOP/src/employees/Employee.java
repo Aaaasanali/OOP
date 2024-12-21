@@ -3,13 +3,18 @@ package employees;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
+import Factories.NamedRunnable;
 import user.User;
 
 public class Employee extends User implements Serializable{
     
+	private static final long serialVersionUID = -4055598320012630398L;
+	
 	public String department;
 	private List<String> messageInbox;
 	
@@ -36,18 +41,35 @@ public class Employee extends User implements Serializable{
     	this.department = department;
     }
     
-    private void sendMessage(User other, String message) {
+    private void sendMessage() {
+    	//User other, String message
+    	System.out.println("In process......");
     	
     }
     
-    public String getFunc() {
-    	String res = "";
-    	for(String i : functions) {
-    		res += i + "\n";
-    	}
-    	res += super.getFunc();
-    	return res;
+//    public String getFunc() {
+//    	String res = "";
+//    	for(String i : functions) {
+//    		res += i + "\n";
+//    	}
+//    	res += super.getFunc();
+//    	return res;
+//    }
+//    
+    
+    public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
+        Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
+        functions.put(startIndex++, new NamedRunnable(this::sendMessage, "Send message"));
+        
+        
+        for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
+            functions.put(startIndex++, entry.getValue());
+        }
+        
+        return functions;
     }
+    
+    
     
     public String toString() {
     	return "Employee is placed in " + department + " department";

@@ -198,7 +198,7 @@ public abstract class User implements Serializable {
 
                 // Now serialize the Data.INSTANCE object to persist the updated state
                 try {
-                    Data.write();  // Save the updated data to the file
+                    Data.write();  
                     System.out.println("Password updated successfully.");
                 } catch (IOException e) {
                     e.printStackTrace();

@@ -46,9 +46,9 @@ public class Main {
 	public static void main(String[] args) {
 	
 		
-		//NOW ALL THIS IN daatabse.Generating FILE!!!
+		//Now all of this should be in daatabse.Generating file!
 		
-		/*
+		
 //		System.out.println("Working Directory: " + new File(".").getAbsolutePath());
 //		Data.INSTANCE.write();
 		
@@ -130,7 +130,7 @@ public class Main {
         // Put mark log to student Register logout - log to teacher Put mark logout - log to student then see marks
         
 		
-		*/
+		
 		
         User current = null;
 
