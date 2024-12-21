@@ -105,25 +105,30 @@ public abstract class Student extends User implements Serializable {
     }
 
     public boolean registerForCourse() {
-    	System.out.println("Type 'quit' at any time to exit");
+        System.out.println("Type 'quit' at any time to exit");
         while (true) {
             try {
+                // Prompt user for course name
                 String courseName = promptInput("Enter the name of the course you want to register for: ");
-                if (courseName == null) return false;
+                if (courseName == null || courseName.equalsIgnoreCase("quit")) return false;
 
+                // Prompt user for the course year
                 String yearInput = promptInput("Enter the year for the course: ");
-                if (yearInput == null) return false;
+                if (yearInput == null || yearInput.equalsIgnoreCase("quit")) return false;
                 int year = Integer.parseInt(yearInput);
 
+                // Prompt user for the course semester
                 String semesterInput = promptInput("Enter the semester for the course (Fall/Spring/Summer): ");
-                if (semesterInput == null) return false;
+                if (semesterInput == null || semesterInput.equalsIgnoreCase("quit")) return false;
                 Semester semester = Semester.valueOf(semesterInput.toUpperCase());
 
                 Data data = Data.INSTANCE;
 
+                // Create a temporary course to search for a matching course in the system
                 Course tempCourse = new Course(courseName, year, semester);
                 Course existingCourse = null;
 
+                // Search for the existing course
                 for (Course course : data.getAllCourses()) {
                     if (course.equals(tempCourse)) {
                         existingCourse = course;
@@ -131,19 +136,23 @@ public abstract class Student extends User implements Serializable {
                     }
                 }
 
+                // If no such course is found in the system, show an error message
                 if (existingCourse == null) {
                     System.out.println("No such course found in the system.");
                     return false;
                 }
 
+                // If the student is not already registered for the course, register them
                 if (!courses.containsKey(existingCourse)) {
-                    courses.put(existingCourse, new Mark(0, 0, 0));
+                    courses.put(existingCourse, new Mark(0, 0, 0));  // Register the student with a default Mark
+                    existingCourse.addStudent(this);  // Enroll the student in the course
                     System.out.println("Successfully registered for course: " + courseName);
                     return true;
                 } else {
                     System.out.println("You are already registered for the course: " + courseName);
                     return false;
                 }
+
             } catch (NumberFormatException e) {
                 System.out.println("Invalid year. Please enter a valid number.");
             } catch (IllegalArgumentException e) {
@@ -151,7 +160,9 @@ public abstract class Student extends User implements Serializable {
             }
         }
     }
-
+    
+    
+    
     public void viewTeacherInfo() {
     	System.out.println("Type 'quit' at any time to exit");
         while (true) {

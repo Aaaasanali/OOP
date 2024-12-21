@@ -21,8 +21,6 @@ public class Teacher extends Employee implements Researcher, Serializable {
 	
 	private static final long serialVersionUID = -6261577719787557070L;
 
-    private Vector<Course> courses;
-
     private double rating;
     private Vector<Double> ratingMarks = new Vector<>();
 
@@ -30,35 +28,19 @@ public class Teacher extends Employee implements Researcher, Serializable {
 
     private Set<Document> documents;
 
-    
-    
     public Teacher(String login, String password) {
         super(login, password);
-        this.courses = new Vector<Course>();
-        // TODO Auto-generated constructor stub
     }
 
     public Teacher(String login, String password, String name, String surname) {
         super(login, password, name, surname);
-        this.courses = new Vector<Course>();
     }
    
-    public Vector<Course> getCourses() {
-        if (this.courses == null) {
-            this.courses = new Vector<Course>();
-        }
-        return this.courses;
-    }
-
-    private void addCourses(Course course) {
-        this.courses.add(course);
-    }
-
-    private double getRating() {
+    public double getRating() {
         return this.rating;
     }
 
-    private void setRating(double rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
@@ -78,11 +60,11 @@ public class Teacher extends Employee implements Researcher, Serializable {
         }
     }
 
-    private TeacherTitle getTeacherType() {
+    public TeacherTitle getTeacherType() {
         return this.teacherType;
     }
 
-    private void setTeacherType(TeacherTitle teacherType) {
+    public void setTeacherType(TeacherTitle teacherType) {
         this.teacherType = teacherType;
     }
 
@@ -94,17 +76,9 @@ public class Teacher extends Employee implements Researcher, Serializable {
     }
 
     public void addDocument(Document document) {
-        this.documents = documents;
+        this.documents.add(document);
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
     public void putMark() {
         System.out.println("Type 'quit' at any time to exit");
 
@@ -155,7 +129,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
             return;
         }
 
-        // Step 4: Find the course
+        // Step 4: Find the course in Data (instead of Teacher's courses)
         Course targetCourse = null;
         for (Course course : Data.INSTANCE.getAllCourses()) {
             if (course.getName().equalsIgnoreCase(courseName) &&
@@ -194,30 +168,33 @@ public class Teacher extends Employee implements Researcher, Serializable {
         System.out.println("Marks updated successfully for student: " + studentName + " " + studentSurname);
     }
 
-    
-    
-    
-    
-    
-    
     public void viewStudentsInfo() {
-        if (courses == null || courses.isEmpty()) {
+        // Fetch the courses assigned to the teacher from Data
+        List<Course> teacherCourses = new ArrayList<>();
+        for (Course course : Data.INSTANCE.getAllCourses()) {
+            if (course.getTeachers().contains(this)) {
+                teacherCourses.add(course);
+            }
+        }
+
+        if (teacherCourses.isEmpty()) {
             System.out.println("You are not assigned to any courses.");
             return;
         }
 
         System.out.println("Select a course to view student information:");
-        for (int i = 0; i < courses.size(); i++) {
-            System.out.printf("%d. %s\n", i + 1, courses.get(i).getName());
+        for (int i = 0; i < teacherCourses.size(); i++) {
+            Course course = teacherCourses.get(i);
+            System.out.printf("%d. %s (Year: %d, Semester: %s)\n", i + 1, course.getName(), course.getYear(), course.getSemester());
         }
 
         int choice = InputPrompt.promptIntInput("Enter course number (or 0 to cancel): ");
-        if (choice <= 0 || choice > courses.size()) {
+        if (choice <= 0 || choice > teacherCourses.size()) {
             System.out.println("Cancelled or invalid choice.");
             return;
         }
 
-        Course selectedCourse = courses.get(choice - 1);
+        Course selectedCourse = teacherCourses.get(choice - 1);
 
         System.out.println("Students enrolled in " + selectedCourse.getName() + ":");
         if (selectedCourse.getEnrolledStudents().isEmpty()) {
@@ -229,23 +206,18 @@ public class Teacher extends Employee implements Researcher, Serializable {
         }
     }
 
-    
-    
-    
     public void viewCourses() {
-        if (courses == null || courses.isEmpty()) {
+        if (Data.INSTANCE.getAllCourses().isEmpty()) {
             System.out.println("No courses are registered for this teacher.");
             return;
         }
 
-        // Print courses if the list is not empty
+        // Print courses from Data
         System.out.println("Courses for this teacher:");
-        for (Course course : courses) {
+        for (Course course : Data.INSTANCE.getAllCourses()) {
             System.out.println(course.getName());  // Assuming Course has a getName() method
         }
     }
-    
-    
     
     
     public void sentComplaint() {
@@ -271,7 +243,8 @@ public class Teacher extends Employee implements Researcher, Serializable {
 
         System.out.println("Complaint sent successfully!");
     }
-
+    
+    
 
     @Override
     public void addResearchPaper() {
@@ -297,25 +270,12 @@ public class Teacher extends Employee implements Researcher, Serializable {
 
     @Override
     public String toString() {
-        // Get the teacher's courses as a list of course names (you can modify this to include other details if needed)
-        StringBuilder courseNames = new StringBuilder();
-        if (this.courses != null && !this.courses.isEmpty()) {
-            for (Course course : this.courses) {
-                courseNames.append(course.getName()).append(", ");
-            }
-            // Remove last comma and space
-            courseNames.setLength(courseNames.length() - 2);
-        } else {
-            courseNames.append("No courses assigned");
-        }
-
-        // Build the string representation
         return "Teacher Name: " + this.getName() + " " + this.getSurname() + ", " +
                "Rating: " + this.rating + ", " +
-               "Teacher Type: " + (this.teacherType != null ? this.teacherType.toString() : "Not assigned") + " ";
+               "Teacher Type: " + (this.teacherType != null ? this.teacherType.toString() : "Not assigned");
     }
 
-    //                          Operations                                  
+    // Operations                                  
     public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
         Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
         // Add student-specific actions    
@@ -324,7 +284,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
         functions.put(startIndex++, new NamedRunnable(this::printResearchPaper, "Print research paper"));
         functions.put(startIndex++, new NamedRunnable(this::viewStudentsInfo, "View students info"));
         functions.put(startIndex++, new NamedRunnable(this::sentComplaint, "Sent complaint"));
-   
+        
         for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
             functions.put(startIndex++, entry.getValue());
         }

@@ -149,7 +149,7 @@ public class Manager extends Employee implements Serializable {
     
     
     public void approveStudentRegistration() {
-        
+        System.out.println("In process.....");
     }
     
     
@@ -193,6 +193,7 @@ public class Manager extends Employee implements Serializable {
     }
     
     
+   
     public boolean assignTeacherToCourse() {
         System.out.println("Type 'quit' at any time to exit");
         while (true) {
@@ -258,14 +259,11 @@ public class Manager extends Employee implements Serializable {
                     return false;
                 }
 
-                // Assign the teacher to the course and the course to the teacher
+                // Assign the teacher to the course
                 existingCourse.getTeachers().add(foundTeacher);
-                foundTeacher.getCourses().add(existingCourse);
 
                 // Print debug information
-                System.out.println("Teacher's courses after assignment: " + foundTeacher.getCourses());
                 System.out.println("Course's teachers after assignment: " + existingCourse.getTeachers());
-
                 System.out.println("Successfully assigned " + foundTeacher.getName() + " " + foundTeacher.getSurname() + " to the course: " + courseName);
 
                 // Save changes to data
@@ -281,7 +279,6 @@ public class Manager extends Employee implements Serializable {
             }
         }
     }
-    
     
     
 
