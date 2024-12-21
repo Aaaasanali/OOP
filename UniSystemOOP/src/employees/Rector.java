@@ -1,41 +1,32 @@
 package employees;
 
-import java.io.*;
+import java.io.Serializable;
 import java.util.*;
 
+
 import Factories.NamedRunnable;
-import documents.Complaint;
 import documents.Request;
 import utils.InputPrompt;
 
-public class Dean extends Employee implements Serializable{
+public class Rector extends Employee implements Serializable {
 
-    public static Vector<Complaint> complaints = new Vector<>();
-    
-    private static List<Request> approvedRequests = new ArrayList<>();
+	private static List<Request> approvedRequests = new ArrayList<>();
 
-
-    public Dean(String login, String password) {
-        super(login, password);			
-        // TODO Auto-generated constructor stub
-    }
-
-    public static void getComplaints() {
-        if (complaints.isEmpty()) {
-            System.out.println("No complaints have been filed.");
-        } else {
-            for (Complaint complaint : complaints) {
-                System.out.println(complaint);
-            }
-        }
-    }
-    
-    public static List<Request> getApprovedRequests() {
+	
+	public Rector(String login, String password) {
+		super(login, password);
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+	public static List<Request> getApprovedRequests() {
         return approvedRequests;
     }
-    
-    
-    public void signRequests() {
+	
+	
+	
+	public void signRequests() {
         List<Request> pendingRequests = Employee.getRequests();
 
         if (pendingRequests.isEmpty()) {
@@ -74,15 +65,14 @@ public class Dean extends Employee implements Serializable{
             }
         }
     }
-    
-    
+		
 
-    public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
+	
+	public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
         Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
         // Reference the static method with the class name
-        functions.put(startIndex++, new NamedRunnable(Dean::getComplaints, "Get Complaints"));
+        
         functions.put(startIndex++, new NamedRunnable(this::signRequests, "Sign Request"));
-
 
         for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
             functions.put(startIndex++, entry.getValue());
@@ -90,4 +80,5 @@ public class Dean extends Employee implements Serializable{
 
         return functions;
     }
+
 }

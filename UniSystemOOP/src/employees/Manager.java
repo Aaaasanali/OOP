@@ -24,9 +24,9 @@ import utils.InputPrompt;
 public class Manager extends Employee implements Serializable {
 	
 	private static final long serialVersionUID = 9134543246365552631L;
+    
+    private static List<Request> managerRequests = new ArrayList<>();
 
-    private transient final Scanner n = new Scanner(System.in);
-    private final Vector<String> functions = new Vector<>(Arrays.asList("Create Student", "Create Someone", "Find Student"));
 
     public Manager(String login, String password) {
         super(login, password);
@@ -40,7 +40,19 @@ public class Manager extends Employee implements Serializable {
 //        res += super.getFunc();
 //        return res;
 //    }
-
+    
+    
+    public static List<Request> getManagerRequests() {
+        return managerRequests;
+    }
+    
+    
+    public static void receiveRequest(Request request) {
+        managerRequests.add(request);
+        System.out.println("Request received by Manager: " + request);
+    }
+    
+    
     // Add a new student
     public void addStudent() {
         System.out.println("Type 'quit' at any time to exit");
