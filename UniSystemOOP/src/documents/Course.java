@@ -6,7 +6,7 @@ import java.util.*;
 import employees.Teacher;
 
 public class Course implements Serializable {
-    
+	
     private String id;
     private String name;
     private Integer credits;
@@ -190,4 +190,6 @@ public class Course implements Serializable {
         
         return year.equals(course.year) && name.equals(course.name) && semester.equals(this.semester);  
     }
+    
+    
 }

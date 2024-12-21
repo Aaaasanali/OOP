@@ -129,7 +129,7 @@ public class Admin extends User implements CreatingUsers, Serializable {
 	public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
 		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
 		functions.put(startIndex++, new NamedRunnable(this::usersSettings, "Users"));
-		functions.put(startIndex++, new NamedRunnable(this::usersSettings, "University"));
+		functions.put(startIndex++, new NamedRunnable(this::uniSettings, "University"));
 		for(Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
 			functions.put(startIndex++, entry.getValue());
 		}
