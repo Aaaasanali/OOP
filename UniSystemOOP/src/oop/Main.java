@@ -17,25 +17,17 @@ import user.*;
 
 public class Main {
 
-	private static Scanner inp = new Scanner(System.in);
+	private static transient Scanner inp = new Scanner(System.in);
 	
 	public static Runnable pickFunc(Map<Integer, NamedRunnable> functions) {
 		while(true) {
 			int i=0;
 			for (Map.Entry<Integer, NamedRunnable> entry : functions.entrySet()) {
 	            System.out.println((++i) + " - " + entry.getValue().getName());
-	        }
-
-<<<<<<< HEAD
+			}
 	        int choice = inp.nextInt()-1;
 	        
 	        if(choice==-1) return null;
-=======
-
-	private static transient Scanner inp = new Scanner(System.in);
->>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP/
-
-<<<<<<< HEAD
 	        Runnable function = functions.get(choice);
 	        if (function != null) {
 	            return function;
@@ -43,45 +35,6 @@ public class Main {
 	        System.out.println("Invalid input. This function does not exist.");
 		}
 	}
-	
-	public static User login() {
-		while(true) {
-		System.out.println("Welcome To UniSystem2000ProMax??");
-		
-		System.out.print("Login: ");
-		String login = inp.next();
-		
-		User u = Data.findUserByLogin(login); 
-		if(u == null) {
-			System.out.println("User's not found");
-			continue;
-		}
-		
-		System.out.print("Password: ");
-		String password = inp.next();
-		
-		while(password.hashCode() != u.getPassword()) {
-			System.out.println("0 - Back");
-			System.out.print("Password: ");
-			password = inp.next();
-			if(password.equals("0")) return null;
-			if(password.equals(u.getPassword())) break;
-			System.out.print("Incorrect Password");
-		}
-		System.out.println("Loginning...!");
-		return u;
-		}
-	}
-	
-	public static void main(String[] args) {
-		
-		User admin = new Admin("popa1", "popapassword");
-		
-		Manager manager = new Manager("mngr", "mngr");
-		
-        Student student1 = new Student("stud", "pswrd", "Ben", "Doe");
-        Student student2 = new Student("stud2", "parol", "John", "Chan");
-=======
     public static User login() {
         while (true) {
             System.out.println("Welcome To UniSystem2000ProMax??");
@@ -119,7 +72,6 @@ public class Main {
 
 		Bachelor student1 = new Bachelor("stud", "pswrd", "Ben", "Doe");
 		Bachelor student2 = new Bachelor("stud2", "parol", "John", "Chan");
->>>>>>> branch 'master' of https://github.com/Aaaasanali/OOP/
         Master student3 = new Master("stud3", "log", "Alex", "Smith");
 
         Teacher teacher1 = new Teacher("tchr", "tchr", "Pakizar", "Shamoi");
