@@ -22,7 +22,7 @@ import utils.InputPrompt;
  */
 public class Manager extends Employee implements Serializable {
 
-    private final Scanner n = new Scanner(System.in);
+    private transient final Scanner n = new Scanner(System.in);
     private final Vector<String> functions = new Vector<>(Arrays.asList("Create Student", "Create Someone", "Find Student"));
 
     public Manager(String login, String password) {

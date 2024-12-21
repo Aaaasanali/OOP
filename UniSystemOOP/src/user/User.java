@@ -107,6 +107,11 @@ public abstract class User implements Serializable {
     
     
 	private void save() throws IOException {
+		
+		if (InputPrompt.scanner != null) {
+			InputPrompt.scanner.close(); // Close the Scanner to avoid resource leakage
+	    }
+		
 		Data.write();
 	}
 	

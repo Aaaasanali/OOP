@@ -70,23 +70,27 @@ public final class Data implements Serializable{
 	    }
 
 	    try (ObjectInputStream oin = new ObjectInputStream(new FileInputStream(dataFile))) {
-	        return (Data) oin.readObject();
+	        System.out.println("Reading data from file...");
+	        Data instance = (Data) oin.readObject();
+	        System.out.println("Data successfully read.");
+	        return instance;
 	    } catch (IOException | ClassNotFoundException e) {
 	        e.printStackTrace();
 	        return new Data(); // Default to a new instance in case of an error
 	    }
 	}
-	
-    public static void write() {
-        File dataFile = new File("data"); // Creates file in the working directory
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dataFile))) {
-            oos.writeObject(INSTANCE);
-            System.out.println("Data file successfully created: " + dataFile.getAbsolutePath());
-        } catch (IOException e) {
-            System.err.println("Error writing file: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
+
+	public static void write() {
+	    File dataFile = new File("data"); // Creates file in the working directory
+	    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dataFile))) {
+	        System.out.println("Writing data to file...");
+	        oos.writeObject(INSTANCE);
+	        System.out.println("Data file successfully created: " + dataFile.getAbsolutePath());
+	    } catch (IOException e) {
+	        System.err.println("Error writing file: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	}
 
     
 

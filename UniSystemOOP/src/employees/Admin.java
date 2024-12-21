@@ -12,7 +12,9 @@ import database.Data;
 
 public class Admin extends User implements CreatingUsers, Serializable {
 
-    private Scanner n = new Scanner(System.in);
+    private transient Scanner n = new Scanner(System.in);
+    private static final long serialVersionUID = 1067496602760879814L;
+
 
     public Admin(String login, String password) {
         super(login, password);

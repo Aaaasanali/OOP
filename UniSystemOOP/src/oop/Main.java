@@ -18,7 +18,7 @@ import user.*;
 public class Main {
 
 
-    private static Scanner inp = new Scanner(System.in);
+	private static transient Scanner inp = new Scanner(System.in);
 
     public static User login() {
         while (true) {
@@ -45,7 +45,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		System.out.println("Working Directory: " + new File(".").getAbsolutePath());
+//		System.out.println("Working Directory: " + new File(".").getAbsolutePath());
 //		Data.INSTANCE.write();
 		
 		User admin = new Admin("popa1", "popapassword");
@@ -94,22 +94,22 @@ public class Main {
         News news2 = new News("News2", "New news about news2", false, comments);
 
         // Adding users and data to the system
-        Data.INSTANCE.addUser(admin);
-        Data.INSTANCE.addUser(manager);
-        Data.INSTANCE.addUser(student1);
-        Data.INSTANCE.addUser(student2);
-        Data.INSTANCE.addUser(student3);
-        Data.INSTANCE.addUser(teacher1);
-        Data.INSTANCE.addUser(teacher2);
-        Data.INSTANCE.addUser(teacher3);
-
-        Data.INSTANCE.addCourse(oop);
-        Data.INSTANCE.addCourse(ads);
-        Data.INSTANCE.addCourse(cmp);
-
-        Data.INSTANCE.addStudentOrganization(faces);
-        Data.INSTANCE.addStudentOrganization(osit);
-        Data.INSTANCE.addStudentOrganization(bigCityLights);
+//        Data.INSTANCE.addUser(admin);
+//        Data.INSTANCE.addUser(manager);
+//        Data.INSTANCE.addUser(student1);
+//        Data.INSTANCE.addUser(student2);
+//        Data.INSTANCE.addUser(student3);
+//        Data.INSTANCE.addUser(teacher1);
+//        Data.INSTANCE.addUser(teacher2);
+//        Data.INSTANCE.addUser(teacher3);
+//
+//        Data.INSTANCE.addCourse(oop);
+//        Data.INSTANCE.addCourse(ads);
+//        Data.INSTANCE.addCourse(cmp);
+//
+//        Data.INSTANCE.addStudentOrganization(faces);
+//        Data.INSTANCE.addStudentOrganization(osit);
+//        Data.INSTANCE.addStudentOrganization(bigCityLights);
 
         // TESTING STUDENT:
         // register for course - OOP, 2024, FALL or ADS 2024, FALL 

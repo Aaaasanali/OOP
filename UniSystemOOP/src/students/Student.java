@@ -19,7 +19,7 @@ import utils.InputPrompt;
 
 public class Student extends User implements Serializable {
 
-    private Scanner n = new Scanner(System.in);  // Scanner for user input
+    private transient Scanner n = new Scanner(System.in);  // Scanner for user input
 
     private int admissionYear;
     private Speciality speciality;
