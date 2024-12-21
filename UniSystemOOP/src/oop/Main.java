@@ -115,37 +115,86 @@ public class Main {
 //        Data.INSTANCE.addStudentOrganization(bigCityLights);	
 
         
+        																																					/*
+        
+        
+        	//TESTING USER
+        
+        1 - Change Password				Changing password of any user 
+        2 - Change Language				Changing language of the system
+        3 - Check news					Checking all existing news
+        4 - Exit						Exit from system
+        5 - Logout						Log out form system (Login from another account)
+        	
         
         	// TESTING STUDENT:
         
-//        1 - View Courses				Shows all courses that student enrolled to
-//        2 - Register for Course		Registers student for specific course   							(OOP, 2024, Fall or ADS 2024, FALL)
-//        3 - View Teacher Info			View Info about all teachers of specific course						(ADS, 2024, Fall)
-//        4 - View Marks				Shows all marks for all enrolled courses
-//        5 - View Transcript			Shows transcript like info about mark 								(Letter mark, GPA, ECTS)
-//        6 - Get Transcript			--Not working now--
-//        7 - Rate Teacher				Rate specific teacher												(Pakizar, Shamoi, 10)
-//        8 - View Organizations		Shows student organization that student is part of
-//        9 - Join Organization			Function to join student organization								(OSIT)
-//        10 - Leave Organization		Function to leave student organization  							(OSIT)
+        1 - View Courses				Shows all courses that student enrolled to
+        2 - Register for Course			Registers student for specific course   							(OOP, 2024, Fall or ADS 2024, FALL)
+        3 - View Teacher Info			View Info about all teachers of specific course						(ADS, 2024, Fall)
+        4 - View Marks					Shows all marks for all enrolled courses
+        5 - View Transcript				Shows transcript like info about mark 								(Letter mark, GPA, ECTS)
+        6 - Get Transcript				--Not working now--
+        7 - Rate Teacher				Rate specific teacher												(Pakizar, Shamoi, 10)
+        8 - View Organizations			Shows student organization that student is part of
+        9 - Join Organization			Function to join student organization								(OSIT)
+        10 - Leave Organization			Function to leave student organization  							(OSIT)
+        
+        
+        
+        	//BACHELOR
+       	1 - Get Diploma Work			Printing diploma work
+       	
+       	
+       		//MASTER
+        1 - Get Thesis					Printing thesis
+        	
+        	
+        	//PHD	
+        1 - Get Dissertation			Printing dissertation
+        
         
         
         	// TESTING TEACHER
-//        1 - View Courses				Shows all courses that teacher assigned to
-//        2 - Put mark					Putting mark to specific student and course							(Ben, Doe, ADS, 2024, fall, 30, 30, 30)
-//        3 - Print research paper		--Not working now--
-//        4 - View students info		View info about all students of specific course						(Now realized by selection 1-n (May be ill change this))
-//        5 - Sent complaint			Sending complaint to all deans with urgency level					(Emergency!!!, HIGH)
+        1 - View Courses				Shows all courses that teacher assigned to
+        2 - Put mark					Putting mark to specific student and course							(Ben, Doe, ADS, 2024, fall, 30, 30, 30)
+        3 - Print research paper		--Not working now--
+        4 - View students info			View info about all students of specific course						(Now realized by selection 1-n (May be ill change this))
+        5 - Sent complaint				Sending complaint to all deans with urgency level					(Emergency!!!, HIGH)
         
+        
+        
+        	//TESTING MANAGER
+		1 - Add student					Create new students and add them to the system 						(Lionel, Messi, messi_30, 3030)					(name, surname, login, password)
+        2 - Create news					Createing new news 													(Important, info, yes)							(Title, content, pin status)					
+        3 - Add new course				Create new course 													(PP1, 2023, Fall, 1, Alimzhan)					(name, year, semester of course, number of teachers, teachers (shoud be in the system))
+        4 - Assign teacher to course	Asigning teacher to specific course 							(PP1, 2023, Fall, Alimzan, Amanov)				(name, year, semester of course, name, surname of teacher)
+	
 		
-		
-		
+        
+        	//TESTING ADMIN
+        
+        1 - Create User					Creating new user 
+		2 - Update User					Updating user
+		3 - Delete User					Deleting user 
+        
+        
+        
+        
+        
+        
+        	//TESTING DEAN
+        1 - Get complaints 
+        
+ 																					 																					*/
+        
+        
         User current = null;
 
         while (true) {
 
             while (current == null) {
-                current = login(); // Use the updated login method
+                current = login(); 
             }
 
             // User menu loop
@@ -159,7 +208,7 @@ public class Main {
                     System.out.println((++i) + " - " + entry.getValue().getName());
                 }
 
-                System.out.println((i + 1) + " - Logout"); // Add a logout option
+                System.out.println((i + 1) + " - Logout"); 										//Logout for every type of user
 
                 int choice = inp.nextInt() - 1;
 
