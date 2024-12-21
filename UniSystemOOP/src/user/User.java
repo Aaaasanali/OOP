@@ -104,6 +104,12 @@ public abstract class User implements Serializable {
                 ", education=" + education +
                 '}';
     }
+    
+    
+	private void save() throws IOException {
+		Data.write();
+	}
+	
 
     // Method to validate login credentials (check if login exists and password matches)
     public static boolean validateLogin(String login, String password) {
@@ -139,13 +145,13 @@ public abstract class User implements Serializable {
 
         switch (choice) {
             case 1:
-                Data.setLanguage(Language.RU);
+                Data.INSTANCE.setLanguage(Language.RU);
                 break;
             case 2:
-                Data.setLanguage(Language.EN);
+            	Data.INSTANCE.setLanguage(Language.EN);
                 break;
             case 3:
-                Data.setLanguage(Language.KZ);
+            	Data.INSTANCE.setLanguage(Language.KZ);
                 break;
             default:
                 System.out.println("Invalid input.");
@@ -210,7 +216,7 @@ public abstract class User implements Serializable {
     public void checkNews() {
         System.out.println("All News:");
 
-        List<News> newsList = Data.getAllNews();
+        List<News> newsList = Data.INSTANCE.getAllNews();
 
         if (newsList.isEmpty()) {
             System.out.println("No news available.");
@@ -230,6 +236,13 @@ public abstract class User implements Serializable {
     // Exit method to close the application
     public void exit() {
         System.out.println("Exiting the application...");
+        
+        try {
+			save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        
         System.exit(0);
     }
 

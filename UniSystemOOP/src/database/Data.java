@@ -32,7 +32,7 @@ public final class Data implements Serializable{
     private Vector<Course> courses = new Vector<Course>();
     private Vector<StudentOrganization> studentOrganizations = new Vector<StudentOrganization>();
 
-    private List<News> news = new ArrayList<News>();
+    public List<News> news = new ArrayList<News>();
 
     private Stack<String> logs = new Stack<>();
 
@@ -62,25 +62,33 @@ public final class Data implements Serializable{
         return INSTANCE;
     }
 
-    public static Data read() throws IOException, ClassNotFoundException {
-        File dataFile = new File("data");
-        if (!dataFile.exists()) {
-            throw new FileNotFoundException("Data file not found.");
-        }
+	public static Data read() {
+	    File dataFile = new File("data");
+	    if (!dataFile.exists()) {
+	        System.out.println("Data file not found. Initializing new Data instance.");
+	        return new Data(); // Return a new instance if the file doesn't exist
+	    }
 
-        try (ObjectInputStream oin = new ObjectInputStream(new FileInputStream(dataFile))) {
-            return (Data) oin.readObject();
-        }
-    }
+	    try (ObjectInputStream oin = new ObjectInputStream(new FileInputStream(dataFile))) {
+	        return (Data) oin.readObject();
+	    } catch (IOException | ClassNotFoundException e) {
+	        e.printStackTrace();
+	        return new Data(); // Default to a new instance in case of an error
+	    }
+	}
 	
-    public static void write() throws IOException {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data"))) {
+    public static void write() {
+        File dataFile = new File("data"); // Creates file in the working directory
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dataFile))) {
             oos.writeObject(INSTANCE);
-            //oos.close();
+            System.out.println("Data file successfully created: " + dataFile.getAbsolutePath());
+        } catch (IOException e) {
+            System.err.println("Error writing file: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-
+    
 
 
 
