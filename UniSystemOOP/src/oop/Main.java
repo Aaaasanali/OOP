@@ -1,5 +1,6 @@
 package oop;
 
+import java.io.File;
 import java.util.*;
 
 import communication.*;
@@ -49,6 +50,9 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
+		
+		System.out.println("Working Directory: " + new File(".").getAbsolutePath());
+//		Data.INSTANCE.write();
 		
 		User admin = new Admin("popa1", "popapassword");
 		
