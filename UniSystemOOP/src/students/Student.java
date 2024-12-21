@@ -17,7 +17,7 @@ import students.*;
 import user.*;
 import utils.InputPrompt;
 
-public class Student extends User implements Serializable {
+public abstract class Student extends User implements Serializable {
 
     private transient Scanner n = new Scanner(System.in);  // Scanner for user input
 

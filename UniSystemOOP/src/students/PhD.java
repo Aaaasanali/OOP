@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 
 
-import oop.NamedRunnable;
+import Factories.NamedRunnable;
 import research.Dissertation;
 
 /**
@@ -18,8 +18,8 @@ public class PhD extends GraduateStudent implements Serializable {
     
     
     
-    public PhD(String login, String password, String name, String surname, String id) {
-		super(login, password, name, surname, id);
+    public PhD(String login, String password, String name, String surname) {
+		super(login, password, name, surname);
 		// TODO Auto-generated constructor stub
 	}
     
@@ -62,6 +62,11 @@ public class PhD extends GraduateStudent implements Serializable {
         Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
         functions.put(startIndex++, new NamedRunnable(this::getDissertation, "Get Dissertation"));
         functions.put(startIndex++, new NamedRunnable(this::getString, "Get String"));
+        
+        for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
+            functions.put(startIndex++, entry.getValue());
+        }
+        
         return functions;
     }
     

@@ -59,8 +59,8 @@ public class Main {
 		
 		
 
-        Student student1 = new Student("stud", "pswrd", "Ben", "Doe");
-        Student student2 = new Student("stud2", "parol", "John", "Chan");
+		Bachelor student1 = new Bachelor("stud", "pswrd", "Ben", "Doe");
+		Bachelor student2 = new Bachelor("stud2", "parol", "John", "Chan");
         Master student3 = new Master("stud3", "log", "Alex", "Smith");
 
         Teacher teacher1 = new Teacher("tchr", "tchr", "Pakizar", "Shamoi");
@@ -98,22 +98,22 @@ public class Main {
         News news2 = new News("News2", "New news about news2", false, comments);
 
         // Adding users and data to the system
-//        Data.INSTANCE.addUser(admin);
-//        Data.INSTANCE.addUser(manager);
-//        Data.INSTANCE.addUser(student1);
-//        Data.INSTANCE.addUser(student2);
-//        Data.INSTANCE.addUser(student3);
-//        Data.INSTANCE.addUser(teacher1);
-//        Data.INSTANCE.addUser(teacher2);
-//        Data.INSTANCE.addUser(teacher3);
-//
-//        Data.INSTANCE.addCourse(oop);
-//        Data.INSTANCE.addCourse(ads);
-//        Data.INSTANCE.addCourse(cmp);
-//
-//        Data.INSTANCE.addStudentOrganization(faces);
-//        Data.INSTANCE.addStudentOrganization(osit);
-//        Data.INSTANCE.addStudentOrganization(bigCityLights);	*/
+        Data.INSTANCE.addUser(admin);
+        Data.INSTANCE.addUser(manager);
+        Data.INSTANCE.addUser(student1);
+        Data.INSTANCE.addUser(student2);
+        Data.INSTANCE.addUser(student3);
+        Data.INSTANCE.addUser(teacher1);
+        Data.INSTANCE.addUser(teacher2);
+        Data.INSTANCE.addUser(teacher3);
+
+        Data.INSTANCE.addCourse(oop);
+        Data.INSTANCE.addCourse(ads);
+        Data.INSTANCE.addCourse(cmp);
+
+        Data.INSTANCE.addStudentOrganization(faces);
+        Data.INSTANCE.addStudentOrganization(osit);
+        Data.INSTANCE.addStudentOrganization(bigCityLights);	
 
         // TESTING STUDENT:
         // register for course - OOP, 2024, FALL or ADS 2024, FALL 
@@ -130,7 +130,7 @@ public class Main {
         // Put mark log to student Register logout - log to teacher Put mark logout - log to student then see marks
         
 		
-		
+		*/
 		
         User current = null;
 

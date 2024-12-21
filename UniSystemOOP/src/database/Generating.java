@@ -13,11 +13,11 @@ import employees.Admin;
 import employees.Manager;
 import employees.Teacher;
 import news.News;
+import students.Bachelor;
 import students.Master;
 import students.Student;
 import students.StudentOrganization;
 import user.User;
-
 public class Generating {
 	
 public static void main(String[] args) {
@@ -32,8 +32,8 @@ public static void main(String[] args) {
 		
 		
 
-        Student student1 = new Student("stud", "pswrd", "Ben", "Doe");
-        Student student2 = new Student("stud2", "parol", "John", "Chan");
+		Bachelor student1 = new Bachelor("stud", "pswrd", "Ben", "Doe");
+		Bachelor student2 = new Bachelor("stud2", "parol", "John", "Chan");
         Master student3 = new Master("stud3", "log", "Alex", "Smith");
 
         Teacher teacher1 = new Teacher("tchr", "tchr", "Pakizar", "Shamoi");
