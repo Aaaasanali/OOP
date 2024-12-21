@@ -18,63 +18,88 @@ import user.*;
 
 
 public final class Data implements Serializable{
-
-	public static Vector<User> users = new Vector<User>();
-	//Teachers, Students, Admins contains in users, access them through method getAllTeachers
-
-
-	// University name
-	private static String universityName;
-
-	// Current language
-	public static Language currentLanguage = Language.RU;
-
-	// Courses
-	public static Vector<Course> courses = new Vector<Course>();
-	
-	public static Vector<StudentOrganization> studentOrganizations = new Vector<StudentOrganization>();
-
-	public static List<News> news = new ArrayList<News>();
-
-	Stack<String> logs = new Stack<>();	
-
-
-
 	public static Data INSTANCE;																	//Singleton
 	
-	static {
-		if(new File("data").exists()) {
-			try {
-				INSTANCE = read();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		else INSTANCE = new Data();
-	}
+	private static final long serialVersionUID = 123456789L;
+
+	private Vector<User> users = new Vector<User>();
+	//Teachers, Students, Admins contains in users, access them through method getAllTeachers
+	
+    private static String universityName;
+    private Language currentLanguage = Language.EN;
+
+    private Vector<Course> courses = new Vector<Course>();
+    private Vector<StudentOrganization> studentOrganizations = new Vector<StudentOrganization>();
+
+    public List<News> news = new ArrayList<News>();
+    
+    private Vector<Request> requests = new Vector<>();
+
+
+    private Stack<String> logs = new Stack<>();
+
+    
+	
+    static {
+        INSTANCE = getInstance();
+    }
+    
 	private Data() {
 
 	}	
+	
+	public static Data getInstance() {
+        if (INSTANCE == null) {
+            synchronized (Data.class) {
+                if (INSTANCE == null) {
+                    try {
+                        INSTANCE = read();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        INSTANCE = new Data(); // Default if reading fails
+                    }
+                }
+            }
+        }
+        return INSTANCE;
+    }
 
-	public static Data read() throws IOException, ClassNotFoundException {
-		try (ObjectInputStream oin = new ObjectInputStream(new FileInputStream("data"))) {
-			return (Data) oin.readObject();
-		}
+	public static Data read() {
+	    File dataFile = new File("data");
+	    if (!dataFile.exists()) {
+	        System.out.println("Data file not found. Initializing new Data instance.");
+	        return new Data(); // Return a new instance if the file doesn't exist
+	    }
+
+	    try (ObjectInputStream oin = new ObjectInputStream(new FileInputStream(dataFile))) {
+	        System.out.println("Reading data from file...");
+	        Data instance = (Data) oin.readObject();
+	        System.out.println("Data successfully read.");
+	        return instance;
+	    } catch (IOException | ClassNotFoundException e) {
+	        e.printStackTrace();
+	        return new Data(); // Default to a new instance in case of an error
+	    }
 	}
 
-	public static void write() throws IOException {
-		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data"))) {
-			oos.writeObject(INSTANCE);
-		}
+	public static void write () throws IOException {
+	    File dataFile = new File("data"); // Creates file in the working directory
+	    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dataFile))) {
+	        System.out.println("Writing data to file...");
+	        oos.writeObject(INSTANCE);
+	        System.out.println("Data file successfully created: " + dataFile.getAbsolutePath());
+	    } catch (IOException e) {
+	        System.err.println("Error writing file: " + e.getMessage());
+	        e.printStackTrace();
+	    }
 	}
 
+    
 
 
 
 
-
-
-	public static void addUser(User a) {
+	public void addUser(User a) {
 		users.add(a);
 	}
 
@@ -82,26 +107,28 @@ public final class Data implements Serializable{
 		this.courses.add(course);
 	}
 
-	public static void addStudentOrganization(StudentOrganization studOrg) {
+	public void addStudentOrganization(StudentOrganization studOrg) {
 		studentOrganizations.add(studOrg);
 	}
 
-	public static void setUniName(String name) {
+	public void setUniName(String name) {
 		universityName = name;
 	}
 
 
-	public static void setLanguage(Language l) {
+	public void setLanguage(Language l) {
 		currentLanguage = l;
 	}
 
+	public void addRequest(Request request) {
+        requests.add(request);
+    }
 
 
 
 
 
-
-	public static Vector<Student> getAllStudents(){
+	public Vector<Student> getAllStudents(){
 		Vector v = new Vector<Student>();
 
 		for(User u : users) {
@@ -113,7 +140,7 @@ public final class Data implements Serializable{
 		return v;
 	}
 
-	public static Vector<Teacher> getAllTeachers(){
+	public Vector<Teacher> getAllTeachers(){
 		Vector v = new Vector<Teacher>();
 
 		for(User u : users) {
@@ -125,7 +152,7 @@ public final class Data implements Serializable{
 		return v;
 	}
 
-	public static Vector<Admin> getAllAdmins(){
+	public Vector<Admin> getAllAdmins(){
 		Vector v = new Vector<Admin>();
 
 		for(User u : users) {
@@ -137,26 +164,32 @@ public final class Data implements Serializable{
 	}
 
 
-	public static Vector<StudentOrganization> getStudentOrganizations() {
+	public Vector<StudentOrganization> getStudentOrganizations() {
 		return studentOrganizations;
 	}
 
 
-	public static Vector<User> getAllUsers(){
+	public Vector<User> getAllUsers(){
 		return users;
 	}
 
-	public static Vector<Course> getAllCourses(){
+	public Vector<Course> getAllCourses(){
 		return courses;
 	}
 	
-	public static List<News> getAllNews(){
+	public List<News> getAllNews(){
 		return news;
+	}
+	
+	public Vector<Request> getRequests() {
+	    if (requests == null) {
+	        requests = new Vector<>(); // Initialize the requests list if it's null
+	    }
+	    return requests;
 	}
 
 
-
-	public static User findUserByLogin(String login) {    
+	public User findUserByLogin(String login) {    
 		for (User user : users) {
 			if (user.getLogin().equals(login)) {
 				return user; 
@@ -165,7 +198,7 @@ public final class Data implements Serializable{
 		return null; 
 	}
 
-	public static User findUserById(String id) {
+	public User findUserById(String id) {
 		for (User user : users) {
 			if (user.getId().equals(id)) {
 				return user;

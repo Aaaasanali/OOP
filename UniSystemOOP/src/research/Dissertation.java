@@ -1,11 +1,13 @@
 package research;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Vector;
 
 /**
 * @generated
 */
-public class Dissertation {
+public class Dissertation implements Serializable{
     
 
     private String title;
@@ -16,12 +18,23 @@ public class Dissertation {
 
     private int numberOfChapters;
     
+    private Vector<ResearchPaper> publishedResearchPapers;
+    
 
     
     
 
 
-    private String getTitle() {
+    public Vector<ResearchPaper> getPublishedResearchPapers() {
+		return publishedResearchPapers;
+	}
+
+	public void setPublishedResearchPapers(Vector<ResearchPaper> publishedResearchPapers) {
+		this.publishedResearchPapers = publishedResearchPapers;
+	}
+	
+
+	private String getTitle() {
         return this.title;
     }
     

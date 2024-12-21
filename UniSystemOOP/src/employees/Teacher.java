@@ -38,6 +38,8 @@ public class Teacher extends Employee implements Researcher, Serializable {
 
 
 	private Vector<Course> courses;
+	
+	private static final long serialVersionUID = -6261577719787557070L;
 
     private double rating;
     private Vector<Double> ratingMarks = new Vector<>();
@@ -46,22 +48,19 @@ public class Teacher extends Employee implements Researcher, Serializable {
 
     private Set<Document> documents;
 
-    private Vector<Course> getCourses() {
-        if (this.courses == null) {
-            this.courses = new Vector<Course>();
-        }
-        return this.courses;
+    public Teacher(String login, String password) {
+        super(login, password);
     }
 
-    private void addCourses(Course course) {
-        this.courses.add(course);
+    public Teacher(String login, String password, String name, String surname) {
+        super(login, password, name, surname);
     }
-
-    private double getRating() {
+   
+    public double getRating() {
         return this.rating;
     }
 
-    private void setRating(double rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
@@ -71,21 +70,21 @@ public class Teacher extends Employee implements Researcher, Serializable {
 
     public void updateAverageRating() {
         if (ratingMarks.isEmpty()) {
-            rating = 0.0;  // No ratings yet, so the average is 0
+            rating = 0.0;  
         } else {
             double sum = 0;
             for (Double mark : ratingMarks) {
                 sum += mark;
             }
-            rating = sum / ratingMarks.size();  // Calculate the average rating
+            rating = sum / ratingMarks.size();  
         }
     }
 
-    private TeacherTitle getTeacherType() {
+    public TeacherTitle getTeacherType() {
         return this.teacherType;
     }
 
-    private void setTeacherType(TeacherTitle teacherType) {
+    public void setTeacherType(TeacherTitle teacherType) {
         this.teacherType = teacherType;
     }
 
@@ -97,11 +96,9 @@ public class Teacher extends Employee implements Researcher, Serializable {
     }
 
     public void addDocument(Document document) {
-        this.documents = documents;
+        this.documents.add(document);
     }
 
-    
-    
     public void putMark() {
         System.out.println("Type 'quit' at any time to exit");
 
@@ -152,7 +149,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
             return;
         }
 
-        // Step 4: Find the course
+        // Step 4: Find the course in Data (instead of Teacher's courses)
         Course targetCourse = null;
         for (Course course : Data.INSTANCE.getAllCourses()) {
             if (course.getName().equalsIgnoreCase(courseName) &&
@@ -191,15 +188,83 @@ public class Teacher extends Employee implements Researcher, Serializable {
         System.out.println("Marks updated successfully for student: " + studentName + " " + studentSurname);
     }
 
-    
-    
-    public void viewStudentsInfo() { 
-        //NEED TO REALIZE
+    public void viewStudentsInfo() {
+        // Fetch the courses assigned to the teacher from Data
+        List<Course> teacherCourses = new ArrayList<>();
+        for (Course course : Data.INSTANCE.getAllCourses()) {
+            if (course.getTeachers().contains(this)) {
+                teacherCourses.add(course);
+            }
+        }
+
+        if (teacherCourses.isEmpty()) {
+            System.out.println("You are not assigned to any courses.");
+            return;
+        }
+
+        System.out.println("Select a course to view student information:");
+        for (int i = 0; i < teacherCourses.size(); i++) {
+            Course course = teacherCourses.get(i);
+            System.out.printf("%d. %s (Year: %d, Semester: %s)\n", i + 1, course.getName(), course.getYear(), course.getSemester());
+        }
+
+        int choice = InputPrompt.promptIntInput("Enter course number (or 0 to cancel): ");
+        if (choice <= 0 || choice > teacherCourses.size()) {
+            System.out.println("Cancelled or invalid choice.");
+            return;
+        }
+
+        Course selectedCourse = teacherCourses.get(choice - 1);
+
+        System.out.println("Students enrolled in " + selectedCourse.getName() + ":");
+        if (selectedCourse.getEnrolledStudents().isEmpty()) {
+            System.out.println("No students are enrolled in this course.");
+        } else {
+            for (Student student : selectedCourse.getEnrolledStudents()) {
+                System.out.println(student); // Assuming Student has a meaningful toString() method
+            }
+        }
     }
 
-    public void sentComplaint() {
-        // Functionality yet to be implemented
+    public void viewCourses() {
+        if (Data.INSTANCE.getAllCourses().isEmpty()) {
+            System.out.println("No courses are registered for this teacher.");
+            return;
+        }
+
+        // Print courses from Data
+        System.out.println("Courses for this teacher:");
+        for (Course course : Data.INSTANCE.getAllCourses()) {
+            System.out.println(course.getName());  // Assuming Course has a getName() method
+        }
     }
+    
+    
+    public void sentComplaint() {
+        System.out.println("Please enter your complaint:");
+        String complaintText = InputPrompt.promptInput("Complaint: ");  // A method to capture user input
+        if (complaintText == null || complaintText.isEmpty()) {
+            System.out.println("Complaint not sent. No text provided.");
+            return;
+        }
+
+        System.out.println("Set urgency level (LOW, MEDIUM, HIGH):");
+        String urgencyInput = InputPrompt.promptInput("Urgency: ");
+        UrgencyLevel urgencyLevel;
+        try {
+            urgencyLevel = UrgencyLevel.valueOf(urgencyInput.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid urgency level. Defaulting to LOW.");
+            urgencyLevel = UrgencyLevel.LOW;
+        }
+
+        Complaint complaint = new Complaint(this.getName(), complaintText, urgencyLevel);
+        Dean.complaints.add(complaint);
+
+        System.out.println("Complaint sent successfully!");
+    }
+    
+    
 
     @Override
     public void addResearchPaper() {
@@ -225,33 +290,21 @@ public class Teacher extends Employee implements Researcher, Serializable {
 
     @Override
     public String toString() {
-        // Get the teacher's courses as a list of course names (you can modify this to include other details if needed)
-        StringBuilder courseNames = new StringBuilder();
-        if (this.courses != null && !this.courses.isEmpty()) {
-            for (Course course : this.courses) {
-                courseNames.append(course.getName()).append(", ");
-            }
-            // Remove last comma and space
-            courseNames.setLength(courseNames.length() - 2);
-        } else {
-            courseNames.append("No courses assigned");
-        }
-
-        // Build the string representation
         return "Teacher Name: " + this.getName() + " " + this.getSurname() + ", " +
                "Rating: " + this.rating + ", " +
-               "Teacher Type: " + (this.teacherType != null ? this.teacherType.toString() : "Not assigned") + " ";
+               "Teacher Type: " + (this.teacherType != null ? this.teacherType.toString() : "Not assigned");
     }
 
-    //                          Operations                                  
+    // Operations                                  
     public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
         Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
         // Add student-specific actions    
+        functions.put(startIndex++, new NamedRunnable(this::viewCourses, "View Courses"));  
         functions.put(startIndex++, new NamedRunnable(this::putMark, "Put mark"));
         functions.put(startIndex++, new NamedRunnable(this::printResearchPaper, "Print research paper"));
         functions.put(startIndex++, new NamedRunnable(this::viewStudentsInfo, "View students info"));
         functions.put(startIndex++, new NamedRunnable(this::sentComplaint, "Sent complaint"));
-   
+        
         for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
             functions.put(startIndex++, entry.getValue());
         }

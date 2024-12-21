@@ -1,8 +1,10 @@
 package research;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Vector;
 
-public class Thesis {
+public class Thesis implements Serializable{
     
 
     private String title;
@@ -10,6 +12,22 @@ public class Thesis {
     private String fieldOfStudy;
     
     private Date SubmitionDate;
+    
+    private Vector<ResearchPaper> publishedResearchPapers;
+    
+
+    
+    
+
+
+    public Vector<ResearchPaper> getPublishedResearchPapers() {
+		return publishedResearchPapers;
+	}
+
+	public void setPublishedResearchPapers(Vector<ResearchPaper> publishedResearchPapers) {
+		this.publishedResearchPapers = publishedResearchPapers;
+	}
+	
     
    
     

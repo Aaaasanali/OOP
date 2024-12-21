@@ -9,7 +9,7 @@ public class ResearchDecorator implements Researcher {
     private Researcher baseObject;
     
 
-    private  papers;
+//    private  papers;
     
     
 
@@ -25,26 +25,26 @@ public class ResearchDecorator implements Researcher {
     }
     
 
-    public Researcher setBaseObject(Researcher baseObject) {
+    public void setBaseObject(Researcher baseObject) {
         this.baseObject = baseObject;
     }
     
     
 
-    public  getPapers() {
-        return this.papers;
-    }
+//    public  getPapers() {
+//        return this.papers;
+//    }
+//    
+//
+//    public  setPapers(invalid papers) {
+//        this.papers = papers;
+//    }
+    
+    
     
 
-    public  setPapers(invalid papers) {
-        this.papers = papers;
-    }
-    
-    
-    
-
-    public Teacher getTEacher() {
-        return this.tEacher;
+    public Teacher getTeacher() {
+        return this.teacher;
     }
     
 
@@ -69,10 +69,6 @@ public class ResearchDecorator implements Researcher {
     //                          Operations                                  
     
 
-    public Researcher baseObject:() {
-        //TODO
-        return null;
-    }
 	@Override
 	public void addResearchPaper() {
 		// TODO Auto-generated method stub

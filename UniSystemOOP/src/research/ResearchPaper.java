@@ -1,10 +1,11 @@
 package research;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import user.User;
 
-public class ResearchPaper {
+public class ResearchPaper implements Serializable{
     
 
     private String title;

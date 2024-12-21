@@ -104,6 +104,17 @@ public abstract class User implements Serializable {
                 ", education=" + education +
                 '}';
     }
+    
+    
+	private void save() throws IOException {
+		
+		if (InputPrompt.scanner != null) {
+			InputPrompt.scanner.close(); // Close the Scanner to avoid resource leakage
+	    }
+		
+		Data.write();
+	}
+	
 
     // Method to validate login credentials (check if login exists and password matches)
     public static boolean validateLogin(String login, String password) {
@@ -139,13 +150,13 @@ public abstract class User implements Serializable {
 
         switch (choice) {
             case 1:
-                Data.setLanguage(Language.RU);
+                Data.INSTANCE.setLanguage(Language.RU);
                 break;
             case 2:
-                Data.setLanguage(Language.EN);
+            	Data.INSTANCE.setLanguage(Language.EN);
                 break;
             case 3:
-                Data.setLanguage(Language.KZ);
+            	Data.INSTANCE.setLanguage(Language.KZ);
                 break;
             default:
                 System.out.println("Invalid input.");
@@ -187,7 +198,7 @@ public abstract class User implements Serializable {
 
                 // Now serialize the Data.INSTANCE object to persist the updated state
                 try {
-                    Data.write();  // Save the updated data to the file
+                    Data.write();  
                     System.out.println("Password updated successfully.");
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -210,7 +221,7 @@ public abstract class User implements Serializable {
     public void checkNews() {
         System.out.println("All News:");
 
-        List<News> newsList = Data.getAllNews();
+        List<News> newsList = Data.INSTANCE.getAllNews();
 
         if (newsList.isEmpty()) {
             System.out.println("No news available.");
@@ -225,34 +236,40 @@ public abstract class User implements Serializable {
             System.out.println("Comments: " + news.getComments());
             System.out.println("----------------------------------");
         }
-	}
-	
-	
-	
-	
-	public void exit() {
-		System.exit(0);
-	}
-	
-	public void logout() {
-		System.out.println("Logging out...");
-	}
-	
-	public void settings() {
-		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
-		int startIndex = 0;
-		functions.put(startIndex++, new NamedRunnable(this::changePassword, "Change Password"));
+    }
+
+    // Exit method to close the application
+    public void exit() {
+        System.out.println("Exiting the application...");
+        
+        try {
+			save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        
+        System.exit(0);
+    }
+
+    // Logout method
+    public void logout() {
+        System.out.println("Logging out...");
+    }
+
+    // Mapping of functions to the menu
+    public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
+        Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
+        functions.put(startIndex++, new NamedRunnable(this::changePassword, "Change Password"));
         functions.put(startIndex++, new NamedRunnable(this::changeLanguage, "Change Language"));
         
         tabs(functions);
+        return functions;
 	}
 	
 	public void tabs(Map<Integer, NamedRunnable> functions) {
     	while(true) {
         	Runnable pick = Main.pickFunc(functions);
-            
             if(pick == null) return;
-            
             pick.run();
         }
     }

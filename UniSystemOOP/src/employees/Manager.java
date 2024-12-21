@@ -1,5 +1,6 @@
 package employees;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
@@ -21,9 +22,11 @@ import utils.InputPrompt;
  * @generated
  */
 public class Manager extends Employee implements Serializable {
+	
+	private static final long serialVersionUID = 9134543246365552631L;
+    
+    private static List<Request> managerRequests = new ArrayList<>();
 
-    private final Scanner n = new Scanner(System.in);
-    private final Vector<String> functions = new Vector<>(Arrays.asList("Create Student", "Create Someone", "Find Student"));
 
     public Manager(String login, String password) {
         super(login, password);
@@ -31,16 +34,16 @@ public class Manager extends Employee implements Serializable {
     public Manager() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public String getFunc() {
-    	String res = "";
-    	for(String i : functions) {
-    		res += i + "\n";
-    	}
-    	res += super.getFunc();
-    	return res;
+    
+    
+    public static List<Request> getManagerRequests() {
+        return managerRequests;
     }
+    
+    
 
+    
+    
     // Add a new student
     public void addStudent() {
         System.out.println("Type 'quit' at any time to exit");
@@ -57,7 +60,7 @@ public class Manager extends Employee implements Serializable {
         String password = InputPrompt.promptInput("Enter student's password: ");
         if (password == null) return;
 
-        Student newStudent = new Student(login, password, firstName, lastName);
+        Student newStudent = new Bachelor(login, password, firstName, lastName);
         Data.INSTANCE.addUser(newStudent);
 
         System.out.println("Student added successfully!");
@@ -140,16 +143,15 @@ public class Manager extends Employee implements Serializable {
         boolean isPinned = pinInput.equalsIgnoreCase("yes");
 
         News news = new News(title, content, isPinned, new ArrayList<>());
-        Data.news.add(news);
+        Data.INSTANCE.news.add(news);
 
         System.out.println("News created and added successfully!");
     }
     
     
     
-    
     public void approveStudentRegistration() {
-        
+        System.out.println("In process.....");
     }
     
     
@@ -193,6 +195,150 @@ public class Manager extends Employee implements Serializable {
     }
     
     
+   
+    public boolean assignTeacherToCourse() {
+        System.out.println("Type 'quit' at any time to exit");
+        while (true) {
+            try {
+                // Prompt for the course name
+                String courseName = InputPrompt.promptInput("Enter the name of the course you want to assign a teacher to: ");
+                if (courseName == null) return false;
+
+                // Prompt for the course year
+                String yearInput = InputPrompt.promptInput("Enter the year for the course: ");
+                if (yearInput == null) return false;
+                int year = Integer.parseInt(yearInput);
+
+                // Prompt for the semester
+                String semesterInput = InputPrompt.promptInput("Enter the semester for the course (Fall/Spring/Summer): ");
+                if (semesterInput == null) return false;
+                Semester semester = Semester.valueOf(semesterInput.toUpperCase());
+
+                // Fetch all available courses from Data
+                Data data = Data.INSTANCE;
+
+                // Search for the matching course
+                Course tempCourse = new Course(courseName, year, semester);
+                Course existingCourse = null;
+
+                for (Course course : data.getAllCourses()) {
+                    if (course.equals(tempCourse)) {
+                        existingCourse = course;
+                        break;
+                    }
+                }
+
+                if (existingCourse == null) {
+                    System.out.println("No such course found in the system.");
+                    return false;
+                }
+
+                // Prompt for the teacher's first name
+                String firstName = InputPrompt.promptInput("Enter the first name of the teacher you want to assign: ");
+                if (firstName == null) return false;
+
+                // Prompt for the teacher's surname
+                String lastName = InputPrompt.promptInput("Enter the surname of the teacher you want to assign: ");
+                if (lastName == null) return false;
+
+                // Search for the teacher in the system
+                Teacher foundTeacher = null;
+                for (Teacher teacher : data.getAllTeachers()) {
+                    if (teacher.getName().equalsIgnoreCase(firstName) && teacher.getSurname().equalsIgnoreCase(lastName)) {
+                        foundTeacher = teacher;
+                        break;
+                    }
+                }
+
+                if (foundTeacher == null) {
+                    System.out.println("No such teacher found in the system.");
+                    return false;
+                }
+
+                // Check if the teacher is already assigned to this course
+                if (existingCourse.getTeachers().contains(foundTeacher)) {
+                    System.out.println("Teacher is already assigned to this course.");
+                    return false;
+                }
+
+                // Assign the teacher to the course
+                existingCourse.getTeachers().add(foundTeacher);
+
+                // Print debug information
+                System.out.println("Course's teachers after assignment: " + existingCourse.getTeachers());
+                System.out.println("Successfully assigned " + foundTeacher.getName() + " " + foundTeacher.getSurname() + " to the course: " + courseName);
+
+                // Save changes to data
+                Data.write();
+                return true;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid year. Please enter a valid number.");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid semester value. Please enter Fall, Spring, or Summer.");
+            } catch (IOException e) {
+                System.out.println("Failed to save changes. Try again.");
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    
+    
+    
+    private void approveRequest(Request request) {
+        // Logic for approving a request (e.g., register a student, add course, etc.)
+        System.out.println("Request approved: " + request.toString());
+        managerRequests.remove(request);
+    }
+    
+    // Reject request method
+    private void rejectRequest(Request request) {
+        // Logic for rejecting a request
+        System.out.println("Request rejected: " + request.toString());					
+        managerRequests.remove(request);
+    }
+
+    // Receive a new request
+    public static void receiveRequest(Request request) {
+        managerRequests.add(request);
+        
+        //System.out.println("Request received: " + request.toString());				//TO LOGS
+    }
+    
+    
+    
+    public void handleRequest() {
+        if (managerRequests.isEmpty()) {
+            System.out.println("No requests available.");
+            return;
+        }
+        
+        System.out.println("Available requests:");
+        for (int i = 0; i < managerRequests.size(); i++) {
+            System.out.println(i + 1 + ". " + managerRequests.get(i).toString());
+        }
+
+        int requestIndex = InputPrompt.promptIntInput("Select a request to handle (1 to " + managerRequests.size() + "): ");
+        if (requestIndex < 1 || requestIndex > managerRequests.size()) {
+            System.out.println("Invalid request selection.");
+            return;
+        }
+
+        Request selectedRequest = managerRequests.get(requestIndex - 1);
+        String action = InputPrompt.promptInput("Do you want to approve or reject this request? (approve/reject): ");
+        
+        if ("approve".equalsIgnoreCase(action)) {
+            approveRequest(selectedRequest);
+        } else if ("reject".equalsIgnoreCase(action)) {
+            rejectRequest(selectedRequest);
+        } else {
+            System.out.println("Invalid action.");
+        }
+    }
+    
+    
+    
+    
 
     // Function map for the Manager
     public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
@@ -203,7 +349,10 @@ public class Manager extends Employee implements Serializable {
         functions.put(startIndex++, new NamedRunnable(this::addCourse, "Add new course"));
 //      functions.put(startIndex++, new NamedRunnable(this::approveStudentRegistration, "Approve student registration"));
 //      functions.put(startIndex++, new NamedRunnable(this::registerStudentToCourse, "Register student to course"));
-
+        functions.put(startIndex++, new NamedRunnable(this::assignTeacherToCourse, "Assign teacher to course"));
+        functions.put(startIndex++, new NamedRunnable(this::handleRequest, "Handle requests"));
+        
+        
         // Add parent class functions
         for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
             functions.put(startIndex++, entry.getValue());

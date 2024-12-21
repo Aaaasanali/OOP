@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class InputPrompt {
 
-    private static Scanner scanner = new Scanner(System.in);
+    public transient static Scanner scanner = new Scanner(System.in);
 
     // Prompt method for string inputs
     public static String promptInput(String message) {

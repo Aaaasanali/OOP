@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.*;
 
 import employees.Teacher;
+import students.Student;
 
 public class Course implements Serializable {
-	
+    
+	private static final long serialVersionUID = 7652765630445325908L;
     private String id;
     private String name;
     private Integer credits;
@@ -18,6 +20,8 @@ public class Course implements Serializable {
     private CourseType type;
     private String description;
     private Vector<Course> prerequisites;
+    
+    private Vector<Student> enrolledStudents;
 
     public Course() {
     	
@@ -29,6 +33,8 @@ public class Course implements Serializable {
     	this.year = year;
     	this.semester = semester;
     	this.id = id;
+    	this.enrolledStudents = new Vector<>();
+    	this.teachers = new Vector<>();
     }
     
     public Course(String name,int year, Semester semester) {
@@ -48,6 +54,8 @@ public class Course implements Serializable {
 		//  this.schedule = schedule;
 		  this.description = description;
 		  this.semester = semester;
+	    	this.enrolledStudents = new Vector<>();
+	    	this.teachers = new Vector<>();
 
     }
     
@@ -66,6 +74,8 @@ public class Course implements Serializable {
 		this.type = type;
 		this.description = description;
 		this.prerequisites = (prerequisites != null) ? prerequisites : new Vector<>();
+    	this.enrolledStudents = new Vector<>();
+    	this.teachers = new Vector<>();
 	}
     
     
@@ -164,6 +174,31 @@ public class Course implements Serializable {
     public void setPrerequisites(Vector<Course> prerequisites) {
         this.prerequisites = prerequisites;
     }
+    
+    
+    
+    
+    public Vector<Student> getEnrolledStudents() {
+        return enrolledStudents;
+    }
+
+    public void setEnrolledStudents(Vector<Student> enrolledStudents) {
+        this.enrolledStudents = enrolledStudents;
+    }
+
+    public void addStudent(Student student) {
+        if (!enrolledStudents.contains(student)) {
+            enrolledStudents.add(student);
+        }
+    }
+
+    public void removeStudent(Student student) {
+        enrolledStudents.remove(student);
+    }
+    
+    
+    
+    
 
     @Override
     public String toString() {

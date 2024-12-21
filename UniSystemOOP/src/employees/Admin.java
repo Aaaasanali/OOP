@@ -13,15 +13,16 @@ import oop.Main;
 
 public class Admin extends User implements CreatingUsers, Serializable {
 
-    private Scanner n = new Scanner(System.in);
+    private transient Scanner n = new Scanner(System.in);
+    private static final long serialVersionUID = 1067496602760879814L;
+
 
     public Admin(String login, String password) {
         super(login, password);
-        Data.addUser(this);
     }
 
     public void setUniName(String name) {
-        Data.setUniName(name);
+    	Data.INSTANCE.setUniName(name);
     }
 
     public void createUser() {
@@ -68,7 +69,7 @@ public class Admin extends User implements CreatingUsers, Serializable {
         }
         
 
-        User current = Data.findUserById(id);
+        User current = Data.INSTANCE.findUserById(id);
         if (current == null) {
             System.out.println("User not found with the ID: " + id);
             return; // Exit if user not found
@@ -90,6 +91,15 @@ public class Admin extends User implements CreatingUsers, Serializable {
                 return; // Exit the method
             }
         }
+
+        User current = Data.INSTANCE.findUserById(id);
+        if (current == null) {
+            System.out.println("User not found with the ID: " + id);
+            return; // Exit if user not found
+        }
+
+        Data.INSTANCE.deleteUser(current);
+        System.out.println("User " + current.getId() + " has been deleted!");
     }
             
 	public void usersSettings() {
@@ -109,7 +119,7 @@ public class Admin extends User implements CreatingUsers, Serializable {
 		functions.put(startIndex++, new NamedRunnable(this::setUniName, "Create New Course"));
 		functions.put(startIndex++, new NamedRunnable(this::setUniName, "Create New Faculty"));
 		functions.put(startIndex++, new NamedRunnable(this::setUniName, "Create New Speciality"));
-
+		tabs(functions);
 	}
 
 	public void setUniName() {

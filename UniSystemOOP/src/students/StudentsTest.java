@@ -19,8 +19,8 @@ public class StudentsTest {
 
 	public static void main(String[] args) {
 
-        Student student1 = new Student("studentLogin", "studentPassword123", "Ben", "Doe");
-        Student student2 = new Student("john_doe", "password", "John", "Doe");
+		Bachelor student1 = new Bachelor("studentLogin", "studentPassword123", "Ben", "Doe");
+        Master student2 = new Master("john_doe", "password", "John", "Doe");
         Master student3 = new Master("john_smith", "password123", "Alex", "Smith");
 
         Teacher teacher1 = new Teacher("teacher1_login", "teacher1_password", "Pakizar", "Shamoi");
