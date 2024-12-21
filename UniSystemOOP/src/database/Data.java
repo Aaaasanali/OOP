@@ -32,7 +32,7 @@ public final class Data implements Serializable{
     private Vector<Course> courses = new Vector<Course>();
     private Vector<StudentOrganization> studentOrganizations = new Vector<StudentOrganization>();
 
-    private List<News> news = new ArrayList<News>();
+    public List<News> news = new ArrayList<News>();
 
     private Stack<String> logs = new Stack<>();
 

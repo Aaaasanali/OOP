@@ -137,7 +137,7 @@ public class Manager extends Employee implements Serializable {
         boolean isPinned = pinInput.equalsIgnoreCase("yes");
 
         News news = new News(title, content, isPinned, new ArrayList<>());
-        Data.news.add(news);
+        Data.INSTANCE.news.add(news);
 
         System.out.println("News created and added successfully!");
     }
