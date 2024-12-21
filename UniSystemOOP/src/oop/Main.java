@@ -48,16 +48,12 @@ public class Main {
 		
 		//Now all of this should be in daatabse.Generating file!
 		
+		//UPD: 		Если че то не работает покачто юзайте мэйн - удаляйте файл data, раскоменчиваете блок ниже "Adding users and data to the system" и опять коментите 
 		
-//		System.out.println("Working Directory: " + new File(".").getAbsolutePath());
-//		Data.INSTANCE.write();
+		
 		
 		User admin = new Admin("popa1", "popapassword");
-		
 		Manager manager = new Manager("mngr", "mngr");
-		
-		
-		
 
 		Bachelor student1 = new Bachelor("stud", "pswrd", "Ben", "Doe");
 		Bachelor student2 = new Bachelor("stud2", "parol", "John", "Chan");
@@ -73,7 +69,7 @@ public class Main {
         teachers.add(teacher3);
         
         Vector<Teacher> teachers2 = new Vector<>();
-        teachers.add(teacher3);
+        teachers2.add(teacher3);
 
         Course ads = new Course("ADS", 2024, Semester.FALL);
         ads.setTeachers(teachers);
@@ -82,7 +78,7 @@ public class Main {
         oop.setTeachers(teachers);
 
         Course cmp = new Course("CMP", 2024, Semester.FALL);
-        //cmp.setTeachers(teachers2);
+        //cmp.setTeachers(teachers2);								//no teacher for CMP course - test manager function to assign course to teacher
 
         Mark mark75 = new Mark(30, 30, 15);
         Mark mark85 = new Mark(30, 30, 25);
@@ -118,19 +114,28 @@ public class Main {
 //        Data.INSTANCE.addStudentOrganization(osit);
 //        Data.INSTANCE.addStudentOrganization(bigCityLights);	
 
-        // TESTING STUDENT:
-        // register for course - OOP, 2024, FALL or ADS 2024, FALL 
-        // view courses
-        // view teacher info - OOP, 2024, FALL only after registration
-        // add mark to course, then check
-        // view|get transcript for now empty
-        // Rate teacher - Pakizar, Shamoi, 10
-        // View organization
-        // Join organization - OSIT
-        // Leave organization - OSIT
-
-        // TESTING TEACHER
-        // Put mark log to student Register logout - log to teacher Put mark logout - log to student then see marks
+        
+        
+        	// TESTING STUDENT:
+        
+//        1 - View Courses				Shows all courses that student enrolled to
+//        2 - Register for Course		Registers student for specific course   							(OOP, 2024, Fall or ADS 2024, FALL)
+//        3 - View Teacher Info			View Info about all teachers of specific course						(ADS, 2024, Fall)
+//        4 - View Marks				Shows all marks for all enrolled courses
+//        5 - View Transcript			Shows transcript like info about mark 								(Letter mark, GPA, ECTS)
+//        6 - Get Transcript			--Not working now--
+//        7 - Rate Teacher				Rate specific teacher												(Pakizar, Shamoi, 10)
+//        8 - View Organizations		Shows student organization that student is part of
+//        9 - Join Organization			Function to join student organization								(OSIT)
+//        10 - Leave Organization		Function to leave student organization  							(OSIT)
+        
+        
+        	// TESTING TEACHER
+//        1 - View Courses				Shows all courses that teacher assigned to
+//        2 - Put mark					Putting mark to specific student and course							(Ben, Doe, ADS, 2024, fall, 30, 30, 30)
+//        3 - Print research paper		--Not working now--
+//        4 - View students info		View info about all students of specific course						(Now realized by selection 1-n (May be ill change this))
+//        5 - Sent complaint			Sending complaint to all deans with urgency level					(Emergency!!!, HIGH)
         
 		
 		
