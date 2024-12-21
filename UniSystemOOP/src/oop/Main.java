@@ -44,7 +44,11 @@ public class Main {
 
 	
 	public static void main(String[] args) {
+	
 		
+		//NOW ALL THIS IN daatabse.Generating FILE!!!
+		
+		/*
 //		System.out.println("Working Directory: " + new File(".").getAbsolutePath());
 //		Data.INSTANCE.write();
 		
@@ -109,7 +113,7 @@ public class Main {
 //
 //        Data.INSTANCE.addStudentOrganization(faces);
 //        Data.INSTANCE.addStudentOrganization(osit);
-//        Data.INSTANCE.addStudentOrganization(bigCityLights);
+//        Data.INSTANCE.addStudentOrganization(bigCityLights);	*/
 
         // TESTING STUDENT:
         // register for course - OOP, 2024, FALL or ADS 2024, FALL 
@@ -125,10 +129,13 @@ public class Main {
         // TESTING TEACHER
         // Put mark log to student Register logout - log to teacher Put mark logout - log to student then see marks
         
+		
+		
+		
         User current = null;
 
         while (true) {
-            // Login loop
+
             while (current == null) {
                 current = login(); // Use the updated login method
             }
