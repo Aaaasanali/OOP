@@ -48,10 +48,19 @@ public class StudentOrganization implements Serializable {
         this.students.remove(student);
     }
 
+    
+    
     public void assignHead(Student student) {
         // Logic for assigning a head (optional)
     }
 
+    public void changeHead(Student student) {
+    	
+    }
+    
+    
+    
+    
     public Vector<String> getStudentsNames() {
         Vector<String> res = new Vector<>();
         for (Student student : students) {
