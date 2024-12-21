@@ -49,7 +49,7 @@ public class Manager extends Employee implements Serializable {
     
     public static void receiveRequest(Request request) {
         managerRequests.add(request);
-        System.out.println("Request received by Manager: " + request);
+//        System.out.println("Request received by Manager: " + request);			to logs
     }
     
     

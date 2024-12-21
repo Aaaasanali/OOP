@@ -95,6 +95,10 @@ public class Main {
 
         News news1 = new News("News1", "New news about news", false, comments);
         News news2 = new News("News2", "New news about news2", false, comments);
+        
+        
+        Rector rector = new Rector("gbdln", "rctr", "Gabdulin", "Maratbek");
+        Dean dean = new Dean("dean", "dean", "DeanName", "DeanSurname");
 
         // Adding users and data to the system
 //        Data.INSTANCE.addUser(admin);
@@ -114,9 +118,10 @@ public class Main {
 //        Data.INSTANCE.addStudentOrganization(osit);
 //        Data.INSTANCE.addStudentOrganization(bigCityLights);	
 
-        
-        																																					/*
-        
+//        	Data.INSTANCE.addUser(rector);
+//        	Data.INSTANCE.addUser(dean);																																			/*
+        	
+        /*
         
         	//TESTING USER
         

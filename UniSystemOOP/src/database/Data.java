@@ -33,6 +33,9 @@ public final class Data implements Serializable{
     private Vector<StudentOrganization> studentOrganizations = new Vector<StudentOrganization>();
 
     public List<News> news = new ArrayList<News>();
+    
+    private Vector<Request> requests = new Vector<>();
+
 
     private Stack<String> logs = new Stack<>();
 
@@ -118,7 +121,9 @@ public final class Data implements Serializable{
 		currentLanguage = l;
 	}
 
-
+	public void addRequest(Request request) {
+        requests.add(request);
+    }
 
 
 
@@ -177,7 +182,13 @@ public final class Data implements Serializable{
 	public List<News> getAllNews(){
 		return news;
 	}
-
+	
+	public Vector<Request> getRequests() {
+	    if (requests == null) {
+	        requests = new Vector<>(); // Initialize the requests list if it's null
+	    }
+	    return requests;
+	}
 
 
 	public User findUserByLogin(String login) {    

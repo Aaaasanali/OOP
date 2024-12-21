@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import Factories.NamedRunnable;
+import database.Data;
 import documents.Complaint;
 import documents.Request;
 import utils.InputPrompt;
@@ -19,6 +20,12 @@ public class Dean extends Employee implements Serializable{
         super(login, password);			
         // TODO Auto-generated constructor stub
     }
+    
+    public Dean(String login, String password, String name, String surname) {
+    	super(login, password, name, surname);
+	}
+    
+    
 
     public static void getComplaints() {
         if (complaints.isEmpty()) {
@@ -36,7 +43,7 @@ public class Dean extends Employee implements Serializable{
     
     
     public void signRequests() {
-        List<Request> pendingRequests = Employee.getRequests();
+        List<Request> pendingRequests = Data.INSTANCE.getRequests();
 
         if (pendingRequests.isEmpty()) {
             System.out.println("No requests to review.");
@@ -62,7 +69,7 @@ public class Dean extends Employee implements Serializable{
             // Approve the selected request
             Request approvedRequest = pendingRequests.remove(requestIndex - 1);
             approvedRequests.add(approvedRequest);
-            System.out.println("Approved request: " + approvedRequest);
+//            System.out.println("Approved request: " + approvedRequest);					//To logs
 
             // Forward to Manager
             Manager.receiveRequest(approvedRequest);

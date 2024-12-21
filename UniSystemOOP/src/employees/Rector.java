@@ -5,6 +5,7 @@ import java.util.*;
 
 
 import Factories.NamedRunnable;
+import database.Data;
 import documents.Request;
 import utils.InputPrompt;
 
@@ -18,7 +19,11 @@ public class Rector extends Employee implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
+    public Rector(String login, String password, String name, String surname) {
+    	super(login, password, name, surname);
+	}
+    
+    
 	
 	public static List<Request> getApprovedRequests() {
         return approvedRequests;
@@ -27,7 +32,7 @@ public class Rector extends Employee implements Serializable {
 	
 	
 	public void signRequests() {
-        List<Request> pendingRequests = Employee.getRequests();
+        List<Request> pendingRequests = Data.INSTANCE.getRequests();
 
         if (pendingRequests.isEmpty()) {
             System.out.println("No requests to review.");
@@ -53,7 +58,7 @@ public class Rector extends Employee implements Serializable {
             // Approve the selected request
             Request approvedRequest = pendingRequests.remove(requestIndex - 1);
             approvedRequests.add(approvedRequest);
-            System.out.println("Approved request: " + approvedRequest);
+//            System.out.println("Approved request: " + approvedRequest);			To logs
 
             // Forward to Manager
             Manager.receiveRequest(approvedRequest);

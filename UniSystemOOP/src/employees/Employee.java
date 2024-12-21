@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import Factories.NamedRunnable;
+import database.Data;
 import documents.Request;
 import user.User;
 import utils.InputPrompt;
@@ -20,8 +21,6 @@ public class Employee extends User implements Serializable{
 	public String department;
 	private List<String> messageInbox = new ArrayList<>();
 	
-	private static List<Request> requests = new ArrayList<>();
-
 	
 //	private final Vector<String> functions = new Vector<>(Arrays.asList("Check Salary", "Check Inbox"));
 	
@@ -47,7 +46,16 @@ public class Employee extends User implements Serializable{
     	
     }
     
-    public static List<Request> getRequests() {
+    public List<Request> getRequests() {
+        if (Data.INSTANCE == null) {
+            System.out.println("Data object is null");
+            return null; // or return an empty list
+        }
+        Vector<Request> requests = Data.INSTANCE.getRequests();
+        if (requests == null) {
+            System.out.println("Requests list is null");
+            return null; // or return an empty list
+        }
         return requests;
     }
     
@@ -68,9 +76,13 @@ public class Employee extends User implements Serializable{
                 continue;
             }
 
-            // Create a new request and add it to the list
-            Request request = new Request(content);
-            requests.add(request);
+            // Collect sender's name and surname
+            String senderName = this.getName(); // Assuming Employee has a `getName` method
+            String senderSurname = this.getSurname(); // Assuming Employee has a `getSurname` method
+
+            // Create a new request and add it to the Data
+            Request request = new Request(content, senderName, senderSurname);
+            Data.INSTANCE.addRequest(request); // This adds the request to the data's list
             System.out.println("Request sent successfully: " + content);
             break; // Exit after a successful request
         }

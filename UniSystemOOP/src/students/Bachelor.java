@@ -9,6 +9,8 @@ import research.DiplomaWork;
 
 public class Bachelor extends Student implements Serializable{
     
+	private static final long serialVersionUID = -17710899551115796L;
+	
 	private DiplomaWork diplomaWork;
 	
 	
