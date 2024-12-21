@@ -47,10 +47,7 @@ public class Manager extends Employee implements Serializable {
     }
     
     
-    public static void receiveRequest(Request request) {
-        managerRequests.add(request);
-//        System.out.println("Request received by Manager: " + request);			to logs
-    }
+
     
     
     // Add a new student
@@ -156,7 +153,6 @@ public class Manager extends Employee implements Serializable {
 
         System.out.println("News created and added successfully!");
     }
-    
     
     
     
@@ -293,6 +289,62 @@ public class Manager extends Employee implements Serializable {
     }
     
     
+    
+    
+    private void approveRequest(Request request) {
+        // Logic for approving a request (e.g., register a student, add course, etc.)
+        System.out.println("Request approved: " + request.toString());
+        managerRequests.remove(request);
+    }
+    
+    // Reject request method
+    private void rejectRequest(Request request) {
+        // Logic for rejecting a request
+        System.out.println("Request rejected: " + request.toString());					
+        managerRequests.remove(request);
+    }
+
+    // Receive a new request
+    public static void receiveRequest(Request request) {
+        managerRequests.add(request);
+        
+        //System.out.println("Request received: " + request.toString());				//TO LOGS
+    }
+    
+    
+    
+    public void handleRequest() {
+        if (managerRequests.isEmpty()) {
+            System.out.println("No requests available.");
+            return;
+        }
+        
+        System.out.println("Available requests:");
+        for (int i = 0; i < managerRequests.size(); i++) {
+            System.out.println(i + 1 + ". " + managerRequests.get(i).toString());
+        }
+
+        int requestIndex = InputPrompt.promptIntInput("Select a request to handle (1 to " + managerRequests.size() + "): ");
+        if (requestIndex < 1 || requestIndex > managerRequests.size()) {
+            System.out.println("Invalid request selection.");
+            return;
+        }
+
+        Request selectedRequest = managerRequests.get(requestIndex - 1);
+        String action = InputPrompt.promptInput("Do you want to approve or reject this request? (approve/reject): ");
+        
+        if ("approve".equalsIgnoreCase(action)) {
+            approveRequest(selectedRequest);
+        } else if ("reject".equalsIgnoreCase(action)) {
+            rejectRequest(selectedRequest);
+        } else {
+            System.out.println("Invalid action.");
+        }
+    }
+    
+    
+    
+    
 
     // Function map for the Manager
     public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
@@ -304,6 +356,7 @@ public class Manager extends Employee implements Serializable {
 //      functions.put(startIndex++, new NamedRunnable(this::approveStudentRegistration, "Approve student registration"));
 //      functions.put(startIndex++, new NamedRunnable(this::registerStudentToCourse, "Register student to course"));
         functions.put(startIndex++, new NamedRunnable(this::assignTeacherToCourse, "Assign teacher to course"));
+        functions.put(startIndex++, new NamedRunnable(this::handleRequest, "Handle requests"));
         
         
         // Add parent class functions
