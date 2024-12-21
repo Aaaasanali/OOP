@@ -10,6 +10,11 @@ import Factories.NamedRunnable;
 public class Master extends GraduateStudent implements Serializable {
     
 
+	private Thesis thesis;
+	
+	
+	
+	
 	public Master() {};
 	
     public Master(String login, String password, String name, String surname) {
@@ -18,7 +23,6 @@ public class Master extends GraduateStudent implements Serializable {
    
     
     
-    private Thesis thesis;
 
 
     private void getThesis() {											// void/Thesis?    return thesis or just print it?
@@ -40,7 +44,7 @@ public class Master extends GraduateStudent implements Serializable {
     public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
         Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
         functions.put(startIndex++, new NamedRunnable(this::getThesis, "Get Thesis"));
-        functions.put(startIndex++, new NamedRunnable(this::getString, "Get String"));
+        //functions.put(startIndex++, new NamedRunnable(this::getString, "Get String"));
         
         for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
             functions.put(startIndex++, entry.getValue());
