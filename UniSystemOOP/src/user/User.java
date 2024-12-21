@@ -257,7 +257,8 @@ public abstract class User implements Serializable {
     }
 
     // Mapping of functions to the menu
-    public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
+    public Map<Integer, NamedRunnable> settings() {
+    	int startIndex = 0;
         Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
         functions.put(startIndex++, new NamedRunnable(this::changePassword, "Change Password"));
         functions.put(startIndex++, new NamedRunnable(this::changeLanguage, "Change Language"));

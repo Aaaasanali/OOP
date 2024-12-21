@@ -17,24 +17,26 @@ import user.*;
 
 public class Main {
 
+
 	private static transient Scanner inp = new Scanner(System.in);
-	
+
 	public static Runnable pickFunc(Map<Integer, NamedRunnable> functions) {
-		while(true) {
-			int i=0;
-			for (Map.Entry<Integer, NamedRunnable> entry : functions.entrySet()) {
-	            System.out.println((++i) + " - " + entry.getValue().getName());
-			}
-	        int choice = inp.nextInt()-1;
-	        
-	        if(choice==-1) return null;
-	        Runnable function = functions.get(choice);
-	        if (function != null) {
-	            return function;
-	        }
-	        System.out.println("Invalid input. This function does not exist.");
-		}
-	}
+        while(true) {
+            int i=0;
+            for (Map.Entry<Integer, NamedRunnable> entry : functions.entrySet()) {
+                System.out.println((++i) + " - " + entry.getValue().getName());
+            }
+            int choice = inp.nextInt()-1;
+
+            if(choice==-1) return null;
+            Runnable function = functions.get(choice);
+            if (function != null) {
+                return function;
+            }
+            System.out.println("Invalid input. This function does not exist.");
+        }
+    }
+	
     public static User login() {
         while (true) {
             System.out.println("Welcome To UniSystem2000ProMax??");
@@ -116,15 +118,15 @@ public class Main {
         Dean dean = new Dean("dean", "dean", "DeanName", "DeanSurname");
 
         // Adding users and data to the system
-//        Data.INSTANCE.addUser(admin);
-//        Data.INSTANCE.addUser(manager);
-//        Data.INSTANCE.addUser(student1);
-//        Data.INSTANCE.addUser(student2);
-//        Data.INSTANCE.addUser(student3);
-//        Data.INSTANCE.addUser(teacher1);
-//        Data.INSTANCE.addUser(teacher2);
-//        Data.INSTANCE.addUser(teacher3);
-//
+        Data.INSTANCE.addUser(admin);
+        Data.INSTANCE.addUser(manager);
+        Data.INSTANCE.addUser(student1);
+        Data.INSTANCE.addUser(student2);
+        Data.INSTANCE.addUser(student3);
+        Data.INSTANCE.addUser(teacher1);
+        Data.INSTANCE.addUser(teacher2);
+        Data.INSTANCE.addUser(teacher3);
+
 //        Data.INSTANCE.addCourse(oop);
 //        Data.INSTANCE.addCourse(ads);
 //        Data.INSTANCE.addCourse(cmp);
