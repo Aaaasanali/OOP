@@ -80,7 +80,7 @@ public final class Data implements Serializable{
 	    }
 	}
 
-	public static void write() {
+	public static void write () throws IOException {
 	    File dataFile = new File("data"); // Creates file in the working directory
 	    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dataFile))) {
 	        System.out.println("Writing data to file...");

@@ -210,7 +210,21 @@ public abstract class Student extends User implements Serializable {
 
     public void viewTranscript() {
 
-        // Assuming you have some implementation for this
+    	if (courses.isEmpty()) {
+            System.out.println("No marks to display.");
+            return;
+        }
+        for (Map.Entry<Course, Mark> entry : courses.entrySet()) {
+            Course course = entry.getKey();
+            Mark mark = entry.getValue();
+            System.out.println("Course: " + course.getName() +
+            		" | ECTS: " + course.getCredits() +
+                    " | Overall score: " + mark.getScore() + 
+                    " | Letter grade: " + mark.calculateLetterGrade() + 
+            		" | GPA: " + mark.calculateGrade()
+            		
+            		);
+        }
     }
 
     public void getTranscript() {

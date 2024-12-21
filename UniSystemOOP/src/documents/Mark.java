@@ -80,6 +80,10 @@ public class Mark implements Serializable{
     	return this.convertGradeToLetter(this.calculateGrade());
     }
     
+    public int getScore() {
+    	return this.firstAttestation + this.secondAttestation + this.finalExam;
+    }
+    
     
     public String convertGradeToLetter(double grade) {
         if (grade == 4.0) return "A";
