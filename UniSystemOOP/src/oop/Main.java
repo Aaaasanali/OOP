@@ -71,6 +71,9 @@ public class Main {
         teachers.add(teacher1);
         teachers.add(teacher2);
         teachers.add(teacher3);
+        
+        Vector<Teacher> teachers2 = new Vector<>();
+        teachers.add(teacher3);
 
         Course ads = new Course("ADS", 2024, Semester.FALL);
         ads.setTeachers(teachers);
@@ -79,7 +82,7 @@ public class Main {
         oop.setTeachers(teachers);
 
         Course cmp = new Course("CMP", 2024, Semester.FALL);
-        cmp.setTeachers(teachers);
+        //cmp.setTeachers(teachers2);
 
         Mark mark75 = new Mark(30, 30, 15);
         Mark mark85 = new Mark(30, 30, 25);

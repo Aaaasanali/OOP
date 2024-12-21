@@ -34,6 +34,7 @@ public class Course implements Serializable {
     	this.year = year;
     	this.semester = semester;
     	this.enrolledStudents = new Vector<>();
+    	this.teachers = new Vector<>();
     }
     
 
@@ -48,6 +49,8 @@ public class Course implements Serializable {
 		//  this.schedule = schedule;
 		  this.description = description;
 		  this.semester = semester;
+	    	this.enrolledStudents = new Vector<>();
+	    	this.teachers = new Vector<>();
 
     }
     
@@ -66,7 +69,8 @@ public class Course implements Serializable {
 		this.type = type;
 		this.description = description;
 		this.prerequisites = (prerequisites != null) ? prerequisites : new Vector<>();
-		this.enrolledStudents = new Vector<>();
+    	this.enrolledStudents = new Vector<>();
+    	this.teachers = new Vector<>();
 	}
     
     
