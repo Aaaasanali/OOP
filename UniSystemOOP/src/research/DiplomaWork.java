@@ -1,4 +1,4 @@
-package documents;
+package research;
 
 public class DiplomaWork {
 

@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import Factories.NamedRunnable;
-import documents.DiplomaWork;
+import research.DiplomaWork;
 
 public class Bachelor extends Student implements Serializable{
     
