@@ -17,7 +17,7 @@ import students.*;
 import user.*;
 import utils.InputPrompt;
 
-public class Teacher extends Employee implements Researcher, Serializable {
+public class Teacher extends Employee implements Serializable {
 
     public Teacher(String login, String password) {
         super(login, password);
@@ -33,8 +33,8 @@ public class Teacher extends Employee implements Researcher, Serializable {
     
 	public Teacher() {
 		// TODO Auto-generated constructor stub
+		
 	}
-
 
 
 	private Vector<Course> courses;
@@ -47,14 +47,6 @@ public class Teacher extends Employee implements Researcher, Serializable {
     private TeacherTitle teacherType;
 
     private Set<Document> documents;
-
-    public Teacher(String login, String password) {
-        super(login, password);
-    }
-
-    public Teacher(String login, String password, String name, String surname) {
-        super(login, password, name, surname);
-    }
    
     public double getRating() {
         return this.rating;

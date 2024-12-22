@@ -37,7 +37,7 @@ public abstract class Student extends User implements Serializable {
         this.documents = new ArrayList<>();
         this.courses = new HashMap<>();
     }
-
+    
     public Student(String login, String password, String name, String surname) {
         super(login, password, name, surname);
         this.documents = new ArrayList<>();

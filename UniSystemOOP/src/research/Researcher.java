@@ -1,8 +1,13 @@
 package research;
 
-public interface Researcher {
-	public void addResearchPaper();
-	public ResearchPaper getresearchPaper();
-	public int calculateHIndex();
-	public void printResearchPaper();
+import employees.Employee;
+
+public class Researcher extends Employee{
+	
+	public Researcher(String login, String password, String name, String surname) {
+		super(login, password, name, surname);
+	}
+	
+	
+	
 }

@@ -94,11 +94,6 @@ public final class Data implements Serializable{
 	    }
 	}
 
-    
-
-
-
-
 	public void addUser(User a) {
 		users.add(a);
 	}
@@ -123,10 +118,6 @@ public final class Data implements Serializable{
 	public void addRequest(Request request) {
         requests.add(request);
     }
-
-
-
-
 
 	public Vector<Student> getAllStudents(){
 		Vector v = new Vector<Student>();
@@ -210,5 +201,5 @@ public final class Data implements Serializable{
 	public static String getUniName() {
 		return universityName;
 	}
-
+	
 }

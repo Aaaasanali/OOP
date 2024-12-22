@@ -2,6 +2,7 @@ package employees;
 
 import user.User;
 import user.UserFactory;
+import utils.InputPrompt;
 
 import java.io.Serializable;
 import java.util.*;
@@ -28,10 +29,9 @@ public class Admin extends User implements CreatingUsers, Serializable {
     public void createUser() {
         System.out.println("Type 'quit' at any time to exit");
         
-        System.out.println("Enter User Type: ");
         String userType = null;
         while (userType == null) {
-            userType = n.nextLine().toUpperCase();
+            userType = InputPrompt.promptInput("Enter User Type: ");
             if (userType.equals("QUIT")) {
                 System.out.println("Operation cancelled.");
                 return; // Exit the method
@@ -44,11 +44,21 @@ public class Admin extends User implements CreatingUsers, Serializable {
         }
         
         User current = UserFactory.getUser(userType, this);
-        System.out.println("Enter Login: ");
-        String login = n.nextLine();
-        current.setLogin(login);
+        
+        String firstName = InputPrompt.promptInput("Enter student's first name: ");
+        if (firstName == null) return;
 
-        System.out.println(current.getClass().getSimpleName() + " has been created\nlogin: " + current.getLogin() + "\npassword: " + current.getPassword());
+        String lastName = InputPrompt.promptInput("Enter student's last name: ");
+        if (lastName == null) return;
+
+        String login = InputPrompt.promptInput("Enter student's login: ");
+        if (login == null) return;
+        
+        current.setLogin(login);
+        current.setName(firstName, lastName);
+        System.out.println(current.getClass().getSimpleName() + " has been created\nlogin: " + current.getLogin() + "\npassword: " + current.getSimplePassword());
+        Data.INSTANCE.addUser(current);
+        current.researcherCheck();
     }
 
     public void updateUser() {

@@ -1,4 +1,4 @@
-package oop;
+  package oop;
 
 import java.io.File;
 import java.util.*;
@@ -52,6 +52,15 @@ public class Main {
                 // If login is valid, fetch the user by login
                 User u = Data.INSTANCE.findUserByLogin(login);
                 System.out.println("Logging in...!");
+                if(u.getResearcherStatus()) {
+                	while(true) {
+                		System.out.println("Which account you want to login?\n1 - Standart\n2 - Researcher");
+                    	String ch = inp.next();
+                    	if(ch.equals("1")) return u;
+                    	else if(ch.equals("2")) return u.getResearcherAccount();
+                    	else System.out.println("Invalid input. Please choose account to login");
+                	}
+                }
                 return u; // Return the logged-in user
             } else {
                 System.out.println("Invalid login or password. Try again.");

@@ -44,10 +44,25 @@ public class Manager extends Employee implements Serializable {
 
     
     
-    // Add a new student
-    public void addStudent() {
+    public void createUser() {
         System.out.println("Type 'quit' at any time to exit");
+        
+        String userType = null;
+        while (userType == null) {
+            userType = InputPrompt.promptInput("Enter User Type: ");
+            if (userType.equals("QUIT")) {
+                System.out.println("Operation cancelled.");
+                return; // Exit the method
+            }
 
+            if (userType.isEmpty()) {
+                System.out.println("User type cannot be empty. Please enter a valid user type.");
+                userType = null; // Reset to prompt again
+            }
+        }
+        
+        User current = UserFactory.getUser(userType, this);
+        
         String firstName = InputPrompt.promptInput("Enter student's first name: ");
         if (firstName == null) return;
 
@@ -56,14 +71,12 @@ public class Manager extends Employee implements Serializable {
 
         String login = InputPrompt.promptInput("Enter student's login: ");
         if (login == null) return;
-
-        String password = InputPrompt.promptInput("Enter student's password: ");
-        if (password == null) return;
-
-        Student newStudent = new Bachelor(login, password, firstName, lastName);
-        Data.INSTANCE.addUser(newStudent);
-
-        System.out.println("Student added successfully!");
+        
+        current.setLogin(login);
+        current.setName(firstName, lastName);
+        System.out.println(current.getClass().getSimpleName() + " has been created\nlogin: " + current.getLogin() + "\npassword: " + current.getSimplePassword());
+        Data.INSTANCE.addUser(current);
+        current.researcherCheck();
     }
 
     // Add a new course
@@ -360,4 +373,7 @@ public class Manager extends Employee implements Serializable {
 
         return functions;
     }
+    
+    
+    
 }

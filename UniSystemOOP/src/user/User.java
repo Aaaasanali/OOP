@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public abstract class User implements Serializable {
-
+	
     private String login;
     private String password;
     private int hashPassword;
@@ -33,8 +33,16 @@ public abstract class User implements Serializable {
     private Sex sex;
     private String phone;
     private Education education;
-
-    public User() {};
+    private boolean isResearcher;
+    private Researcher researcherAcc = null;
+    
+    public User() {
+    	System.out.println("Here");
+    	this.password = generatePassword();
+    	this.hashPassword = this.password.hashCode();
+    }
+    
+    
 
     public User(String login, String password) {
         this.login = login;
@@ -62,8 +70,9 @@ public abstract class User implements Serializable {
         System.out.println("Filling name, email, sex, phone, and other details.");
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String firstname, String lastname) {
+        this.name = firstname;
+        this.surname = lastname;
     }
 
     public String getName() {
@@ -85,7 +94,11 @@ public abstract class User implements Serializable {
     public int getPassword() {
         return this.hashPassword;
     }
-
+    
+    public String getSimplePassword() {
+        return this.password;
+    }
+    
     public String getId() {
         return this.id;
     }
@@ -285,6 +298,33 @@ public abstract class User implements Serializable {
 		return functions;
 	}
 	
+	private String generatePassword() {
+		Random random = new Random();
+
+        // Генерация случайного 5-значного числа (от 10000 до 99999)
+        int password = 10000 + random.nextInt(90000);
+
+        // Вывод пароля
+        return String.valueOf(password);
+	}
 	
+	public void researcherStatus(boolean b) {
+		this.isResearcher = b;
+	}
 	
+	public boolean getResearcherStatus() {
+		return this.isResearcher;
+	}
+	
+	public void setResearcherAccount(Researcher r) {
+		this.researcherAcc = r;
+	}
+	public Researcher getResearcherAccount() {
+		return this.researcherAcc;
+	}
+	public void researcherCheck() {
+		if(this.isResearcher) {
+			this.researcherAcc = new Researcher(this.login, this.password, this.name, this.surname);
+		}
+	}
 }
