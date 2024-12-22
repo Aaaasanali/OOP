@@ -12,328 +12,434 @@ import oop.*;
 import research.*;
 import students.*;
 import user.*;
-import utils.InputPrompt;  // Importing the InputPrompt utility class
+import utils.InputPrompt; // Importing the InputPrompt utility class
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * The User class is main for this system and it represents a user in the
+ * system. It allows for managing user details like login, changing password,
+ * language preferences, and viewing news.
+ * 
+ * <p>
+ * The class also allows interacting with user data by checking news, updating
+ * password, and exiting the application.
+ * </p>
+ */
 public abstract class User implements Serializable {
 
-    private String login;
-    private String password;
-    private int hashPassword;
+	private String login;
+	private String password;
+	private int hashPassword;
 
-    private String id;
-    private String name;
-    private String surname;
-    private String email;
-    private Language language;
-    private Date birthdate;
-    private Sex sex;
-    private String phone;
-    private Education education;
+	private String id;
+	private String name;
+	private String surname;
+	private String email;
+	private Language language;
+	private Date birthdate;
+	private Sex sex;
+	private String phone;
+	private Education education;
 
-    public User() {
-        this.login = "";           
-        this.password = "";        
-        this.hashPassword = 0;     
-        this.id = "";              
-        this.name = "";            
-        this.surname = "";         
-        this.email = "";           
-        this.language = null;      
-        this.birthdate = null;     
-        this.sex = null;           
-        this.phone = "";           
-        this.education = null;     
-    }
+	public User() {
+		this.login = "";
+		this.password = "";
+		this.hashPassword = 0;
+		this.id = "";
+		this.name = "";
+		this.surname = "";
+		this.email = "";
+		this.language = null;
+		this.birthdate = null;
+		this.sex = null;
+		this.phone = "";
+		this.education = null;
+	}
 
-    public User(String login, String password) {
-        this.login = login;
-        this.password = password;
-        this.hashPassword = password.hashCode();
-        this.id = generateId();
-    }
+	public User(String login, String password) {
+		this.login = login;
+		this.password = password;
+		this.hashPassword = password.hashCode();
+		this.id = generateId();
+	}
 
-    public User(String login, String password, String name, String surname) {
-        this.login = login;
-        this.password = password;
-        this.hashPassword = password.hashCode();
-        this.id = generateId();
-        this.name = name;
-        this.surname = surname;
-    }
+	public User(String login, String password, String name, String surname) {
+		this.login = login;
+		this.password = password;
+		this.hashPassword = password.hashCode();
+		this.id = generateId();
+		this.name = name;
+		this.surname = surname;
+	}
 
-    private String generateId() {
-        Date d = new Date();
-        Random r = new Random();
-        return String.valueOf(d.getYear()).substring(1) + "B" + String.valueOf(10000 + r.nextInt(90000));
-    }
+	/**
+	 * Generates a unique user ID based on the current year and a random number.
+	 * 
+	 * @return The generated unique user ID.
+	 */
+	private String generateId() {
+		Date d = new Date();
+		Random r = new Random();
+		return String.valueOf(d.getYear()).substring(1) + "B" + String.valueOf(10000 + r.nextInt(90000));
+	}
 
-    public void setAllData() {
-        System.out.println("Filling name, email, sex, phone, and other details.");
-    }
+	public void setAllData() {
+		System.out.println("Filling name, email, sex, phone, and other details.");
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	/**
+	 * Sets the user's first name.
+	 * 
+	 * @param name The first name to set for the user.
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getName() {
-        return this.name != null ? this.name : "Unknown";
-    }
+	/**
+	 * Gets the user's first name.
+	 * 
+	 * @return The first name of the user, or "Unknown" if not set.
+	 */
+	public String getName() {
+		return this.name != null ? this.name : "Unknown";
+	}
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-    
-    public String getSurname() {
-        return this.surname;
-    }
+	/**
+	 * Sets the user's surname.
+	 * 
+	 * @param surname The surname to set for the user.
+	 */
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
 
-    public String getLogin() {
-        return login;
-    }
+	/**
+	 * Gets the user's surname.
+	 * 
+	 * @return The surname of the user.
+	 */
+	public String getSurname() {
+		return this.surname;
+	}
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-    
+	/**
+	 * Gets the user's login name.
+	 * 
+	 * @return The login name of the user.
+	 */
+	public String getLogin() {
+		return login;
+	}
+
+	/**
+	 * Sets the user's login name.
+	 * 
+	 * @param login The login name to set for the user.
+	 */
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	/**
+	 * Sets the user's email address.
+	 * 
+	 * @param email The email address to set for the user.
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * Sets the user's phone number.
+	 * 
+	 * @param phone The phone number to set for the user.
+	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
-	
-	
-    public int getPassword() {
-        return this.hashPassword;
-    }
+	/**
+	 * Gets the hashed version of the user's password.
+	 * 
+	 * @return The hashed password of the user.
+	 */
+	public int getPassword() {
+		return this.hashPassword;
+	}
 
-    public String getId() {
-        return this.id;
-    }
+	/**
+	 * Gets the user's unique ID.
+	 * 
+	 * @return The unique ID of the user.
+	 */
+	public String getId() {
+		return this.id;
+	}
 
-    public String toString() {
-        return "User{" +
-                "login='" + login + '\'' +
-                ", id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", language=" + language +
-                ", birthdate=" + birthdate +
-                ", sex=" + sex +
-                ", phone='" + phone + '\'' +
-                ", education=" + education +
-                '}';
-    }
-    
-    
+	/**
+	 * Saves the current user data to the database
+	 */
 	private void save() throws IOException {
-		
+
 		if (InputPrompt.scanner != null) {
-			InputPrompt.scanner.close(); // Close the Scanner to avoid resource leakage
-	    }
-		
+			InputPrompt.scanner.close(); // close the scanner
+		}
+
 		Data.write();
 	}
-	
 
-    // Method to validate login credentials (check if login exists and password matches)
-    public static boolean validateLogin(String login, String password) {
-        User user = Data.INSTANCE.findUserByLogin(login);
-        if (user == null) {
-        	
-            System.out.println("User not found with the login: " + login);
-            return false;
-        }
+	/**
+	 * Validates the user's login credentials by checking if the login exists and
+	 * the password matches.
+	 * 
+	 * @param login    The login name to validate.
+	 * @param password The password to validate.
+	 * @return True if the login is valid and the password matches, false otherwise.
+	 */
+	public static boolean validateLogin(String login, String password) {
+		User user = Data.INSTANCE.findUserByLogin(login);
+		if (user == null) {
 
-        if (user.hashPassword == password.hashCode()) {
+			System.out.println("User not found with the login: " + login);
+			return false;
+		}
 
-            System.out.println("Login successful.");
-            return true;
-        } else {
+		if (user.hashPassword == password.hashCode()) {
 
-            System.out.println("Incorrect password.");
-            return false;
-        }
-    }
+			System.out.println("Login successful.");
+			return true;
+		} else {
 
-    // Method to change the user's language
-    public void changeLanguage() {
-        System.out.println("Type 'quit' at any time to exit");
+			System.out.println("Incorrect password.");
+			return false;
+		}
+	}
 
-        String message = "Pick a language to change:\n1 - RU\n2 - EN\n3 - KZ\n";
-        int choice = InputPrompt.promptIntInput(message);  
+	/**
+	 * Changes the user's system language by prompting the user to select a
+	 * language.
+	 * <p>
+	 * The available languages are: Russian, English, and Kazakh
+	 * </p>
+	 */
+	public void changeLanguage() {
+		System.out.println("Type 'quit' at any time to exit");
 
-        if (choice == -1) {
-            System.out.println("Operation cancelled.");
-            return;  
-        }
+		String message = "Pick a language to change:\n1 - RU\n2 - EN\n3 - KZ\n";
+		int choice = InputPrompt.promptIntInput(message);
 
-        switch (choice) {
-            case 1:
-                Data.INSTANCE.setLanguage(Language.RU);
-                break;
-            case 2:
-            	Data.INSTANCE.setLanguage(Language.EN);
-                break;
-            case 3:
-            	Data.INSTANCE.setLanguage(Language.KZ);
-                break;
-            default:
-                System.out.println("Invalid input.");
-        }
-    }
+		if (choice == -1) {
+			System.out.println("Operation cancelled.");
+			return;
+		}
 
-    // Method to change the user's password
-    public void changePassword() {
-        while (true) {
-            System.out.println("Change Password\nType 'quit' to cancel.");
+		switch (choice) {
+		case 1:
+			Data.INSTANCE.setLanguage(Language.RU);
+			break;
+		case 2:
+			Data.INSTANCE.setLanguage(Language.EN);
+			break;
+		case 3:
+			Data.INSTANCE.setLanguage(Language.KZ);
+			break;
+		default:
+			System.out.println("Invalid input.");
+		}
+	}
 
-            // Prompt for old password
-            String oldPassword = InputPrompt.promptInput("Old Password: ");
-            if (oldPassword == null) {
-                System.out.println("Password change operation cancelled.");
-                return;
-            }
+	/**
+	 * function replaces old password with new entered one
+	 * 
+	 * @param password2 new password
+	 */
+	private void setPassword(String password2) {
+		this.password = password2;
+		this.hashPassword = password2.hashCode(); // Update the hashed password
+	}
 
-            // Check if the old password is correct
-            if (this.password.equals(oldPassword)) {
-                // Prompt for new password
-                String newPassword = InputPrompt.promptInput("New Password: ");
-                if (newPassword == null) {
-                    System.out.println("Password change operation cancelled.");
-                    return;
-                }
+	/**
+	 * Changes the user's password by prompting the user to input the old password
+	 * and then setting a new password
+	 */
+	public void changePassword() {
+	    while (true) {
+	        System.out.println("Change Password\nType 'quit' to cancel.");
+	        
+	        // Prompt 1
+	        String oldPassword = InputPrompt.promptInput("Old Password: ");
+	        if (oldPassword == null) {
+	            System.out.println("Password change operation cancelled.");
+	            return;
+	        }
 
-                // Update the password for the current user
-                this.password = newPassword;
-                this.hashPassword = newPassword.hashCode();  // Update the hashed password
+	        // Check old password
+	        if (this.password.equals(oldPassword)) {
 
-                System.out.println("Your new password is: " + this.password);
+	            // Prompt 2
+	            String newPassword = InputPrompt.promptInput("New Password: ");
+	            if (newPassword == null) {
+	                System.out.println("Password change operation cancelled.");
+	                return;
+	            }
 
-                // Find the user by login in Data.INSTANCE and update the password
-                User updatedUser = Data.INSTANCE.findUserByLogin(this.login);
-                if (updatedUser != null) {
-                    updatedUser.setPassword(newPassword);  // Update the password for the user
-                }
+	            // Update password
+	            this.password = newPassword;
+	            this.hashPassword = newPassword.hashCode(); // Update hashed password
 
-                // Now serialize the Data.INSTANCE object to persist the updated state
-                try {
-                    Data.write();  
-                    System.out.println("Password updated successfully.");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.out.println("Failed to save user data.");
-                }
+	            // Log password change to Data
+	            String logMessage = "User " + this.getName() + " " + this.getSurname() + " changed their password.";
+	            Data.INSTANCE.addLog(logMessage);
+	            System.out.println("Log: Password change logged successfully.");
 
-                return;  // Exit after updating the password
-            } else {
-                System.out.println("Incorrect old password. Try again.");
-            }
-        }
-    }
-    
-    public void updateField(String fieldName, String newValue) {
-        switch (fieldName) {
-            case "name":
-                this.setName(newValue);
-                break;
-            case "surname":
-                this.setSurname(newValue);
-                break;
-            case "email":
-                this.setEmail(newValue);
-                break;
-            case "phone":
-                this.setPhone(newValue);
-                break;
-            default:
-                System.out.println("Unknown field: " + fieldName);
-        }
-    }
+	            // Save updated user data
+	            User updatedUser = Data.INSTANCE.findUserByLogin(this.login);
+	            if (updatedUser != null) {
+	                updatedUser.setPassword(newPassword); // Update password
+	            }
 
-    private void setPassword(String password2) {
-        this.password = password2;
-        this.hashPassword = password2.hashCode();  // Update the hashed password
-    }
+	            // Try to save data to persistent storage
+	            try {
+	                Data.write();
+	                System.out.println("Password updated successfully.");
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	                System.out.println("Failed to save user data.");
+	            }
 
-    // Method to check news
-    public void checkNews() {
-        System.out.println("All News:");
+	            return;
+	        } else {
+	            System.out.println("Incorrect old password. Try again.");
+	        }
+	    }
+	}
 
-        List<News> newsList = Data.INSTANCE.getAllNews();
+	/**
+	 * Updates a specific field for the user.
+	 * 
+	 * @param fieldName The name of the field to update
+	 * @param newValue  The new value to set for the field
+	 */
+	public void updateField(String fieldName, String newValue) {
+		switch (fieldName) {
+		case "name":
+			this.setName(newValue);
+			break;
+		case "surname":
+			this.setSurname(newValue);
+			break;
+		case "email":
+			this.setEmail(newValue);
+			break;
+		case "phone":
+			this.setPhone(newValue);
+			break;
+		default:
+			System.out.println("Unknown field: " + fieldName);
+		}
+	}
 
-        if (newsList.isEmpty()) {
-            System.out.println("No news available.");
-            return;
-        }
+	/**
+	 * Checks and displays the latest news.
+	 * <p>
+	 * This method sorts the news by pinned status and then by the order of
+	 * insertion. It displays news details like title, content, and comments.
+	 * </p>
+	 */
+	public void checkNews() {
+		System.out.println("All News:");
 
-        // Sort news: pinned first, then by insertion order
-        newsList.sort((news1, news2) -> Boolean.compare(news2.isPinned(), news1.isPinned()));
-        int i = 1;
-        for (News news : newsList) {
-            System.out.println(i++ + ". " + news.getTitle() + " - " + news.getContent());
-            System.out.println("Comments: " + news.getComments());
-            System.out.println("----------------------------------");
-        }
-    }
+		List<News> newsList = Data.INSTANCE.getAllNews();
 
-    // Exit method to close the application
-    public void exit() {
-        System.out.println("Exiting the application...");
-        
-        try {
+		if (newsList.isEmpty()) {
+			System.out.println("No news available.");
+			return;
+		}
+
+		// Sort news: pinned first, then by insertion order
+		newsList.sort((news1, news2) -> Boolean.compare(news2.isPinned(), news1.isPinned()));
+		int i = 1;
+		for (News news : newsList) {
+			System.out.println(i++ + ". " + news.getTitle() + " - " + news.getContent());
+			System.out.println("Comments: " + news.getComments());
+			System.out.println("----------------------------------");
+		}
+	}
+
+	/**
+	 * Exits the application by saving user data and closing the program.
+	 */
+	public void exit() {
+		System.out.println("Exiting the application...");
+
+		try {
 			save();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        
-        System.exit(0);
-    }
 
-    // Logout method
-    public void logout() {
-        System.out.println("Logging out...");
-    }
-
-    // Mapping of functions to the menu
-    public Map<Integer, NamedRunnable> settings() {
-    	int startIndex = 0;
-        Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
-        functions.put(startIndex++, new NamedRunnable(this::changePassword, "Change Password"));
-        functions.put(startIndex++, new NamedRunnable(this::changeLanguage, "Change Language"));
-        
-        tabs(functions);
-        return functions;
+		System.exit(0);
 	}
-	
-	public void tabs(Map<Integer, NamedRunnable> functions) {
-    	while(true) {
-        	Runnable pick = Main.pickFunc(functions);
-            if(pick == null) return;
-            pick.run();
-        }
-    }
-	
-	
-	public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex){
+
+	/**
+	 * Method to log out from current users account
+	 */
+	public void logout() {
+		System.out.println("Logging out...");
+	}
+
+	/**
+	 * Sets up user settings options like changing password and language.
+	 * 
+	 * @return A map of user settings options.
+	 */
+	public Map<Integer, NamedRunnable> settings() {
+		int startIndex = 0;
 		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
-        functions.put(startIndex++, new NamedRunnable(this::settings, "Settings"));
-        functions.put(startIndex++, new NamedRunnable(this::checkNews, "Check news"));
-//        functions.put(startIndex++, new NamedRunnable(this::logout, "Logout"));
-        functions.put(startIndex++, new NamedRunnable(this::exit, "Exit"));
+		functions.put(startIndex++, new NamedRunnable(this::changePassword, "Change Password"));
+		functions.put(startIndex++, new NamedRunnable(this::changeLanguage, "Change Language"));
+
+		tabs(functions);
 		return functions;
 	}
 
+	/**
+	 * Displays the options and runs the selected action.
+	 * 
+	 * @param functions A map of available user actions.
+	 */
+	public void tabs(Map<Integer, NamedRunnable> functions) {
+		while (true) {
+			Runnable pick = Main.pickFunc(functions);
+			if (pick == null)
+				return;
+			pick.run();
+		}
+	}
 
+	/**
+	 * Creates and returns the main menu options for the user.
+	 * 
+	 * @param startIndex The starting index for the map.
+	 * @return A map of main menu actions.
+	 */
+	public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
+		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
+		functions.put(startIndex++, new NamedRunnable(this::settings, "Settings"));
+		functions.put(startIndex++, new NamedRunnable(this::checkNews, "Check news"));
+//        functions.put(startIndex++, new NamedRunnable(this::logout, "Logout"));
+		functions.put(startIndex++, new NamedRunnable(this::exit, "Exit"));
+		return functions;
+	}
 
-	
-	
-	
+	public String toString() {
+		return "User{" + "login='" + login + '\'' + ", id='" + id + '\'' + ", name='" + name + '\'' + ", surname='"
+				+ surname + '\'' + ", email='" + email + '\'' + ", language=" + language + ", birthdate=" + birthdate
+				+ ", sex=" + sex + ", phone='" + phone + '\'' + ", education=" + education + '}';
+	}
+
 }
