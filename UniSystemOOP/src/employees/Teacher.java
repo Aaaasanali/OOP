@@ -31,9 +31,13 @@ public class Teacher extends Employee implements Researcher, Serializable {
     private Set<Document> documents;
     
     	//Constructors
-    public Teacher() {
-		super();
-	}
+    public Teacher() {  
+    	super();
+        this.courses = new Vector<>();  
+        this.rating = 0.0;  
+        this.ratingMarks = new Vector<>();  
+        this.documents = new HashSet<>();  
+    }
     
     public Teacher(String login, String password) {
         super(login, password);

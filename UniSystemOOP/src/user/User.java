@@ -34,7 +34,20 @@ public abstract class User implements Serializable {
     private String phone;
     private Education education;
 
-    public User() {};
+    public User() {
+        this.login = "";           
+        this.password = "";        
+        this.hashPassword = 0;     
+        this.id = "";              
+        this.name = "";            
+        this.surname = "";         
+        this.email = "";           
+        this.language = null;      
+        this.birthdate = null;     
+        this.sex = null;           
+        this.phone = "";           
+        this.education = null;     
+    }
 
     public User(String login, String password) {
         this.login = login;

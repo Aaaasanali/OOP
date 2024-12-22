@@ -62,9 +62,8 @@ public class Request extends Message implements Serializable {
 	}
 
 	public String toString() {
-		return "Request. " + "Content: '" + content + "'" + " | sender: " + senderName + " " + senderSurname;// +
-//                " | isSignedByDean: " + isSignedByDean+
-//                " | isSignedByRector: " + isSignedByRector;
+		return "Request. " + "Content: '" + content + "'" + " | sender: " + senderName + " " + senderSurname
+				+ " | isSignedByDean: " + isSignedByDean + " | isSignedByRector: " + isSignedByRector;
 
 	}
 }

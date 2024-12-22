@@ -24,8 +24,10 @@ public class Employee extends User implements Serializable {
 	public String department;
 	private Stack<Message> messageInbox = new Stack<>();
 
-	// private final Vector<String> functions = new Vector<>(Arrays.asList("Check
-	// Salary", "Check Inbox"));
+	public Employee() {
+        super();
+        this.department = "";
+    }
 
 	public Employee(String login, String password) {
 		super(login, password);
@@ -209,25 +211,21 @@ public class Employee extends User implements Serializable {
 			break; // Exit after a successful request
 		}
 	}
-	
-	
+
 	public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
-        Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
-        functions.put(startIndex++, new NamedRunnable(this::sendMessage, "Send message"));
-        functions.put(startIndex++, new NamedRunnable(this::sendRequest, "Send request"));
-        
-        
-        for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
-            functions.put(startIndex++, entry.getValue());
-        }
-        
-        return functions;
-    }
-    
-    
-    
-    public String toString() {
-    	return "Employee is placed in " + department + " department";
-    }
-	
+		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
+		functions.put(startIndex++, new NamedRunnable(this::sendMessage, "Send message"));
+		functions.put(startIndex++, new NamedRunnable(this::sendRequest, "Send request"));
+
+		for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
+			functions.put(startIndex++, entry.getValue());
+		}
+
+		return functions;
+	}
+
+	public String toString() {
+		return "Employee is placed in " + department + " department";
+	}
+
 }
