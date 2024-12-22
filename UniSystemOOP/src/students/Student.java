@@ -17,13 +17,17 @@ import students.*;
 import user.*;
 import utils.InputPrompt;
 
+//String logMessage = "Student '" + this.getName() + " " + this.getSurname() ;
+//Data.INSTANCE.addLog(logMessage);
+
+
+
 /**
  * Represents a student in the system.
  * 
  * <p>The `Student` class provides methods and attributes specific to a student's
- * academic and extracurricular activities, such as course registration, viewing marks,
- * managing organizations, and interacting with the system. Students have unique
- * attributes like admission year, specialty, faculty, and study type.</p>
+ * academic and extra activities, such as course registration, viewing marks,
+ * managing organizations, and interacting with the system.</p>
  * 
  * <b>Main Features:</b>
  * <ul>
@@ -53,7 +57,7 @@ public abstract class Student extends User implements Serializable {
     }
 
     public Student(String login, String password, String name, String surname) {
-        
+    	super(login, password, name, surname);
         this.documents = new ArrayList<>();
         this.courses = new HashMap<>();
     }
@@ -132,9 +136,6 @@ public abstract class Student extends User implements Serializable {
     
     /**
      * Displays a list of courses the student is enrolled in.
-     * 
-     * <p>If the student is not enrolled in any courses, a message will be displayed.</p>
-     * 
      * <b>Example Usage:</b>
      * <pre>
      * Enrolled Courses:
@@ -155,7 +156,20 @@ public abstract class Student extends User implements Serializable {
         }
     }
     
-    //Will be changed
+    /**
+     * Method sends registration request to manager.
+     * 
+     * <p>This method prompts the student to enter details of the course they want to register for, including 
+     * name, year, and semester.</p>
+     *    
+     * <b>Example Usage:</b>
+	 * <pre>
+	 * Enter the name of the course you want to register for: Data Structures
+	 * Enter the year for the course: 2024
+	 * Enter the semester for the course (Fall/Spring/Summer): Fall
+	 * Registration request for Data Structures has been sent to the manager for approval.
+	 * </pre> 
+     */
     public boolean registerForCourse() {
         System.out.println("Type 'quit' at any time to exit");
         
@@ -191,7 +205,10 @@ public abstract class Student extends User implements Serializable {
 
                 // Send registration request to manager
                 data.addRegistrationRequest(existingCourse, this);
-                System.out.println("Registration request for " + courseName + " has been sent to the manager for approval.");
+                System.out.println("Registration request for " + courseName + " has been sent to the manager for approval");
+                String logMessage = "Student '" + this.getName() + " " + this.getSurname() + "request registration for "  + courseName;
+                Data.INSTANCE.addLog(logMessage);
+                
                 return true;
 
             } catch (NumberFormatException e) {
@@ -206,16 +223,12 @@ public abstract class Student extends User implements Serializable {
      * Displays the teacher information for a specific course based on user input.
      * 
      * <p>This method prompts the user to enter details of a course, including its name, year, 
-     * and semester, and then searches for a matching course in the system. If the course 
-     * is found, it lists the assigned teachers. If no teachers are assigned or if the course 
-     * is not found, appropriate messages are displayed.</p>
-     * 
-     * 
+     * and semester. And then lists the assigned teachers.</p>
      * <b>Example Usage:</b>
      * <pre>
-     * Enter the course name to view teacher info: Math101
+     * Enter the course name to view teacher info: OOP
      * Enter the year for the course: 2024
-     * Enter the semester for the course (Fall/Spring/Summer): Fall
+     * Enter the semester for the course (Fall/Spring/Summer): fall
      * Teachers for OOP: 
      * - Teacher Name: Pakizar Shamoi, Rating: 0.0, Teacher Type: Not assigned
      * - Teacher Name: Alimzhan Amanov, Rating: 0.0, Teacher Type: Not assigned
@@ -266,12 +279,12 @@ public abstract class Student extends User implements Serializable {
      * Displays the student's marks for all enrolled courses.
      * 
      * <p>For each course, the first attestation, second attestation, and final exam scores
-     * are shown. If no courses are enrolled, a message is displayed.</p>
+     * are shown.</p>
      * 
      * <b>Example Usage:</b>
      * <pre>
      * Course: OOP | First Attestation: 20 | Second Attestation: 25 | Final Exam: 30
-     * Course: Data Structures | First Attestation: 18 | Second Attestation: 22 | Final Exam: 28
+     * Course: ADS | First Attestation: 18 | Second Attestation: 22 | Final Exam: 28
      * </pre>
      */
     public void viewMarks() {
@@ -298,7 +311,7 @@ public abstract class Student extends User implements Serializable {
      * <b>Example Usage:</b>
      * <pre>
      * Course: OOP | ECTS: 5 | Overall score: 75 | Letter grade: B | GPA: 3.0
-     * Course: Data Structures | ECTS: 4 | Overall score: 82 | Letter grade: A | GPA: 4.0
+     * Course: ADS | ECTS: 4 | Overall score: 82 | Letter grade: A | GPA: 4.0
      * </pre>
      */
     public void viewTranscript() {
@@ -324,8 +337,7 @@ public abstract class Student extends User implements Serializable {
      * Allows the student to rate a teacher.
      * 
      * <p>The student inputs the teacher's name, surname, and a rating between 1 and 10.
-     * If the teacher is found, the rating is added to their record and their average
-     * rating is updated.</p>
+     * Then rating adds to teacher and average rating updates.</p>
      * 
      * <b>Example Usage:</b>
      * <pre>
@@ -353,9 +365,12 @@ public abstract class Student extends User implements Serializable {
                     System.out.println("Invalid rating. Please enter a rating between 1 and 10.");
                     continue;
                 }
-
-                System.out.println("Rated teacher " + teacherName + " " + teacherSurName + " with a score of " + rating + "/10.");
-
+                
+                System.out.println("Rated teacher " + teacherName + " " + teacherSurName + " with a score of " + rating + "/10");
+                
+                String logMessage = "Student '" + this.getName() + " " + this.getSurname()+ "' rated teacher " + teacherName + " " + teacherSurName + " with a score of " + rating + "/10";
+                Data.INSTANCE.addLog(logMessage);
+                
                 Teacher teacher = null;
                 for (Teacher t : Data.INSTANCE.getAllTeachers()) {
                     if (t.getName().equalsIgnoreCase(teacherName) && t.getSurname().equalsIgnoreCase(teacherSurName)) {
@@ -379,14 +394,11 @@ public abstract class Student extends User implements Serializable {
     
     /**
      * Allows the student to join a student organization.
-     * 
-     * <p>The student enters the name of the organization they wish to join. If the organization exists,
-     * the student is added as a member.</p>
-     * 
+     * <p>The student enters the name of the organization they want to join.</p>
      * <b>Example Usage:</b>
      * <pre>
-     * Enter the name of the organization you want to join: Coding Club
-     * Successfully joined the organization: Coding Club.
+     * Enter the name of the organization you want to join: Faces
+     * Successfully joined the organization: Faces.
      * </pre>
      */
     public void joinOrganization() {
@@ -406,6 +418,8 @@ public abstract class Student extends User implements Serializable {
         if (organization != null) {
             organization.addMember(this);
             System.out.println("Successfully joined the organization: " + orgName);
+            String logMessage = "Student '" + this.getName() + " " + this.getSurname() + "' joined " + organization.getName() + " organization";
+            Data.INSTANCE.addLog(logMessage);
         } else {
             System.out.println("Organization not found.");
         }
@@ -413,14 +427,11 @@ public abstract class Student extends User implements Serializable {
     
     /**
      * Allows the student to leave a student organization they are part of.
-     * 
-     * <p>The student enters the name of the organization they wish to leave. If they are a member of
-     * the organization, they are removed from its list of members.</p>
-     * 
+     * <p>The student enters the name of the organization they wish to leave.</p>
      * <b>Example Usage:</b>
      * <pre>
-     * Enter the name of the organization you want to leave: Coding Club
-     * Successfully left the organization: Coding Club.
+     * Enter the name of the organization you want to leave: OSIT
+     * Successfully left the organization: OSIT.
      * </pre>
      */
     public void leaveOrganization() {
@@ -440,6 +451,8 @@ public abstract class Student extends User implements Serializable {
         if (organization != null && organization.getStudents().contains(this)) {
             organization.removeMember(this);
             System.out.println("Successfully left the organization: " + orgName);
+            String logMessage = "Student '" + this.getName() + " " + this.getSurname() + "' left " + organization.getName() + " organization";
+            Data.INSTANCE.addLog(logMessage);
         } else {
             System.out.println("You are not part of this organization.");
         }
@@ -447,14 +460,11 @@ public abstract class Student extends User implements Serializable {
     
     /**
      * Displays a list of student organizations the student is a member of.
-     * 
-     * <p>If the student is not part of any organization, a message is displayed.</p>
-     * 
      * <b>Example Usage:</b>
      * <pre>
      * Student Organizations:
-     * - Coding Club
-     * - Robotics Society
+     * - BigCityLights
+     * - Faces
      * </pre>
      */
     public void viewStudentOrganizations() {
@@ -479,36 +489,6 @@ public abstract class Student extends User implements Serializable {
     }
         
     /**
-     * Adds or updates marks for a specific course.
-     * 
-     * @param - the course for which marks are being added.
-     * @param firstAttestation - score for the first attestation.
-     * @param secondAttestation - score for the second attestation.
-     * @param finalExam - score for the final exam.
-     * 
-     * <b>Example Usage:</b>
-     * <pre>
-     * Added mark for course: OOP
-     * Updated mark for course: ADS
-     * </pre>
-     */
-    public void addMarkToCourse(Course course, int firstAttestation, int secondAttestation, int finalExam) {
-        // Create a new Mark object
-        Mark mark = new Mark(firstAttestation, secondAttestation, finalExam);
-
-        // Check if the course is already in the student's courses map
-        if (courses.containsKey(course)) {
-            // Update the mark if the course is already present
-            courses.put(course, mark);
-            System.out.println("Updated mark for course: " + course.getName());
-        } else {
-            // Add the course and the new mark if the course is not already in the map
-            courses.put(course, mark);
-            System.out.println("Added mark for course: " + course.getName());
-        }
-    } 
-    
-    /**
      * Adds or updates a mark for a specific course.
      * 
      * @param course - the course for which the mark is being added or updated.
@@ -516,18 +496,23 @@ public abstract class Student extends User implements Serializable {
      * 
      * <b>Example Usage:</b>
      * <pre>
-     * Added mark for course: Math101
-     * Updated mark for course: Data Structures
+     * Added mark for course: OOP
+     * Updated mark for course: ADS
      * </pre>
      */
     public void addMarkToCourse(Course course, Mark mark) {
-        // Check if the course is already in the student's courses map
+        // Check if the course is already registered
         if (courses.containsKey(course)) {
-            // Update the mark if the course is already present
+            // Update the mark
             courses.put(course, mark);
             System.out.println("Updated mark for course: " + course.getName());
+            
+            //Log
+            String logMessage = "Student " + getName() + " " + getSurname() + " updated mark for course: " 
+                                 + course.getName() + " with new mark: " + mark.toString();
+            Data.INSTANCE.addLog(logMessage);
         } else {
-            // Print an error message if the student is not registered for the course
+            
             System.out.println("You are not registered for this course: " + course.getName());
         }
     }

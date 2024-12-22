@@ -2,6 +2,7 @@ package employees;
 
 import user.User;
 import user.UserFactory;
+import utils.InputPrompt;
 
 import java.io.Serializable;
 import java.util.*;
@@ -124,8 +125,9 @@ public class Admin extends User implements CreatingUsers, Serializable {
 
 	public void setUniName() {
 		System.out.println("New University Name: ");
-		Data.setUniName(n.nextLine());
+		Data.INSTANCE.setUniName(n.nextLine());
 	}
+	
 	public void createCourse() {
 		System.out.println("In process...");
 	}
@@ -136,10 +138,42 @@ public class Admin extends User implements CreatingUsers, Serializable {
 		System.out.println("In process...");
 	}
 
+	public void viewLogs() {
+	    // Get the page number from the user
+	    int pageNumber = InputPrompt.promptIntInput("Enter the page number to view logs (or 0 to quit): ");
+	    if (pageNumber == -1) {
+	        return; // If the user wants to quit, return
+	    }
+
+	    // Get the page size from the user
+	    int pageSize = InputPrompt.promptIntInput("Enter the number of logs per page: ");
+	    if (pageSize == -1) {
+	        return; // If the user wants to quit, return
+	    }
+
+	    // Retrieve logs and display them in pages
+	    List<String> logs = Data.INSTANCE.getLogs();
+	    int totalLogs = logs.size();
+	    int start = Math.max(0, (pageNumber - 1) * pageSize);
+	    int end = Math.min(start + pageSize, totalLogs);
+
+	    if (start >= totalLogs) {
+	        System.out.println("No more logs to display.");
+	        return;
+	    }
+
+	    System.out.println("Displaying logs (page " + pageNumber + "):");
+	    for (int i = start; i < end; i++) {
+	        System.out.println(logs.get(i));
+	    }
+	}
+	
+	
 	public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
 		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
 		functions.put(startIndex++, new NamedRunnable(this::usersSettings, "Users"));
 		functions.put(startIndex++, new NamedRunnable(this::uniSettings, "University"));
+		functions.put(startIndex++, new NamedRunnable(this::viewLogs, "View Logs"));
 		for(Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
 			functions.put(startIndex++, entry.getValue());
 		}
