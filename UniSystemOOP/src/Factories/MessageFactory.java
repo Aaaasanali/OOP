@@ -5,8 +5,6 @@ import employees.Employee;
 import employees.Teacher;
 import documents.Complaint;
 import documents.Request;
-import communication.SimpleMessage;
-import communication.WorkMessage;
 
 public class MessageFactory {
 
