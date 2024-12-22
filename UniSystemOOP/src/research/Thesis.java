@@ -13,6 +13,8 @@ public class Thesis implements Serializable{
     
     private Date SubmitionDate;
     
+    private String content;
+    
     private Vector<ResearchPaper> publishedResearchPapers;
     
 
@@ -20,7 +22,11 @@ public class Thesis implements Serializable{
     
 
 
-    public Vector<ResearchPaper> getPublishedResearchPapers() {
+    public Thesis(String cont) {
+		this.content = cont;
+	}
+
+	public Vector<ResearchPaper> getPublishedResearchPapers() {
 		return publishedResearchPapers;
 	}
 

@@ -1,94 +1,64 @@
 package communication;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 import user.User;
 
+public class Message implements Serializable {
 
-public class Message {
-    
-	
+	private String content;
+	private User sender;
+	LocalDateTime localDateTime;
 
-    private User sendettgr;
+	public Message() {
 
-    private User recipient;
+	}
 
-    private String content;
-    
-    private Set<User> users;
-    
-    
+	public Message(User sender, String content) {
+		this.content = content;
+		this.sender = sender;
+		this.localDateTime.now();
+	}
 
+	public User getSender() {
+		return sender;
+	}
 
-    private User getSender() {
-        return this.sender;
-    }
+	private void setSender(User sender) {
+		this.sender = sender;
+	}
 
-    private void setSender(User sender) {
-        this.sender = sender;
-    }
-    
-    
+	public String getContent() {
+		return this.content;
+	}
 
-    
-    private User getRecipient() {
-        return this.recipient;
-    }
+	private void setContent(String content) {
+		this.content = content;
+	}
 
-    private void setRecipient(User recipient) {
-        this.recipient = recipient;
-    }
-    
-    
+	private LocalDateTime getLocalDateTime() {
+		return localDateTime;
+	}
 
-    
-    private String getContent() {
-        return this.content;
-    }
-    
+	private void setLocalDateTime(LocalDateTime localDateTime) {
+		this.localDateTime = localDateTime;
+	}
 
+	public String toString() {
+		return "Sender: " + sender.getName() + " " + sender.getSurname() + "/nContent" + content + "/nTime: "
+				+ localDateTime;
+	}
 
-    private void setContent(String content) {
-        this.content = content;
-    }
-    
-    
-    
-    public Set<User> getUser() {
-        if (this.users == null) {
-            this.users = new HashSet<User>();
-        }
-        return this.users;
-    }
-    
-    /**
-    * @generated
-    */
-    public void addUser(User user) {
-        this.users.add(user);
-    }
-    
-    
-    
 }
 
-
-
-
-
-
-/*public class Message {
-	private User sender;
-    private User recipient;
-    private String content;
-    private LocalDateTime timestamp;
-
-    public Message(User sender, User recipient, String content, LocalDateTime timestamp) {
-        this.sender = sender;
-        this.recipient = recipient;
-        this.content = content;
-        this.timestamp = timestamp;
-    }
+/*
+ * public class Message { private User sender; private User recipient; private
+ * String content; private LocalDateTime timestamp;
+ * 
+ * public Message(User sender, User recipient, String content, LocalDateTime
+ * timestamp) { this.sender = sender; this.recipient = recipient; this.content =
+ * content; this.timestamp = timestamp; }
  */
