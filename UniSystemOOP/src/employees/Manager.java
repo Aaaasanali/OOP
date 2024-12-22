@@ -31,9 +31,9 @@ public class Manager extends Employee implements Serializable {
     public Manager(String login, String password) {
         super(login, password);
     }
-    public Manager() {
-		// TODO Auto-generated constructor stub
-	}
+//    public Manager() {
+//		super();
+//	}
     
     
     public static List<Request> getManagerRequests() {
@@ -151,7 +151,81 @@ public class Manager extends Employee implements Serializable {
     
     
     public void approveStudentRegistration() {
-        System.out.println("In process.....");
+        System.out.println("Displaying all course registration requests...");
+
+        // List all course registration requests
+        Map<Course, Vector<Student>> courseRegistrations = Data.INSTANCE.getCourseRegistrations();
+        int counter = 1;  // Start numbering from 1
+        boolean hasRequests = false;  // Flag to check if there are any requests
+
+        // Iterate through all courses and their corresponding registration requests
+        for (Map.Entry<Course, Vector<Student>> entry : courseRegistrations.entrySet()) {
+            Course course = entry.getKey();
+            Vector<Student> students = entry.getValue();
+
+            if (!students.isEmpty()) {
+                System.out.println("\nCourse: " + course.getName() + " (" + course.getYear() + " " + course.getSemester() + ")");
+                for (Student student : students) {
+                    System.out.println(counter++ + ". " + student.getName() + " " + student.getSurname());
+                }
+                hasRequests = true;
+            }
+        }
+
+        if (!hasRequests) {
+            System.out.println("No registration requests available.");
+            return;  // No pending requests, exit the method
+        }
+
+        // Prompt manager to choose a request to approve/reject
+        String choiceInput = InputPrompt.promptInput("\nEnter the number of the registration request to approve/reject, or 'quit' to exit: ");
+        if (choiceInput == null || choiceInput.equalsIgnoreCase("quit")) {
+            return;  // Exit if user chooses 'quit'
+        }
+
+        try {
+            int choice = Integer.parseInt(choiceInput);
+            if (choice < 1) {
+                System.out.println("Invalid choice. Please select a valid number.");
+                return;
+            }
+
+            // Find the course and student based on the manager's choice
+            counter = 1;  // Reset counter for a second pass
+            boolean found = false;
+            for (Map.Entry<Course, Vector<Student>> entry : courseRegistrations.entrySet()) {
+                Course course = entry.getKey();
+                Vector<Student> students = entry.getValue();
+
+                for (Iterator<Student> iterator = students.iterator(); iterator.hasNext();) {
+                    Student student = iterator.next();
+
+                    if (counter == choice) {
+                        found = true;
+                        // Ask manager to approve or reject
+                        String action = InputPrompt.promptInput("Approve or Reject the registration of " + student.getName() + " for course " + course.getName() + "? (approve/reject): ");
+                        if ("approve".equalsIgnoreCase(action)) {
+                            Data.INSTANCE.approveRegistration(course, student);
+                            iterator.remove();  // Remove the student from the registration list after approval
+                        } else if ("reject".equalsIgnoreCase(action)) {
+                            Data.INSTANCE.rejectRegistration(course, student);
+                            iterator.remove();  // Optionally remove the student if rejected (or leave it for future reference)
+                        } else {
+                            System.out.println("Invalid action. Please choose 'approve' or 'reject'.");
+                        }
+                        break;
+                    }
+                    counter++;
+                }
+                if (found) break;
+            }
+
+            if (!found) {
+                System.out.println("Invalid number. No registration found for that number.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid number.");
+        }
     }
     
     
@@ -347,7 +421,7 @@ public class Manager extends Employee implements Serializable {
         functions.put(startIndex++, new NamedRunnable(this::addStudent, "Add student"));
         functions.put(startIndex++, new NamedRunnable(this::createNews, "Create news"));
         functions.put(startIndex++, new NamedRunnable(this::addCourse, "Add new course"));
-//      functions.put(startIndex++, new NamedRunnable(this::approveStudentRegistration, "Approve student registration"));
+        functions.put(startIndex++, new NamedRunnable(this::approveStudentRegistration, "Approve student registration"));
 //      functions.put(startIndex++, new NamedRunnable(this::registerStudentToCourse, "Register student to course"));
         functions.put(startIndex++, new NamedRunnable(this::assignTeacherToCourse, "Assign teacher to course"));
         functions.put(startIndex++, new NamedRunnable(this::handleRequest, "Handle requests"));

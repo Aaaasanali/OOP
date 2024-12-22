@@ -27,6 +27,9 @@ public final class Data implements Serializable{
 	
     private static String universityName;
     private Language currentLanguage = Language.EN;
+    
+    private Map<Course, Vector<Student>> courseRegistrations;
+
 
     private Vector<Course> courses = new Vector<Course>();
     private Vector<StudentOrganization> studentOrganizations = new Vector<StudentOrganization>();
@@ -36,7 +39,7 @@ public final class Data implements Serializable{
     private Vector<Request> requests = new Vector<>();
 
 
-    private Stack<String> logs = new Stack<>();
+    private List<String> logs = new ArrayList<>();
 
     
 	
@@ -63,7 +66,7 @@ public final class Data implements Serializable{
         }
         return INSTANCE;
     }
-
+	
 	public static Data read() {
 	    File dataFile = new File("data");
 	    if (!dataFile.exists()) {
@@ -96,6 +99,40 @@ public final class Data implements Serializable{
 
     
 
+	
+	
+	/**
+	 * 
+	 * @param course
+	 * @param student
+	 */
+	public void addRegistrationRequest(Course course, Student student) {
+	    // Initialize courseRegistrations if it's null
+	    if (courseRegistrations == null) {
+	        courseRegistrations = new HashMap<>();
+	    }
+
+	    if (course == null || student == null) {
+	        System.out.println("Invalid course or student");
+	        return; // Handle invalid data gracefully
+	    }
+
+	    courseRegistrations.computeIfAbsent(course, k -> new Vector<>()).add(student);
+	}
+	
+	public void approveRegistration(Course course, Student student) {
+        // Logic to approve registration
+        System.out.println("Registration for " + student.getName() + " " + student.getSurname() + " in course " + course.getName() + " has been approved.");
+    }
+
+    public void rejectRegistration(Course course, Student student) {
+        // Logic to reject registration
+        System.out.println("Registration for " + student.getName() + " " + student.getSurname() + " in course " + course.getName() + " has been rejected.");
+    }
+    
+    
+    
+    
 
 
 
@@ -187,7 +224,15 @@ public final class Data implements Serializable{
 	    }
 	    return requests;
 	}
-
+	
+	public Map<Course, Vector<Student>> getCourseRegistrations() {
+        return courseRegistrations;
+    }
+	
+	public List<String> getLogs() {
+	    return logs; // return the entire log list
+	}
+	
 
 	public User findUserByLogin(String login) {    
 		for (User user : users) {
@@ -209,6 +254,10 @@ public final class Data implements Serializable{
 	
 	public static String getUniName() {
 		return universityName;
+	}
+
+	public void addLog(String logMessage) {
+	    logs.add(logMessage);  // Assuming logs is a Stack<String>
 	}
 
 }

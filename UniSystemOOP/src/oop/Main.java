@@ -127,18 +127,20 @@ public class Main {
         Data.INSTANCE.addUser(teacher2);
         Data.INSTANCE.addUser(teacher3);
 
-//        Data.INSTANCE.addCourse(oop);
-//        Data.INSTANCE.addCourse(ads);
-//        Data.INSTANCE.addCourse(cmp);
-//
-//        Data.INSTANCE.addStudentOrganization(faces);
-//        Data.INSTANCE.addStudentOrganization(osit);
-//        Data.INSTANCE.addStudentOrganization(bigCityLights);	
+        Data.INSTANCE.addCourse(oop);
+        Data.INSTANCE.addCourse(ads);
+        Data.INSTANCE.addCourse(cmp);
 
-//        	Data.INSTANCE.addUser(rector);
-//        	Data.INSTANCE.addUser(dean);																																			/*
+        Data.INSTANCE.addStudentOrganization(faces);
+        Data.INSTANCE.addStudentOrganization(osit);
+        Data.INSTANCE.addStudentOrganization(bigCityLights);	
+
+        Data.INSTANCE.addUser(rector);
+       	Data.INSTANCE.addUser(dean);																																
+//       	
+       	/*
         	
-        /*
+        
         
         	//TESTING USER
         
