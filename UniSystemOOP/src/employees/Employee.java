@@ -97,6 +97,8 @@ public class Employee extends User implements Serializable {
 	 * </pre>
 	 */
 	private void checkInbox() {
+		System.out.println("Type 'quit' at any time to exit");
+		
 		if (messageInbox.isEmpty()) {
 			System.out.println("Your inbox is empty.");
 			return;
@@ -105,16 +107,16 @@ public class Employee extends User implements Serializable {
 		System.out.println("Your Inbox:");
 		for (int i = 0; i < messageInbox.size(); i++) {
 			Message message = messageInbox.get(i);
-			System.out.printf("%d. %s... \nFrom: %s%n", i + 1,
+			System.out.printf("%d. %s...  From: %s%n", i + 1,
 					message.getContent().substring(0, Math.min(10, message.getContent().length())),
-					message.getSender());
+					message.getSender().getName() + " " + message.getSender().getSurname());
 		}
 
-		String choice = InputPrompt.promptInput("Choose an option (1-4): ");
+		String choice = InputPrompt.promptInput("Choose an option (0-3):\n 1 - View Message\n 2 - Delete Message\n 3 - Clear Inbox\n 0 - Back\n");
 		if (choice == null || choice.equals("4")) {
 			return;
 		}
-
+		
 		switch (choice) {
 		case "1":
 			viewMessage();
@@ -139,45 +141,66 @@ public class Employee extends User implements Serializable {
 	 * including the sender and content
 	 */
 	private void viewMessage() {
-		String messageNum = InputPrompt.promptInput("Enter the message number to view: ");
-		if (messageNum == null || messageNum.equalsIgnoreCase("quit"))
-			return;
+		System.out.println("Type 'quit' at any time to exit");
+		
+	    System.out.println("Your Inbox:");
+	    for (int i = 0; i < messageInbox.size(); i++) {
+	        Message message = messageInbox.get(i);
+	        System.out.printf("%d. %s...  From: %s%n", i + 1,
+	                message.getContent().substring(0, Math.min(10, message.getContent().length())),
+	                message.getSender().getName() + " " + message.getSender().getSurname());
+	    }
 
-		try {
-			int index = Integer.parseInt(messageNum) - 1;
-			if (index >= 0 && index < messageInbox.size()) {
-				Message message = messageInbox.get(index);
-				System.out.println("\nMessage Details:");
-				System.out.println("From: " + message.getSender());
-				System.out.println("Content: " + message.getContent());
-			} else {
-				System.out.println("Invalid message number.");
-			}
-		} catch (NumberFormatException e) {
-			System.out.println("Invalid input. Please enter a number.");
-		}
+	    // Prompt for message number
+	    String messageNum = InputPrompt.promptInput("Enter the message number to view: ");
+	    if (messageNum == null || messageNum.equalsIgnoreCase("quit"))
+	        return;
+
+	    try {
+	        int index = Integer.parseInt(messageNum) - 1;
+	        if (index >= 0 && index < messageInbox.size()) {
+	            Message message = messageInbox.get(index);
+	            System.out.println("\nMessage Details:");
+	            System.out.println("From: " + message.getSender().getName() + " " + message.getSender().getSurname());
+	            System.out.println("Content: " + message.getContent());
+	        } else {
+	            System.out.println("Invalid message number.");
+	        }
+	    } catch (NumberFormatException e) {
+	        System.out.println("Invalid input. Please enter a number.");
+	    }
 	}
-
 	/**
 	 * Prompts the user to enter the message number to delete. If the input is
 	 * valid, the selected message is deleted from the inbox
 	 */
 	private void deleteMessage() {
-		String input = InputPrompt.promptInput("Enter the message number to delete: ");
-		if (input == null)
-			return;
+		System.out.println("Type 'quit' at any time to exit");
+		
+	    System.out.println("Your Inbox:");
+	    for (int i = 0; i < messageInbox.size(); i++) {
+	        Message message = messageInbox.get(i);
+	        System.out.printf("%d. %s...  From: %s%n", i + 1,
+	                message.getContent().substring(0, Math.min(10, message.getContent().length())),
+	                message.getSender().getName() + " " + message.getSender().getSurname());
+	    }
 
-		try {
-			int index = Integer.parseInt(input) - 1;
-			if (index >= 0 && index < messageInbox.size()) {
-				messageInbox.remove(index);
-				System.out.println("Message deleted successfully.");
-			} else {
-				System.out.println("Invalid message number.");
-			}
-		} catch (NumberFormatException e) {
-			System.out.println("Invalid input. Please enter a number.");
-		}
+	    // Prompt for message number to delete
+	    String input = InputPrompt.promptInput("Enter the message number to delete: ");
+	    if (input == null)
+	        return;
+
+	    try {
+	        int index = Integer.parseInt(input) - 1;
+	        if (index >= 0 && index < messageInbox.size()) {
+	            messageInbox.remove(index);
+	            System.out.println("Message deleted successfully.");
+	        } else {
+	            System.out.println("Invalid message number.");
+	        }
+	    } catch (NumberFormatException e) {
+	        System.out.println("Invalid input. Please enter a number.");
+	    }
 	}
 
 	/**
@@ -187,7 +210,8 @@ public class Employee extends User implements Serializable {
 	 * messages are removed from the inbox and a success message is displayed.
 	 */
 	private void clearInbox() {
-		String confirmation = InputPrompt.promptInput("Are you sure you want to clear all messages? \nYes/No");
+		System.out.println("Type 'quit' at any time to exit");
+		String confirmation = InputPrompt.promptInput("Are you sure you want to clear all messages? \n(Yes/No)\n");
 		if ("Yes".equalsIgnoreCase(confirmation)) {
 			messageInbox.clear();
 			System.out.println("All messages cleared.");
@@ -212,8 +236,7 @@ public class Employee extends User implements Serializable {
 	 * </pre>
 	 */
 	private void sendMessage() {
-
-		System.out.println("Type 'quit' to exit");
+		System.out.println("Type 'quit' at any time to exit");
 
 		String employeeName = InputPrompt.promptInput("Enter the name of the Employee: ");
 		if (employeeName == null || employeeName.equalsIgnoreCase("quit"))
@@ -274,7 +297,7 @@ public class Employee extends User implements Serializable {
 	 * </pre>
 	 */
 	public void sendRequest() {
-		System.out.println("Type 'quit' at any time to exit.");
+		System.out.println("Type 'quit' at any time to exit");
 
 		while (true) {
 			String content = InputPrompt.promptInput("Enter the request content: ");

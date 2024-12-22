@@ -183,7 +183,7 @@ public final class Data implements Serializable {
 		return v;
 	}
 
-	public static String getUniName() {
+	public String getUniName() {
 		return universityName;
 	}
 
