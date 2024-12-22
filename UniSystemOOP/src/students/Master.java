@@ -53,7 +53,7 @@ public class Master extends GraduateStudent implements Serializable {
 	 * 
 	 * @param thesis The thesis to associate with this Master student.
 	 */
-	private void setThesis(Thesis thesis) {
+	public void setThesis(Thesis thesis) {
 		this.thesis = thesis;
 	}
 

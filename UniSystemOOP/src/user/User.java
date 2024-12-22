@@ -80,9 +80,13 @@ public abstract class User implements Serializable {
     }
 
     public String getName() {
-        return this.name;
+        return this.name != null ? this.name : "Unknown";
     }
 
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+    
     public String getSurname() {
         return this.surname;
     }
@@ -94,7 +98,17 @@ public abstract class User implements Serializable {
     public void setLogin(String login) {
         this.login = login;
     }
+    
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	
+	
     public int getPassword() {
         return this.hashPassword;
     }
@@ -224,6 +238,25 @@ public abstract class User implements Serializable {
             }
         }
     }
+    
+    public void updateField(String fieldName, String newValue) {
+        switch (fieldName) {
+            case "name":
+                this.setName(newValue);
+                break;
+            case "surname":
+                this.setSurname(newValue);
+                break;
+            case "email":
+                this.setEmail(newValue);
+                break;
+            case "phone":
+                this.setPhone(newValue);
+                break;
+            default:
+                System.out.println("Unknown field: " + fieldName);
+        }
+    }
 
     private void setPassword(String password2) {
         this.password = password2;
@@ -297,6 +330,9 @@ public abstract class User implements Serializable {
         functions.put(startIndex++, new NamedRunnable(this::exit, "Exit"));
 		return functions;
 	}
+
+
+
 	
 	
 	
