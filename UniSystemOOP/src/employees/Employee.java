@@ -25,9 +25,9 @@ public class Employee extends User implements Serializable {
 	private Stack<Message> messageInbox = new Stack<>();
 
 	public Employee() {
-        super();
-        this.department = "";
-    }
+		super();
+		this.department = "";
+	}
 
 	public Employee(String login, String password) {
 		super(login, password);
@@ -37,20 +37,66 @@ public class Employee extends User implements Serializable {
 		super(login, password, name, surname);
 	}
 
+	/**
+	 * Retrieves the department of the employee
+	 * 
+	 * @return The department name
+	 */
 	protected String getDepartment() {
 		return department;
 	}
 
+	/**
+	 * Retrieves the list of requests.
+	 * 
+	 * Checks if the Data object and requests list are available
+	 */
+	public List<Request> getRequests() {
+		if (Data.INSTANCE == null) {
+			System.out.println("Data object is null");
+			return null; // or return an empty list
+		}
+		Vector<Request> requests = Data.INSTANCE.getRequests();
+		if (requests == null) {
+			System.out.println("Requests list is null");
+			return null; // or return an empty list
+		}
+		return requests;
+	}
+
+	/**
+	 * Sets the department of the employee
+	 * 
+	 * @param department The department name to set
+	 */
 	protected void setDepartment(String department) {
 		this.department = department;
 	}
 
+	/**
+	 * Retrieves the employee's message inbox
+	 * 
+	 * @return A stack of messages in the employee's inbox
+	 */
 	private Stack<Message> getMessage() {
 		return messageInbox;
 	}
 
+	/**
+	 * Displays the user's inbox and allows them to choose an action for the
+	 * messages
+	 * 
+	 * <b>If the inbox is empty, a message is shown. If there are messages, a
+	 * preview is displayed and the user can choose to:</b>
+	 * 
+	 * <pre>
+	 * - View a message
+	 * - Delete a message
+	 * - Clear the inbox
+	 * - Exit the menu
+	 * </pre>
+	 */
 	private void checkInbox() {
-
 		if (messageInbox.isEmpty()) {
 			System.out.println("Your inbox is empty.");
 			return;
@@ -86,6 +132,12 @@ public class Employee extends User implements Serializable {
 
 	}
 
+	/**
+	 * Prompts the user to enter a message number to view.
+	 * 
+	 * If the input is valid, the details of the selected message are displayed,
+	 * including the sender and content
+	 */
 	private void viewMessage() {
 		String messageNum = InputPrompt.promptInput("Enter the message number to view: ");
 		if (messageNum == null || messageNum.equalsIgnoreCase("quit"))
@@ -106,6 +158,10 @@ public class Employee extends User implements Serializable {
 		}
 	}
 
+	/**
+	 * Prompts the user to enter the message number to delete. If the input is
+	 * valid, the selected message is deleted from the inbox
+	 */
 	private void deleteMessage() {
 		String input = InputPrompt.promptInput("Enter the message number to delete: ");
 		if (input == null)
@@ -124,6 +180,12 @@ public class Employee extends User implements Serializable {
 		}
 	}
 
+	/**
+	 * Clears all messages in the inbox after user confirmation.
+	 * 
+	 * Prompts the user to confirm the action. If the user enters "Yes", all
+	 * messages are removed from the inbox and a success message is displayed.
+	 */
 	private void clearInbox() {
 		String confirmation = InputPrompt.promptInput("Are you sure you want to clear all messages? \nYes/No");
 		if ("Yes".equalsIgnoreCase(confirmation)) {
@@ -134,6 +196,21 @@ public class Employee extends User implements Serializable {
 		}
 	}
 
+	/**
+	 * Sends a message to an employee.
+	 * 
+	 * Prompts the user to enter the name of an employee and the content of the
+	 * message. If the employee is found, the message is sent to the employee's
+	 * inbox.
+	 * 
+	 * <b>Example Usage:</b>
+	 * 
+	 * <pre>
+	 * Enter the name of the Employee: John Doe
+	 * Write the content: Hello, this is a test message.
+	 * Message was sent
+	 * </pre>
+	 */
 	private void sendMessage() {
 
 		System.out.println("Type 'quit' to exit");
@@ -165,33 +242,43 @@ public class Employee extends User implements Serializable {
 		Message m = new Message(targetEmployee, contentOfSender);
 		targetEmployee.receiveMessage(m);
 		System.out.println("Message was sent");
-
+		
+		// Log
+		String logMessage = "Message sent by " + this.getName() + " " + this.getSurname() + " to "
+				+ targetEmployee.getName() + ": " + contentOfSender;
+		Data.INSTANCE.addLog(logMessage);
 	}
 
+	/**
+	 * method to receive message for employee
+	 * 
+	 * @param message
+	 */
 	public void receiveMessage(Message message) {
 		this.messageInbox.push(message);
 	}
 
-	public List<Request> getRequests() {
-		if (Data.INSTANCE == null) {
-			System.out.println("Data object is null");
-			return null; // or return an empty list
-		}
-		Vector<Request> requests = Data.INSTANCE.getRequests();
-		if (requests == null) {
-			System.out.println("Requests list is null");
-			return null; // or return an empty list
-		}
-		return requests;
-	}
-
+	/**
+	 * Sends a request with the specified content.
+	 * 
+	 * Prompts the user to enter request content. If the content is valid, the
+	 * request is created and added to the Data instance. The user's name and
+	 * surname are automatically associated with the request. If the input is empty
+	 * or null, the user is asked to try again.
+	 * 
+	 * <b>Example Usage:</b>
+	 * 
+	 * <pre>
+	 * Request about something;
+	 * Request sent successfully: Request about something
+	 * </pre>
+	 */
 	public void sendRequest() {
 		System.out.println("Type 'quit' at any time to exit.");
 
 		while (true) {
 			String content = InputPrompt.promptInput("Enter the request content: ");
 			if (content == null) {
-				// User chose to quit
 				return;
 			}
 
@@ -200,22 +287,30 @@ public class Employee extends User implements Serializable {
 				continue;
 			}
 
-			// Collect sender's name and surname
-			String senderName = this.getName(); // Assuming Employee has a getName method
-			String senderSurname = this.getSurname(); // Assuming Employee has a getSurname method
+			// Get senders name and surname
+			String senderName = this.getName();
+			String senderSurname = this.getSurname();
 
-			// Create a new request and add it to the Data
+			// Create new request
 			Request request = new Request(content, senderName, senderSurname);
 			Data.INSTANCE.addRequest(request); // This adds the request to the data's list
 			System.out.println("Request sent successfully: " + content);
-			break; // Exit after a successful request
+			
+				//Log
+			String logMessage = "Request sent by " + senderName + " " + senderSurname + ": " + content;
+	        Data.INSTANCE.addLog(logMessage);
+			break;
 		}
 	}
 
+	/**
+	 * The method for registering available actions in the map
+	 */
 	public Map<Integer, NamedRunnable> getFunctionsMap(int startIndex) {
 		Map<Integer, NamedRunnable> functions = new LinkedHashMap<>();
 		functions.put(startIndex++, new NamedRunnable(this::sendMessage, "Send message"));
 		functions.put(startIndex++, new NamedRunnable(this::sendRequest, "Send request"));
+		functions.put(startIndex++, new NamedRunnable(this::checkInbox, "Check Inbox"));
 
 		for (Map.Entry<Integer, NamedRunnable> entry : super.getFunctionsMap(startIndex).entrySet()) {
 			functions.put(startIndex++, entry.getValue());
@@ -225,7 +320,7 @@ public class Employee extends User implements Serializable {
 	}
 
 	public String toString() {
-		return "Employee is placed in " + department + " department";
+		return super.toString() + " [Employee is placed in " + department + " department]";
 	}
 
 }
