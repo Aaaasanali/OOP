@@ -27,13 +27,15 @@ public class Manager extends Employee implements Serializable {
 
 	private static List<Request> managerRequests = new ArrayList<>();
 
+	public Manager() {
+		super();
+	}
+	
 	public Manager(String login, String password) {
 		super(login, password);
 	}
 
-	public Manager() {
-		super();
-	}
+
 
 	public static List<Request> getManagerRequests() {
 		return managerRequests;
