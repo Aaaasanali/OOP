@@ -447,4 +447,24 @@ public abstract class User implements Serializable {
 				+ ", sex=" + sex + ", phone='" + phone + '\'' + ", education=" + education + '}';
 	}
 
+	
+	public void researcherStatus(boolean b) {
+		this.isResearcher = b;
+	}
+
+	public boolean getResearcherStatus() {
+		return this.isResearcher;
+	}
+
+	public void setResearcherAccount(Researcher r) {
+		this.researcherAcc = r;
+	}
+	public Researcher getResearcherAccount() {
+		return this.researcherAcc;
+	}
+	public void researcherCheck() {
+		if(this.isResearcher) {
+			this.researcherAcc = new Researcher(this.login, this.password, this.name, this.surname);
+		}
+	}
 }

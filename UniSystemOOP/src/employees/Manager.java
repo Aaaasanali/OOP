@@ -30,7 +30,7 @@ public class Manager extends Employee implements Serializable {
 	public Manager() {
 		super();
 	}
-	
+
 	public Manager(String login, String password) {
 		super(login, password);
 	}
@@ -57,6 +57,7 @@ public class Manager extends Employee implements Serializable {
         
         String firstName = InputPrompt.promptInput("Enter student's first name: ");
         if (firstName == null) return;
+    }
 
 	public static List<Request> getManagerRequests() {
 		return managerRequests;
@@ -294,7 +295,6 @@ public class Manager extends Employee implements Serializable {
 		int counter = 1;
 		boolean hasRequests = false;
 
-		// Iterate through all courses and registration
 		for (Map.Entry<Course, Vector<Student>> entry : courseRegistrations.entrySet()) {
 			Course course = entry.getKey();
 			Vector<Student> students = entry.getValue();

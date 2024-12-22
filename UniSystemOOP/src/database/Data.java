@@ -28,7 +28,7 @@ public final class Data implements Serializable {
 	private static String universityName;
 	private Language currentLanguage = Language.EN;
 
-	private Map<Course, Vector<Student>> courseRegistrations;
+	private Map<Course, Vector<Student>> courseRegistrations = new HashMap<>();
 
 	private Vector<Course> courses = new Vector<Course>();
 	private Vector<StudentOrganization> studentOrganizations = new Vector<StudentOrganization>();
@@ -111,17 +111,54 @@ public final class Data implements Serializable {
 
 		courseRegistrations.computeIfAbsent(course, k -> new Vector<>()).add(student);
 	}
-
+	
+	
+	/**
+	 * Method to approve registration for students
+	 * 
+	 * Works in Manager class
+	 * @param course the course to enroll
+	 * @param student student that requests registration
+	 */
 	public void approveRegistration(Course course, Student student) {
-		// Logic to approve registration
-		System.out.println("Registration for " + student.getName() + " " + student.getSurname() + " in course "
-				+ course.getName() + " has been approved.");
+	    Map<Course, Mark> studentCourses = student.getCourses();
+
+	    if (studentCourses.containsKey(course)) {
+	        System.out.println(student.getName() + " " + student.getSurname() + " is already enrolled in the course " 
+	                           + course.getName() + ".");
+	    } else {
+	        // Add the course to the student
+	        studentCourses.put(course, null);
+	        System.out.println("Registration for " + student.getName() + " " + student.getSurname() + " in course "
+	                + course.getName() + " has been approved.");
+	        
+	        	//Log
+	        String logMessage = "Registration for student '" + student.getName() + " " + student.getSurname() + "' in course '"
+                    + course.getName() + "' has been approved.";
+        Data.INSTANCE.addLog(logMessage);  
+        
+	    }
 	}
 
 	public void rejectRegistration(Course course, Student student) {
-		// Logic to reject registration
-		System.out.println("Registration for " + student.getName() + " " + student.getSurname() + " in course "
-				+ course.getName() + " has been rejected.");
+	    // Prepare log message
+	    String logMessage;
+
+	    // Get the courses the student is already registered for
+	    Map<Course, Mark> studentCourses = student.getCourses();
+
+	    // Check if the student is enrolled in the course
+	    if (studentCourses.containsKey(course)) {
+	        // If the student is enrolled in the course, reject the registration
+	        studentCourses.remove(course);  // Remove the course from student's registered courses
+
+	        // Log the rejection
+	        logMessage = "Registration for student '" + student.getName() + " " + student.getSurname() + "' in course '"
+	                    + course.getName() + "' has been rejected.";
+	        Data.INSTANCE.addLog(logMessage);  // Add log to Data
+	        
+	    
+	    }
 	}
 
 	public void addUser(User a) {
