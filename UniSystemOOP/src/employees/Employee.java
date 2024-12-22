@@ -28,6 +28,8 @@ public class Employee extends User implements Serializable{
     	super(login, password);
     }
     
+    public Employee() {}
+    
     public Employee(String login, String password, String name, String surname) {
     	super(login, password, name, surname);
 	}
