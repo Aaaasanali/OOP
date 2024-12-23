@@ -187,11 +187,11 @@ public final class Data implements Serializable {
 	}
 
 	public Vector<Researcher> getAllResearchers(){
-		Vector v = new Vector<Student>();
+		Vector v = new Vector<Researcher>();
 
 		for(User u : users) {
-			if (u instanceof Researcher) {
-				v.add(u);
+			if (u.getResearcherStatus()) {
+				v.add(u.getResearcherAccount());
 			}
 		}
 

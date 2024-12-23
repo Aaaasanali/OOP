@@ -106,7 +106,7 @@ public class ResearchProject implements Serializable{
     	System.out.println(this.name + "\n\n" + this.discription + "\n\n" + "Abstract: \n" 
     + this.projectAbstract + "\n\nPublished in" + this.publicationDate.getYear() 
     + this.publicationDate.getMonth() + this.publicationDate.getDay() + "\n\n" 
-    + "Authors: " + authors.substring(0, authors.length()-2));
+    + "Authors: " + authors);
     	System.out.println("\n\n0 - Back\n1 - Sections\n2 - Papers");
     	int pick = InputPrompt.promptIntInput("");
     	if(pick == 0) break;

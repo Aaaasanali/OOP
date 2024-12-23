@@ -695,6 +695,34 @@ public class Manager extends Employee implements Serializable {
 		}
 	}
 
+	
+	
+	/**
+	 * Set researcher status to user
+	 */
+	public void setResearcher() {
+		System.out.println("Type 'quit' at any time to exit");
+		
+		// Prompt for the teacher's first name
+		String firstName = InputPrompt.promptInput("Enter the first name of the teacher you want to assign: ");
+		if (firstName == null)
+			return;
+
+		// Prompt for the teacher's surname
+		String lastName = InputPrompt.promptInput("Enter the surname of the teacher you want to assign: ");
+		if (lastName == null)
+			return;
+		
+		
+		User u = Data.INSTANCE.findUserByNameAndSurname(firstName, lastName);
+		u.researcherStatus(true);
+		u.researcherCheck();
+		
+		
+	}
+	
+	
+	
 	/**
 	 * The method for registering available actions in the map
 	 */
@@ -705,7 +733,7 @@ public class Manager extends Employee implements Serializable {
 		functions.put(startIndex++, new NamedRunnable(this::createNews, "Create news"));
 		functions.put(startIndex++, new NamedRunnable(this::addCourse, "Add new course"));
 		functions.put(startIndex++, new NamedRunnable(this::someOtherMethod, "Approve student registration"));
-//      functions.put(startIndex++, new NamedRunnable(this::registerStudentToCourse, "Register student to course"));
+		functions.put(startIndex++, new NamedRunnable(this::setResearcher, "Set Researcher Privelege"));
 		functions.put(startIndex++, new NamedRunnable(this::assignTeacherToCourse, "Assign teacher to course"));
 		functions.put(startIndex++, new NamedRunnable(this::handleRequest, "Handle requests"));
 
