@@ -5,6 +5,7 @@ import java.util.*;
 
 import Factories.NamedRunnable;
 import research.Dissertation;
+import research.Researcher;
 
 /**
  * The PhD class represents a graduate student pursuing a PhD. It extends the
@@ -22,11 +23,11 @@ public class PhD extends GraduateStudent implements Serializable {
 
 	public PhD(String login, String password, String name, String surname) {
 		super(login, password, name, surname);
-		// TODO Auto-generated constructor stub
+		this.setResearcherAccount(new Researcher(login, password, name, surname));
 	}
 
 	public PhD() {
-		// TODO Auto-generated constructor stub
+		super.researcherStatus(true);
 	}
 
 	/**

@@ -1,7 +1,7 @@
 package research;
 
-import java.util.Map;
-
+import java.util.*;
+import user.User;
 import Factories.NamedRunnable;
 
 public class researchTest {
@@ -10,6 +10,7 @@ public class researchTest {
 		// TODO Auto-generated method stub
 		Researcher r = new Researcher();
 		User current = r;
+		Scanner inp = new Scanner(System.in);
 		while (true) {
 			System.out.println("");
 
