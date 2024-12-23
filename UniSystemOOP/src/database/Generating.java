@@ -6,13 +6,13 @@ import java.util.Map;
 import java.util.Vector;
 
 import Factories.NamedRunnable;
+import communication.News;
 import documents.Course;
 import documents.Mark;
 import documents.Semester;
 import employees.Admin;
 import employees.Manager;
 import employees.Teacher;
-import news.News;
 import students.Bachelor;
 import students.Master;
 import students.Student;

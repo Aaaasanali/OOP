@@ -7,7 +7,6 @@ import employees.*;
 import Factories.*;
 import Factories.NamedRunnable;
 import Interfaces.*;
-import news.*;
 import oop.*;
 import research.*;
 import students.*;
@@ -99,6 +98,13 @@ public abstract class User implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	/**
+	 * Sets the user's first name.
+	 * 
+	 * @param name The first name to set for the user
+	 * @param surname The second name to set for the user.
+	 */
 	public void setName(String name, String surname) {
 		this.name = name;
 		this.surname = surname;

@@ -1,4 +1,4 @@
-package news;
+package communication;
 
 import java.io.Serializable;
 import java.util.*;
