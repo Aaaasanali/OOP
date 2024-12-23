@@ -24,7 +24,7 @@ import utils.InputPrompt;
 public class Manager extends Employee implements Serializable {
 
 	private static final long serialVersionUID = 9134543246365552631L;
-
+	private ManagerType managerType;
 	private static List<Request> managerRequests = new ArrayList<>();
 
 	public Manager() {
@@ -35,6 +35,10 @@ public class Manager extends Employee implements Serializable {
 		super(login, password);
 	}
     
+	public Manager(String login, String password, ManagerType mt) {
+		super(login, password);
+		this.managerType = mt;
+	}
     
 	/**
 	 * Creates a new user based on the provided user type and login details.

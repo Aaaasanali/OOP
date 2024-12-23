@@ -48,13 +48,13 @@ public class Teacher extends Employee implements Serializable {
     }
    
     public Teacher(String login, String password, String name, String surname, Vector<Course> courses, double rating, Vector<Double> ratingMarks,
-			TeacherTitle teacherType, Set<Document> documents) {
+			TeacherTitle teacherType) {
     	super(login, password, name, surname);
 		this.courses = courses;
 		this.rating = rating;
 		this.ratingMarks = ratingMarks;
 		this.teacherType = teacherType;
-		this.documents = documents;
+
 	}
     
     
