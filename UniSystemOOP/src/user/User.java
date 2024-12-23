@@ -47,8 +47,8 @@ public abstract class User implements Serializable {
 
 	public User() {
 		this.login = "";
-		this.password = "";
-		this.hashPassword = 0;
+		this.password = generatePassword();
+		this.hashPassword = this.password.hashCode();
 		this.id = "";
 		this.name = "";
 		this.surname = "";
@@ -63,7 +63,7 @@ public abstract class User implements Serializable {
 	public User(String login, String password) {
 		this.login = login;
 		this.password = password;
-		this.hashPassword = password.hashCode();
+		this.hashPassword = this.password.hashCode();
 		this.id = generateId();
 	}
 
@@ -75,7 +75,25 @@ public abstract class User implements Serializable {
 		this.name = name;
 		this.surname = surname;
 	}
+	
+	public static String generatePassword() {
+        Random random = new Random();
+        StringBuilder password = new StringBuilder();
 
+        for (int i = 0; i < 5; i++) {
+            // Randomly decide between uppercase (65-90) or lowercase (97-122)
+            boolean isUppercase = random.nextBoolean();
+            int asciiValue = isUppercase 
+                ? random.nextInt(26) + 65 // Uppercase letters
+                : random.nextInt(26) + 97; // Lowercase letters
+
+            // Convert ASCII value to character and append
+            password.append((char) asciiValue);
+        }
+
+        return password.toString();
+    }
+	
 	/**
 	 * Generates a unique user ID based on the current year and a random number.
 	 * 
@@ -172,8 +190,11 @@ public abstract class User implements Serializable {
 	 * 
 	 * @return The hashed password of the user.
 	 */
-	public int getPassword() {
+	public int getHashPassword() {
 		return this.hashPassword;
+	}
+	public String getPassword() {
+		return this.password;
 	}
 
 	/**
@@ -447,6 +468,9 @@ public abstract class User implements Serializable {
 				+ ", sex=" + sex + ", phone='" + phone + '\'' + ", education=" + education + '}';
 	}
 
+	public String getFullName() {
+		return this.name + " " + this.surname;
+	}
 	
 	public void researcherStatus(boolean b) {
 		this.isResearcher = b;

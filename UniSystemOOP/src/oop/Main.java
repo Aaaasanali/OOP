@@ -60,8 +60,18 @@ public class Main {
 			if (User.validateLogin(login, password)) {
 				// If login is valid, fetch the user by login
 				User u = Data.INSTANCE.findUserByLogin(login);
-				System.out.println("Logging in...!");
+				if(u.getResearcherStatus()) {
+					while(true) {
+						System.out.println("In which Account You want to log?\n1 - Standart\n2 - Researcher");
+						int p = inp.nextInt();
+						if(p == 1) return u;
+						else if(p == 2) return u.getResearcherAccount();
+						else System.out.println("Invalid login or password. Try again.");	
+					}
+				}
+				System.out.println("Loginning...");
 				return u; // Return the logged-in user
+				
 			} else {
 				System.out.println("Invalid login or password. Try again.");
 			}
@@ -85,7 +95,9 @@ public class Main {
 			Master student3 = new Master("stud3", "log", "Alex", "Smith");
 
 			PhD student4 = new PhD();
-
+			
+			Researcher r = new Researcher("jh", "223", "John", "Smith");
+			Researcher r2 = new Researcher("jhh", "223", "John", "Smit2h");
 			Teacher teacher1 = new Teacher("tchr", "tchr", "Pakizar", "Shamoi");
 			Teacher teacher2 = new Teacher("tchr2", "tchr2", "Alimzhan", "Amanov");
 			Teacher teacher3 = new Teacher("indus", "indus", "Suhrab", "Yoldash");
@@ -94,7 +106,10 @@ public class Main {
 			teachers.add(teacher1);
 			teachers.add(teacher2);
 			teachers.add(teacher3);
-
+			
+			Data.INSTANCE.addUser(r);
+			Data.INSTANCE.addUser(r2);
+			
 			Vector<Teacher> teachers2 = new Vector<>();
 			teachers2.add(teacher3);
 

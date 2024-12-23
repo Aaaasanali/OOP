@@ -32,7 +32,8 @@ public final class Data implements Serializable {
 
 	private Vector<Course> courses = new Vector<Course>();
 	private Vector<StudentOrganization> studentOrganizations = new Vector<StudentOrganization>();
-
+	private Vector<ResearchProject> publishedProjects = new Vector<>();
+	private Vector<ResearchPaper> publishedPapers = new Vector<>();
 	public List<News> news = new ArrayList<News>();
 
 	private Vector<Request> requests = new Vector<>();
@@ -319,4 +320,17 @@ public final class Data implements Serializable {
 		}
 	}
 	
+	public Vector<ResearchProject> getPublishedResearches(){
+		return this.publishedProjects;
+	}
+	public void publishResearch(ResearchProject p) {
+		this.publishedProjects.add(p);
+	}
+	
+	public Vector<ResearchPaper> getPublishedPapers(){
+		return this.publishedPapers;
+	}
+	public void publishResearchPaper(ResearchPaper p) {
+		this.publishedPapers.add(p);
+	}
 }

@@ -36,28 +36,56 @@ public class Manager extends Employee implements Serializable {
 	}
     
     
-    public void createUser() {
-        System.out.println("Type 'quit' at any time to exit");
-        
-        String userType = null;
-        while (userType == null) {
-            userType = InputPrompt.promptInput("Enter User Type: ");
-            if (userType.equals("QUIT")) {
-                System.out.println("Operation cancelled.");
-                return; // Exit the method
-            }
+	/**
+	 * Creates a new user based on the provided user type and login details.
+	 * 
+	 * <p>
+	 * This method prompts the user to enter a user type and a login. It uses the
+	 * UserFactory to create an appropriate user object. The user is then assigned a
+	 * login, and a default password is generated.
+	 * </p>
+	 * 
+	 * <b>Example Usage:</b>
+	 * 
+	 * <pre>
+	 * createUser(); // Creates a new user after inputting the user type and login.
+	 * </pre>
+	 */
+	public void createUser() {
+		System.out.println("Type 'quit' at any time to exit");
 
-            if (userType.isEmpty()) {
-                System.out.println("User type cannot be empty. Please enter a valid user type.");
-                userType = null; // Reset to prompt again
-            }
-        }
-        
-        User current = UserFactory.getUser(userType, this);
-        
-        String firstName = InputPrompt.promptInput("Enter student's first name: ");
-        if (firstName == null) return;
-    }
+		String userType = null;
+		while (userType == null) {
+			userType = InputPrompt.promptInput("Enter User Type: ").toUpperCase();
+			if (userType.equals("QUIT")) {
+				System.out.println("Operation cancelled.");
+				return; // Exit the method
+			}
+
+			if (userType.isEmpty()) {
+				System.out.println("User type cannot be empty. Please enter a valid user type.");
+				userType = null;
+			}
+		}
+
+		User current = UserFactory.getUser(userType, this);
+		String login = InputPrompt.promptInput("Enter Login: ");
+		current.setLogin(login);
+		
+		String name = InputPrompt.promptInput("Enter FirstName: ");
+		current.setName(name);
+		
+		String surname = InputPrompt.promptInput("Enter LastName: ");
+		current.setSurname(surname);
+		Data.INSTANCE.addUser(current);
+		current.researcherCheck();
+		System.out.println(current.getClass().getSimpleName() + " has been created\nlogin: " + current.getLogin()
+				+ "\npassword: " + current.getPassword());
+		// Log
+		String logMessage = current.getClass().getSimpleName() + " created. Login: " + current.getLogin()
+				+ ", Password: " + current.getPassword() + " by " + this.getName() + " " + this.getSurname() + ".";
+		Data.INSTANCE.addLog(logMessage);
+	}
 
 	public static List<Request> getManagerRequests() {
 		return managerRequests;

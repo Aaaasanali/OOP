@@ -94,10 +94,16 @@ public class Admin extends User implements CreatingUsers, Serializable {
 		User current = UserFactory.getUser(userType, this);
 		String login = InputPrompt.promptInput("Enter Login: ");
 		current.setLogin(login);
-
+		
+		String name = InputPrompt.promptInput("Enter FirstName: ");
+		current.setName(name);
+		
+		String surname = InputPrompt.promptInput("Enter LastName: ");
+		current.setSurname(surname);
+		Data.INSTANCE.addUser(current);
+		current.researcherCheck();
 		System.out.println(current.getClass().getSimpleName() + " has been created\nlogin: " + current.getLogin()
 				+ "\npassword: " + current.getPassword());
-
 		// Log
 		String logMessage = current.getClass().getSimpleName() + " created. Login: " + current.getLogin()
 				+ ", Password: " + current.getPassword() + " by " + this.getName() + " " + this.getSurname() + ".";
